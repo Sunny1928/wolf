@@ -20,9 +20,9 @@ body {
 }
 
 .game-container{
-    position: absolute;
-    width: 352px;
-    height: 198px;
+    /* position: absolute; */
+    /* width: 352px;
+    height: 198px; */
     outline: 1px solid #fff;
     transform: scale(3) translateY(50%) translateX(40%);
     margin: 0 auto;
@@ -33,12 +33,31 @@ body {
 }
 
 .menu{
-    position: absolute;
-    height: 594px;
+    /* position: absolute; */
+    height: 660px;
     width: 360px;
     background: #fff;
-    top: 99px;
-    left: 840px;
+    /* top: 99px;
+    left: 840px; */
+
     outline: 3px solid #fff;
 
+}
+
+.goUp {
+    position: relative;
+    animation-name: showUp;
+    animation-duration: 4s;
+    animation-delay: -2s;
+}
+
+.bg-color-4{
+    background-color: "#111111";
+}
+
+  
+@keyframes showUp {
+    0%   {top:0px; display:hidden;}
+    50%  {top:100px;}
+    100% {top:0px; display:show;}
 }

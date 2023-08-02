@@ -20,20 +20,21 @@
     <script defer src="/components/BarItem.js"></script>
     <script defer src="/components/Player.js"></script>
     <script defer src="/components/Message.js"></script>
+    <script src="/script.js" type="module"></script>
+
   </head>
   <body>
-    <div class="container">
+    <div class="container flex items-center justify-center h-screen">
       
       
       <!-- ANIMATION -->
-      <div class="game-container">
-        <!-- 352 -->
+      <!-- <div class="game-container">
         <canvas class="game-canvas" width="256" height="198"></canvas>
-      </div>
+      </div> -->
 
 
       <!-- WOLF -->
-      <div class="menu text-center bg-gray-100 bg-white">
+      <div class="menu text-center bg-gray-100 bg-white ">
         <!-- <div class="flex">
             <div class="items-center justify-center">
               <img class="w-20" src="/images/Logo.png">
@@ -42,54 +43,60 @@
         
         
         <!-- MAIN PAGE -->
-        <div id="initialPage" class="mt-40">
-          <p class="font-semibold text-xl">Welcome to play WOLF!</p>
-          <div class="mt-1 gap-x-6">
-            <button
-              id="findARoomBtn"
-              class="uppercase w-5/6 rounded-lg bg-gray-600 px-1 py-1 my-1 text-lg font-semibold text-white shadow-lg hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-            >
-              Find a room
-            </button>
-            <button
-              id="buildARoomBtn"
-              class="uppercase w-5/6 rounded-lg bg-gray-600 px-1 py-1 text-lg font-semibold text-white shadow-lg hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-            >
-              Build a room
-            </button>
+        <div id="initialPage" class="h-full flex items-center justify-center">
+          <div class="">
+            <p class="font-semibold text-xl">歡迎來玩狼人殺 WOLF!</p>
+
+            <div class="my-4 mx-2">
+              <div class="w-full max-w-lg grid grid-cols-6">
+                <div class="flex items-center justify-center col-start-1 col-end-12 p-3 rounded-lg ">
+                    <div class="flex items-center justify-center h-28 w-28 rounded-full colorpad flex-shrink-0 shadow-xl"></div>
+                </div>
+                
+                <div class="grid col-start-2 col-end-6">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">名字</label>
+                  <input
+                    id="user_name"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    type="text"
+                    placeholder="請輸入你的名字"
+                  />
+                  <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+                </div>
+              </div>
+            </div>
+            <div id="startBtns" class="mt-1 gap-x-6 ">
+              <button
+                id="findARoomBtn"
+                class="uppercase w-5/6 rounded-lg bg-gray-600 px-1 py-1 my-1 text-lg font-semibold text-white shadow-lg hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+              >
+                找遊戲房間
+              </button>
+              <button
+                id="settingGamePageBtn"
+                class="uppercase w-5/6 rounded-lg bg-gray-600 px-1 py-1 text-lg font-semibold text-white shadow-lg hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+              >
+                創建遊戲房間
+              </button>
+            </div>
           </div>
+          
         </div>
 
 
 
 
         <!-- FIND A ROOM PAGE -->
-        <div id="findARoomPage">
-          <bar-item>Find a room!</bar-item>
-          
+        <div id="findARoomPage" class="flex flex-col h-full ">
+          <bar-item>找遊戲房間!</bar-item>
           
           <!-- ROOM COL -->
-          <div id="roomCol">
-            <!-- <div class="max-w-sm px-6 py-3 bg-white border border-gray-200 rounded-lg shadow text-left">
-              <h6 class="text-xl font-bold tracking-tight text-gray-900">Room 606</h6>
-              <div class="block mt-2 mb-3">
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">People: 6</span>
-                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Villager: 2</span>
-                <span class="bg-red-100 text-red-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Wolf: 2</span>
-                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Predictor</span>
-                <span class="bg-purple-100 text-purple-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Witch</span>
-                <span class="bg-green-100 text-green-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Hunter</span>
-              </div>
-
-              <button id="joinBtn" class="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                Join In
-                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-              </button>
+          <div class="grow h-full antialiased overflow-hidden overflow-y-auto">
+            <div id="roomCol" >
+              <!-- <room-item ></room-item> -->
             </div>
-            <room-item ></room-item>   -->
           </div>
+          
         </div>
 
 
@@ -97,39 +104,62 @@
 
 
         <!-- BUILD A ROOM PAGE -->
-        <div id="buildARoomPage">
-          <bar-item>Build a room!</bar-item>
+        
+        <div id="settingGamePage">
+          
+          <div class="flex bg-white w-full px-3 py-3 ">
+            <div class="flex w-full">
+              <button id="backToGameBtn" class="px-2">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <p class="font-semibold text-xl px-2" id="room">設定角色</p>
+            </div>
+            
+          </div>
 
           <div class="mt-3 mx-2">
             <div class="w-full max-w-lg grid gap-4">
-              <div class="grid grid-cols-0">
-                <div class="w-full">
-                  <label
-                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
-                  >
-                    Room Number
-                  </label>
-                  <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="roomInput"
-                    type="text"
-                    placeholder="2"
-                  />
-                  <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
-                </div>
-              </div>
+              
               <div class="grid grid-cols-3 gap-4">
                 <div class="w-full">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
+                    for="operation_time_input"
+                  >
+                  operation_time
+                  </label>
+                  <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    id="operation_time_input"
+                    type="number"
+                    placeholder="2"
+                  />
+                  <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+                </div>
+                <div class="w-full">
+                  <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="dialogue_time_input"
+                  >
+                  dialogue_time
+                  </label>
+                  <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    id="dialogue_time_input"
+                    type="number"
+                    placeholder="2"
+                  />
+                </div>
+                <div class="w-full">
+                  <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="villager_input"
                   >
                     Villager
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
+                    id="villager_input"
                     type="number"
                     placeholder="2"
                   />
@@ -138,13 +168,13 @@
                 <div class="w-full">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
+                    for="wolf_input"
                   >
                     Wolf
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
+                    id="wolf_input"
                     type="number"
                     placeholder="2"
                   />
@@ -152,13 +182,13 @@
                 <div class="w-full">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
+                    for="predictor_input"
                   >
                     Predictor
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
+                    id="predictor_input"
                     type="number"
                     placeholder="2"
                   />
@@ -166,13 +196,13 @@
                 <div class="w-full">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
+                    for="witch_input"
                   >
                     Witch
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
+                    id="witch_input"
                     type="number"
                     placeholder="2"
                   />
@@ -180,13 +210,13 @@
                 <div class="w-full">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-first-name"
+                    for="hunter_input"
                   >
                     Hunter
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
+                    id="hunter_input"
                     type="number"
                     placeholder="2"
                   />
@@ -195,199 +225,151 @@
               <div class="mt-5">
                 <button
                   class="uppercase w-2/3 rounded-lg bg-gray-600 px-1 py-1 text-lg font-semibold text-white shadow-lg hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                  id="buildRoomBtn"
+                  id="confirmRoomBtn"
                 >
-                  Build a room
+                  確認
                 </button>
               </div>
             </div>
           </div>
         </div>
+       
 
-        <div id="playGame" class="h-full">
-          <bar-item>Room 606</bar-item>
-          <!-- <div class="flex bg-white w-full px-3 py-3 mb-2">
-            <button id="backBtn" class="px-2">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <p class="font-semibold text-xl px-2">Room 606</p>
-          </div> -->
-          <div class="h-full">
+        <div id="gamePage" class="flex flex-col h-full ">
+          <bar-item>Room 606 </bar-item>
+
+          
+          
+          
+          
 
 
-            <!-- ALL PLAYERS -->
-            <div class="grid grid-cols-5 gap-2 p-1 mb-2">
-              <player-item>Sunny</player-item>
-              <player-item>Sunny</player-item>
-              <player-item>Sunny</player-item>
-              <player-item>Sunny</player-item>
-              <player-item>Sunny</player-item>
-              <player-item>Sunny</player-item>
-              <div class="">
-                <div class="flex flex-row items-start justify-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-500 text-white flex-shrink-0"
-                  >
-                    S
-                  </div>
-                </div>
-                <p class="tracking-wide text-gray-700 text-xs font-bold">
-                  Sunny
-                </p>
-              </div>
-            </div>
 
-            
-            <!-- MESSAGE -->
-            <div class="flex flex-row h-2/3 antialiased text-gray-800">
-              <div class="flex flex-col h-full w-full bg-white">
-                <div class="h-full overflow-hidden overflow-y-auto">
-                  <div id="chatRoom" class="grid grid-cols-12 gap-y-1">
-                    <message-god>${message}</message-god>
-                    <div class="col-start-1 col-end-13 rounded-lg m-1">
-                      <div class="flex items-center justify-center">
-                        <div
-                          class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full"
-                        >
-                          First day
-                        </div>
-                      </div>
-                    </div>
+        
 
-                    <div class="col-start-1 col-end-12 p-3 rounded-lg">
-                      <div class="flex flex-row items-start">
-                        <div
-                          class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                        >
-                          A
-                        </div>
-                        <div class="relative ml-3">
-                          <p
-                            class="tracking-wide text-gray-700 text-xs font-bold text-left"
-                          >
-                            Sunnygggggggg
-                          </p>
-                          <div
-                            class="text-sm bg-white py-2 px-4 shadow rounded-xl"
-                          >
-                            <div>Hey How are you today?</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <message-others
-                      >Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Vel ipsa commodi illum saepe numquam maxime asperiores
-                      voluptate sit, minima perspiciatis.</message-others
-                    >
-                    <message-others>Hey How are you today?</message-others>
-                    <message-me>I'm ok what about you?</message-me>
-                    <message-me
-                      >Lorem ipsum dolor sit, amet consectetur adipisicing.
-                      ?</message-me
-                    >
-                    <message-others
-                      >Lorem ipsum dolor sit amet !</message-others
-                    >
 
-                    <div class="col-start-2 col-end-13 p-3 rounded-lg">
-                      <div
-                        class="flex items-center justify-start flex-row-reverse"
-                      >
-                        <div
-                          class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                        >
-                          A
-                        </div>
-                        <div
-                          class="relative mr-3 text-left text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                        >
-                          <div>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing.
-                            ?
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <message-others
-                      >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Perspiciatis, in.</message-others
-                    >
-                  </div>
-                </div>
-                <div class="flex flex-row items-center ml-1">
-                  <div
-                    class="flex flex-row items-center w-full border rounded-3xl h-12 px-2"
-                  >
-                    <button
-                      class="flex items-center justify-center h-10 w-10 text-gray-400 ml-1"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                        ></path>
-                      </svg>
-                    </button>
-                    <div class="w-full">
-                      <input
-                        type="text"
-                        class="border border-transparent w-full focus:outline-none text-sm h-10 flex items-center"
-                        placeholder="Type your message...."
-                        id="messageInput"
-                      />
-                    </div>
-                  </div>
-                  <div class="ml-1">
-                    <button
-                      id="sendMessageBtn"
-                      class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 hover:bg-gray-300 text-indigo-800 text-white"
-                    >
-                      <svg
-                        class="w-5 h-5 transform rotate-90 -mr-px"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                        ></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="flex -space-x-2"></div>
+
+
+
+
+
+
+          <!-- ALL PLAYERS -->
+          <div id="playerCol" class="grid grid-cols-5 gap-2 p-1 mb-2">
+            <!-- <player-item>Sunny</player-item>
+            <player-item>Sunny</player-item>
+            <player-item>Sunny</player-item>
+            <player-item>Sunny</player-item>
+            <player-item>Sunny</player-item>
+            <player-item>Sunny</player-item> -->
           </div>
+
+          
+          <!-- TOPIC -->
+          <div class="col-start-1 col-end-13 rounded-lg">
+            <div class="flex items-center justify-center">
+              <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow w-full flex items-center justify-center">
+                <div id="room_cant_start" class="text-base font-black text-gray-900">人數不夠，還不能開始遊戲</div>
+                <button type="button" id="startGameBtn" class="text-white bg-blue-400 dark:bg-blue-500  font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                  遊戲開始
+                </button>
+
+                <div id="stage_description" class="text-base font-black text-gray-900"></div>
+                <span id="timer"  class="inline-flex items-center justify-center w-6 h-6 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full"></span>
+              </div>
+            </div>
+          </div>
+
+          
+          <!-- MESSAGE -->
+          
+          <div class=" h-full grow overflow-hidden overflow-y-auto text-gray-800 bg-white ">
+            <div class="flex flex-col h-full w-full">
+              <div class="h-full antialiased overflow-y-auto">
+                <div id="chatRoom" class="grid grid-cols-12 gap-y-1">
+
+
+                  
+                  <!-- <message-god>${message}</message-god> -->
+                
+                 
+                </div>
+              </div>
+
+              <!-- MESSAGE BUTTON -->
+              <div class="flex flex-row items-center h-12">
+                <div
+                  class="flex flex-row items-center ml-1 w-full border rounded-3xl h-12 px-2"
+                >
+                  <button
+                    class="flex items-center justify-center h-10 w-10 text-gray-400 ml-1"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                      ></path>
+                    </svg>
+                  </button>
+                  <div class="w-full">
+                    <input
+                      type="text"
+                      class="border border-transparent w-full focus:outline-none text-sm h-10 flex items-center"
+                      placeholder="Type your message...."
+                      id="messageInput"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    id="sendMessageBtn"
+                    class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 hover:bg-gray-300 text-blue-200 text-white"
+                  >
+                    <svg
+                      class="w-5 h-5 transform rotate-90 -mr-px"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
     <!-- Scripts -->
-    <script src="/scripts/utils.js"></script>
+    <!-- <script src="/scripts/utils.js"></script>
     <script src="/scripts/DirectionInput.js"></script>
     <script src="/scripts/Overworld.js"></script>
     <script src="/scripts/GameObject.js"></script>
     <script src="/scripts/Person.js"></script>
     <script src="/scripts/Sprite.js"></script>
     <script src="/scripts/OverworldMap.js"></script>
-    <script src="/scripts/init.js"></script>
+    <script src="/scripts/init.js"></script> -->
   </body>
 </html>
-<script src="/script.js" type="module"></script>
+
+

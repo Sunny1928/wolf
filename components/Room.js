@@ -5,22 +5,25 @@ class RoomItem extends HTMLElement{
         super()
         this.innerHTML = `
         <div class="max-w-sm px-6 py-3 bg-white border border-gray-200 rounded-lg shadow text-left">
-              <h6 class="text-xl font-bold tracking-tight text-gray-900">${room}</h6>
-              <div class="block mt-2 mb-3">
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">People: 6</span>
-                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Villager: 2</span>
-                <span class="bg-red-100 text-red-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Wolf: 2</span>
-                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Predictor</span>
-                <span class="bg-purple-100 text-purple-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Witch</span>
-                <span class="bg-green-100 text-green-800 text-xs font-medium mr-1 px-2.5 py-0.5 rounded-full">Hunter</span>
-              </div>
-
-              <button id="joinBtn" class="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                Join 
+          <div class="flex justify-between items-center">
+            <h6 class="uppercase text-base font-bold tracking-tight text-gray-900"><span>${room.room_name}</span> : ${room.room_state}</h6>
+            <button id="joinBtn" class="inline-flex items-center px-3 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 ">
+                加入
                 <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                 </svg>
-              </button>
+            </button>
+          </div>      
+              <div class="block ">
+                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">人數:${room.game_setting.player_num}</span>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">村民:${room.game_setting.village}</span>
+                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">狼人:${room.game_setting.werewolf}</span>
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full ${'seer' in room.game_setting ?'':'hidden'}">預言家</span>
+                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full ${'witch' in room.game_setting ?'':'hidden'}">女巫</span>
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full ${'hunter' in room.game_setting ?'':'hidden'}">獵人</span>
+              </div>
+
+              
             </div>`
     }
 }

@@ -367,7 +367,7 @@ $(document).ready(function () {
 
                     data_vote_info.room_user = room_data.room_user
 
-                    if(data_vote_info.announcement.length!=0){
+                    if(data_vote_info.information.length!=0){
                         voteData(data_vote_info)
 
                         for(let i of data_vote_info.information[0].target){

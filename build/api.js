@@ -1,4 +1,3 @@
-import {io} from "./_snowpack/pkg/socket.io-client.js" 
 import {RoomItem} from "./components/Room.js"
 import {PlayerItem} from "./components/Player.js"
 

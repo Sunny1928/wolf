@@ -1,6 +1,5 @@
-import {io} from "socket.io-client" 
-import {RoomItem} from "./components/Room"
-import {PlayerItem} from "./components/Player"
+import {RoomItem} from "./components/Room.js"
+import {PlayerItem} from "./components/Player.js"
 
 const api_url = 'api_server:8001/api/'
 // const api_url = 'http://localhost:8001/api/'

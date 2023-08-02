@@ -1,7 +1,7 @@
 
-import {MessageGod,MessageMe,MessageOthers} from "./components/Message"
-import {VoteWolf,VoteDay,VoteSave, VoteData} from "./components/Vote"
-import {PlayerItem} from "./components/Player"
+import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
+import {VoteWolf,VoteDay,VoteSave, VoteData} from "./components/Vote.js"
+import {PlayerItem} from "./components/Player.js"
 
 import * as API from './api.js'
 

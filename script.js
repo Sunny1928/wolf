@@ -264,7 +264,7 @@ $(document).ready(function () {
 
         $('bar-item #room').text(room_name)
         
-        refreshRoomId =  setInterval(updateRoom, 100);
+        refreshRoomId =  setInterval(updateRoom, 1000);
 
     }
 
@@ -322,7 +322,7 @@ $(document).ready(function () {
                 $('#startGameBtn').hide()
                 $('#timer').show()
                 clearInterval(refreshRoomId)
-                refreshGameId =  setInterval(updateGame, 100);
+                refreshGameId =  setInterval(updateGame, 1000);
                 
             }
         })

@@ -4,7 +4,7 @@ class MessageGod extends HTMLElement{
 
       this.innerHTML = `
         <div class="flex items-center justify-center m-1">
-          <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
+          <div class="font-semibold relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
             ${text}
           </div>
         </div>

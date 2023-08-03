@@ -359,6 +359,8 @@ $(document).ready(function () {
                 console.log(data)
                 clearTimeout(timerId);
 
+                $(':radio:not(:checked)').attr('disabled', true);
+
                 
 
                 // check vote info
@@ -428,7 +430,8 @@ $(document).ready(function () {
                         // console.log(item)
 
                         if(item.operation == 'chat') {
-
+                            console.log(item.user)
+                            console.log(user_id)
                             if(item.user == user_id) return
 
                             // show chat content
@@ -554,14 +557,14 @@ $(document).ready(function () {
 
    
     // test
-    user_name ='sunny'
+    user_name ='pinyu'
     room_name = ROOM
+    
     get_user_role()
     intoGame(room_name)
     // $("#gamePage").hide();
     // $("#settingGamePage").show();
-
-
+    
 
 
 
@@ -591,7 +594,7 @@ $(document).ready(function () {
         
         API.operation(user_name, room_name, data, handleData=>{
             if(handleData=='OK'){
-                $("#messageInput").hide().val('')
+                $("#messageInput").val('')
                 displayMessageMe(user_id, `${message}`, room_data.user_color[user_id])
 
             }else{
@@ -620,7 +623,6 @@ $(document).ready(function () {
             "position" : [1,2]
         }
 
-        if(user_role != 'werewolf' && stage_name != 'wereeolf') $(this).hide()
         
         if(stage_name == 'witch'){
             data.chat = "poison"
@@ -628,7 +630,15 @@ $(document).ready(function () {
             data.operation = "vote"
         }
 
-        API.operation(user_name, room_name, data)
+        API.operation(user_name, room_name, data, handleData=>{
+            console.log(handleData)
+            console.log(data.stage_name)
+            if(handleData=='OK'){
+                $(`#error-${data.stage_name}`).text(handleData)
+            }else{
+                $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
+            }
+        })
     });
 
 
@@ -650,6 +660,7 @@ $(document).ready(function () {
         if(state == 'poison'){
             
             $(`#${id}`).hide()
+            $(':radio:not(:checked)').attr('disabled', true);
 
             let info = data_former
             if(info.information.length == 1) return
@@ -661,9 +672,16 @@ $(document).ready(function () {
             voteDay(info)
 
         }else{
+            API.operation(user_name, room_name, data, handleData=>{
+                if(handleData=='OK'){
+                    $(`#error-${data.stage_name}`).text(handleData)
+                    $(`#${id}`).hide()
+                    $(':radio:not(:checked)').attr('disabled', true);
 
-            $(`#${id}`).hide()
-            API.operation(user_name, room_name, data)
+                }else{
+                    $(`#error-save-${data.stage_name}`).text(handleData.responseJSON.Error)
+                }
+            })
         }
 
 
@@ -809,8 +827,19 @@ $(document).ready(function () {
         $("#settingRoleBtn").hide()
     });
 
-
+    // show setting room page
+    $("button[id^='skipStageBtn']").click(function () {
+        API.skipStage(room_name, handleData =>{
+            if(handleData=='OK'){
+                displayMessageGod("SKIP STAGE: "+handleData)
     
+            }else{
+                displayMessageGod("SKIP STAGE: "+handleData.responseJSON.Error)
+            }
+        })
+      
+        
+    });
 
     
     

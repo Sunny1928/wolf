@@ -40,7 +40,11 @@ export class VoteWolf extends HTMLElement{
       //back
       html += `
               <div class="flex justify-end">
-                <button id="${data.stage}" type="button" class="voteBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+                <div>
+                  <button id="${data.stage}" type="button" class="voteBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+                  <p id="error-${data.stage}" class="text-yellow-500 text-xs italic mt-2 text-right"></p>
+
+                </div>
               </div>
             </ul>
           </div>
@@ -158,7 +162,10 @@ export class VoteDay extends HTMLElement{
             </li>
 
             <div class="flex justify-end">
-              <button id="${data.stage}" type="button" class="voteBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+            <div>
+            <button id="${data.stage}" type="button" class="voteBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+            <p id="error-${data.stage}" class="text-yellow-500 text-xs italic mt-2 text-right"></p>
+            </div>
             </div>
           </ul>
         </div>
@@ -215,7 +222,10 @@ export class VoteSave extends HTMLElement{
 
       
             <div class="flex justify-end">
-              <button id="${data.stage}" type="button" class="voteSaveBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+              <div>
+                <button id="${data.stage}" type="button" class="voteSaveBtn text-black bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+                <p id="error-save-${data.stage}" class="text-yellow-500 text-xs italic mt-2 text-right"></p>
+              </div>
             </div>
           </ul>
         </div>

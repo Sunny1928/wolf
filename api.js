@@ -286,4 +286,33 @@ export var setGame = (room_name, data, handleData) => {
 
         }
     })
+}
+
+
+
+// skip stage
+export var skipStage = (room_name, handleData) => {
+
+    const user_token = sessionStorage.getItem("user_token");
+    // console.log(user_name)
+    // console.log(user_token)
+
+    
+    $.ajax({
+        type:'GET',
+        url: `${api_url}game/${room_name}/skip/1-0-werewolf`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
+        },
+        success: function(info){
+            
+            // console.log(info)
+            handleData(info)
+        },
+        error: function(err){
+            // alert(err.responseJSON.Error);
+            handleData(err)
+            // console.log("err")
+        }
+    })
 } 

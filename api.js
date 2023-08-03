@@ -1,7 +1,7 @@
 import {RoomItem} from "./components/Room.js"
 
-// const api_url = 'api/'
-const api_url = 'http://localhost:8001/api/'
+const api_url = 'api/'
+// const api_url = 'http://localhost:8001/api/'
 
 
 // api

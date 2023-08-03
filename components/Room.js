@@ -7,7 +7,7 @@ class RoomItem extends HTMLElement{
         <div class="max-w-sm px-6 py-3 bg-white border border-gray-200 rounded-lg shadow text-left">
           <div class="flex justify-between items-center">
             <h6 class="uppercase text-base font-bold tracking-tight text-gray-900"><span>${room.room_name}</span> : ${room.room_state}</h6>
-            <button id="joinBtn" class="inline-flex items-center px-3 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 ">
+            <button id="joinBtn" class="inline-flex items-center px-2 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 ${room.room_state == 'started' ? 'hidden':''}">
                 加入
                 <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

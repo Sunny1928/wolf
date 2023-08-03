@@ -124,28 +124,6 @@ var voteData = (data) => {
 
 
 
-var countDown = (description, time) => {
-    
-
-    let timeLeft = time-GAP;
-    let elem = document.getElementById('timer');
-    let timerId = setInterval(countdown, 1000);
-    $( "#stage_description" ).text(description) 
-    
-    function countdown() {
-      if (timeLeft == -1) {
-
-        clearTimeout(timerId);
-
-      } else {
-        elem.innerHTML = timeLeft + 's';
-        timeLeft--;
-      }
-    }
-
-}
-
-
 
 
 
@@ -199,6 +177,7 @@ $(document).ready(function () {
 
     var refreshRoomId = -1
     var refreshGameId = -1
+    var timerId = -1
 
 
     
@@ -320,6 +299,8 @@ $(document).ready(function () {
             if(room_data.room_state == "started"){
 
                 $('#startGameBtn').hide()
+                $("button[id^='backBtn']").hide()
+                $("button[id^='settingRoleBtn']").hide()
                 $('#timer').show()
                 clearInterval(refreshRoomId)
                 refreshGameId =  setInterval(updateGame, 1000);
@@ -327,6 +308,31 @@ $(document).ready(function () {
             }
         })
     }
+
+
+
+    // cound time
+    var countDown = (description, time) => {
+    
+
+        let timeLeft = time-GAP;
+        let elem = document.getElementById('timer');
+        timerId = setInterval(countdown, 1000);
+        $( "#stage_description" ).text(description) 
+        
+        function countdown() {
+          if (timeLeft == -1) {
+    
+            clearTimeout(timerId);
+    
+          } else {
+            elem.innerHTML = timeLeft + 's';
+            timeLeft--;
+          }
+        }
+    
+    }
+
 
 
 
@@ -351,7 +357,7 @@ $(document).ready(function () {
                 $("#sendMessageBtn").hide();
 
                 console.log(data)
-
+                clearTimeout(timerId);
 
                 
 
@@ -385,6 +391,10 @@ $(document).ready(function () {
 
 
                 }
+
+
+
+
 
 
                 
@@ -479,6 +489,7 @@ $(document).ready(function () {
                         }else if(item.operation == 'end'){
 
                             clearInterval(refreshGameId);
+                            quit_game()
 
                         }else{
 
@@ -543,9 +554,12 @@ $(document).ready(function () {
 
    
     // test
-    // get_user_role()
-    // intoGame(room_name)
-
+    user_name ='sunny'
+    room_name = ROOM
+    get_user_role()
+    intoGame(room_name)
+    // $("#gamePage").hide();
+    // $("#settingGamePage").show();
 
 
 
@@ -563,7 +577,6 @@ $(document).ready(function () {
         
         if (message === "") return
 
-        displayMessageMe(user_id, `${message}`, room_data.user_color[user_id])
 
         let id = $(this).attr('id')
         let stage = id.split('-')[2]
@@ -576,9 +589,16 @@ $(document).ready(function () {
             "position" : null
         }
         
-        API.operation(user_name, room_name, data)
+        API.operation(user_name, room_name, data, handleData=>{
+            if(handleData=='OK'){
+                $("#messageInput").hide().val('')
+                displayMessageMe(user_id, `${message}`, room_data.user_color[user_id])
 
-        $("#messageInput").hide().val('')
+            }else{
+                displayMessageGod(handleData.responseJSON.Error)
+            }
+        })
+
 
     });
 
@@ -659,7 +679,7 @@ $(document).ready(function () {
 
         if($('#user_name').val()){
             $("#startBtns").show()
-            $("#startBtns").addClass("goUp")
+            $("#page_front").addClass("goUp")
             user_name = $('#user_name').val()
             // sessionStorage.setItem("user_name", $('#user_name').val());
         }else{
@@ -702,33 +722,39 @@ $(document).ready(function () {
     $("button[id^='confirmRoomBtn']").click(function () {
         console.log("hihihihi")
       
-        // let settingData = {
-        //     "player_num": parseInt($("#hunter_input").val())+parseInt($("#wolf_input").val())+parseInt($("#villager_input").val())+parseInt($("#predictor_input").val())+parseInt($("#witch_input").val()),    
-        //     "operation_time" : parseInt($("#operation_time_input").val()),
-        //     "dialogue_time" : parseInt($("#dialogue_time_input").val()),
-        //     "seer" : parseInt($("#predictor_input").val()),
-        //     "witch" : parseInt($("#witch_input").val()),
-        //     "village" : parseInt($("#villager_input").val()),
-        //     "werewolf" : parseInt($("#wolf_input").val()),
-        //     "hunter" : parseInt($("#hunter_input").val())
-        // }
-        let settingData ={
-            "player_num": 9,    
-            "operation_time" : 30,
-            "dialogue_time" : 60,
-            "seer" : 1,
-            "witch" : 1,
-            "village" : 3,
-            "werewolf" : 3,
-            "hunter" : 1 
+        let settingData = {
+            "player_num": parseInt($("#hunter_input").val())+parseInt($("#wolf_input").val())+parseInt($("#villager_input").val())+parseInt($("#predictor_input").val())+parseInt($("#witch_input").val()),    
+            "operation_time" : parseInt($("#operation_time_input").val()),
+            "dialogue_time" : parseInt($("#dialogue_time_input").val()),
+            "seer" : parseInt($("#predictor_input").val()),
+            "witch" : parseInt($("#witch_input").val()),
+            "village" : parseInt($("#villager_input").val()),
+            "werewolf" : parseInt($("#wolf_input").val()),
+            "hunter" : parseInt($("#hunter_input").val())
         }
+        // let settingData ={
+        //     "player_num": 9,    
+        //     "operation_time" : 30,
+        //     "dialogue_time" : 60,
+        //     "seer" : 1,
+        //     "witch" : 1,
+        //     "village" : 3,
+        //     "werewolf" : 3,
+        //     "hunter" : 1 
+        // }
         console.log(settingData)
 
         
     
-        API.setGame(room_name, settingData)
+        API.setGame(room_name, settingData, handleData=>{
+            console.log(handleData)
+            if(handleData == 'OK'){
+                intoGame(room_name)
+            }else{
+                $('#settingGameError').text(handleData.responseJSON.Error)
+            }
+        })
     
-        intoGame(room_name)
     });
 
     

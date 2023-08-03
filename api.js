@@ -1,7 +1,7 @@
 import {RoomItem} from "./components/Room.js"
 
-const api_url = 'api/'
-// const api_url = 'http://localhost:8001/api/'
+// const api_url = 'api/'
+const api_url = 'http://localhost:8001/api/'
 
 
 // api
@@ -220,7 +220,7 @@ export var get_game_room_info = (room_name, handleData) => {
 
 
 // operation
-export var operation = (user_name, room_name, data) => {
+export var operation = (user_name, room_name, data, handleData) => {
 
     // user_name = sessionStorage.getItem("user_name");
     const user_token = sessionStorage.getItem("user_token");
@@ -234,7 +234,6 @@ export var operation = (user_name, room_name, data) => {
 
     
     $.ajax({
-        dataType: "json",
         contentType: "application/json;charset=utf-8",
         type:'POST',
         url: `${api_url}game/${room_name}/operation/${user_name}`,
@@ -244,11 +243,15 @@ export var operation = (user_name, room_name, data) => {
         data: JSON.stringify(data),
         success: function(info){
             console.log("sucess")
+            handleData(info)
             // console.log(info)
         },
         error: function(err){
             // console.log(err.responseJSON.Error);
             console.log("err")
+            handleData(err)
+
+
             // console.log(err)
         }
     })
@@ -256,7 +259,7 @@ export var operation = (user_name, room_name, data) => {
 
 
 // operation
-export var setGame = (room_name, data) => {
+export var setGame = (room_name, data, handleData) => {
 
     const user_token = sessionStorage.getItem("user_token");
 
@@ -264,7 +267,6 @@ export var setGame = (room_name, data) => {
     // console.log(data)
     
     $.ajax({
-        dataType: "json",
         contentType: "application/json;charset=utf-8",
         type:'POST',
         url: `${api_url}room/${room_name}`,
@@ -273,10 +275,15 @@ export var setGame = (room_name, data) => {
         },
         data: JSON.stringify(data),
         success: function(info){
-            console.log("sucess")
+            // console.log("sucess")
+            handleData(info)
+            
         },
         error: function(err){
-            console.log("err")
+            // console.log("err")
+            // console.log(err.responseJSON.Error)
+            handleData(err)
+
         }
     })
 } 

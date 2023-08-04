@@ -24,8 +24,10 @@ body {
     width: 256px;
     height: 198px;
     outline: 1px solid #fff;
-    transform: scale(3) translateY(50%) translateX(40%);
+    transform: scale(3) translateY(50%) translateX(-30%);
     margin: 0 auto;
+    top: 0px;
+    left: 0px;
 }
 
 .game-container canvas {
@@ -38,8 +40,8 @@ body {
     width: 360px;
     background: #fff;
     top: 96px;
-    left: 22px;
-    /* left: 822px; */
+    /* left: 22px; */
+    left: 280px;
 
     /* outline: 3px solid #fff; */
 

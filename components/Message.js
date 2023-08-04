@@ -18,10 +18,10 @@ class MessageMe extends HTMLElement{
         
         this.innerHTML = `
         <div class="flex items-center justify-start flex-row-reverse m-2">
-          <div class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${id}">
+          <div class="shadow flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${id}">
           ${id}
           </div>
-          <div class="relative mr-3 text-left text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl whitespace-normal break-all">
+          <div class="relative mr-2 text-left text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl whitespace-normal break-all">
             <div>${text}</div>
           </div>
         </div>
@@ -35,10 +35,10 @@ class MessageOthers extends HTMLElement{
         
         this.innerHTML = `
         <div class="flex flex-row items-start m-2">
-            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${item.user}">
+            <div class="shadow flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${item.user}">
             ${item.user}
             </div>
-            <div class="relative ml-3">
+            <div class="relative ml-2">
               <p class="tracking-wide text-gray-700 text-xs font-bold text-left">
                 ${item.room_user[item.user]}
               </p>
@@ -46,7 +46,7 @@ class MessageOthers extends HTMLElement{
               
 
               <div
-                  class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-normal break-all"
+                  class="shadow relative  text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-normal break-all"
               >
                     <div>${item.description} </div>
                     </div>

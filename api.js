@@ -1,7 +1,7 @@
 import {RoomItem} from "./components/Room.js"
 
-const api_url = 'api/'
-// const api_url = 'http://localhost:8001/api/'
+// const api_url = 'api/'
+const api_url = 'http://localhost:8001/api/'
 
 
 // api
@@ -51,7 +51,8 @@ export var build_a_room = (user_name, color, handleData) => {
 
         },
         error: function(err){
-            alert(err);
+            console.log(err);
+            // alert(err.responseJSON.Error);
             // alert(err.responseJSON.Error);
         }
     })
@@ -60,7 +61,7 @@ export var build_a_room = (user_name, color, handleData) => {
 
 
 // join a room and go into the game
-export var join_a_room = (user_name, room_name, color) => {
+export var join_a_room = (user_name, room_name, color, handleData) => {
     
     // const user_name = sessionStorage.getItem("user_name");
 
@@ -68,14 +69,15 @@ export var join_a_room = (user_name, room_name, color) => {
         type:'GET',
         url: `${api_url}join_room/${room_name}/${user_name}/${color.slice(-6)}`,
         success: function(info){
-
+            handleData = info
             sessionStorage.setItem("user_token", info.user_token);
 
             // handleData(info)
         },
         error: function(err){
-            alert(err);
-            // alert(err.responseJSON.Error);
+            // alert(err);
+            handleData = err
+            alert(err.responseJSON.Error);
         }
     })
 }

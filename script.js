@@ -192,6 +192,15 @@ $(document).ready(function () {
             user_state = data.game_info.user_state
             user_id = data.player_id
             displayMessageGod("你的角色是"+user_role)
+            let str ='你的夥伴 '
+
+            console.log(data.game_info.teamate)
+            data.game_info.teamate.forEach(e=>{
+                str = str + room_data.room_user[e] + ' '
+                
+            })
+
+            displayMessageGod(str)
     
         });
     }
@@ -209,6 +218,8 @@ $(document).ready(function () {
         $("#gamePage").hide();
         $("#initialPage").show();
         $("#settingRoleBtn").hide()
+        $("#startBtns").hide()
+        $("#user_name").val('')
 
         user_name = ''
         user_id = -1
@@ -427,7 +438,7 @@ $(document).ready(function () {
 
                     for(let item of data.announcement){
 
-                        // console.log(item)
+                        console.log(item)
 
                         if(item.operation == 'chat') {
                             console.log(item.user)
@@ -438,10 +449,17 @@ $(document).ready(function () {
                             item.room_user = room_data.room_user
                             displayMessageOthers(item, room_data.user_color[item.user])
                     
+                        }else if(item.operation == 'game_over'){
+                            $("button[id^='backBtn']").show()
+                            displayMessageGod(item.description)
+                            clearInterval(refreshGameId);
+                            // quit_game()
+
                         }else if(item.operation == 'died') {
                             
                             // change pleyer state
                             $(`#player-state-${item.user[0]}`).text('died')
+                            $(`#player-${item.user[0]}`).addClass('opacity-25')
                             displayMessageGod(item.description)
 
                             if(item.user[0] === user_id) {
@@ -488,11 +506,6 @@ $(document).ready(function () {
                         if(item.operation == 'dialogue') {
 
                             $("#sendMessageBtn").show();
-
-                        }else if(item.operation == 'end'){
-
-                            clearInterval(refreshGameId);
-                            quit_game()
 
                         }else{
 
@@ -557,11 +570,11 @@ $(document).ready(function () {
 
    
     // test
-    user_name ='pinyu'
-    room_name = ROOM
+    // user_name ='a'
+    // room_name = ROOM
     
-    get_user_role()
-    intoGame(room_name)
+    // get_user_role()
+    // intoGame(room_name)
     // $("#gamePage").hide();
     // $("#settingGamePage").show();
     
@@ -728,17 +741,18 @@ $(document).ready(function () {
         
         room_name = $(this).parent().children().children()[0].innerText
 
-        API.join_a_room(user_name, room_name, user_color)
+        API.join_a_room(user_name, room_name, user_color, handleData=>{
+            if(handleData == 'OK'){
+                intoGame(room_name)
+            }
+        })
     
-        intoGame(room_name)
-            
     });
 
 
     // show setting room page
     // $("#confirmRoomBtn").hide()
     $("button[id^='confirmRoomBtn']").click(function () {
-        console.log("hihihihi")
       
         let settingData = {
             "player_num": parseInt($("#hunter_input").val())+parseInt($("#wolf_input").val())+parseInt($("#villager_input").val())+parseInt($("#predictor_input").val())+parseInt($("#witch_input").val()),    
@@ -750,17 +764,6 @@ $(document).ready(function () {
             "werewolf" : parseInt($("#wolf_input").val()),
             "hunter" : parseInt($("#hunter_input").val())
         }
-        // let settingData ={
-        //     "player_num": 9,    
-        //     "operation_time" : 30,
-        //     "dialogue_time" : 60,
-        //     "seer" : 1,
-        //     "witch" : 1,
-        //     "village" : 3,
-        //     "werewolf" : 3,
-        //     "hunter" : 1 
-        // }
-        console.log(settingData)
 
         
     
@@ -768,6 +771,13 @@ $(document).ready(function () {
             console.log(handleData)
             if(handleData == 'OK'){
                 intoGame(room_name)
+                $("#operation_time_input").val('')
+                $("#dialogue_time_input").val('')
+                $("#predictor_input").val('')
+                $("#witch_input").val('')
+                $("#villager_input").val('')
+                $("#wolf_input").val('')
+                $("#hunter_input").val('')
             }else{
                 $('#settingGameError').text(handleData.responseJSON.Error)
             }

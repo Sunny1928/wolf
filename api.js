@@ -69,14 +69,14 @@ export var join_a_room = (user_name, room_name, color, handleData) => {
         type:'GET',
         url: `${api_url}join_room/${room_name}/${user_name}/${color.slice(-6)}`,
         success: function(info){
-            handleData = info
+            handleData('OK')
             sessionStorage.setItem("user_token", info.user_token);
 
             // handleData(info)
         },
         error: function(err){
             // alert(err);
-            handleData = err
+            handleData(err)
             alert(err.responseJSON.Error);
         }
     })

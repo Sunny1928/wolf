@@ -742,9 +742,10 @@ $(document).ready(function () {
         room_name = $(this).parent().children().children()[0].innerText
 
         API.join_a_room(user_name, room_name, user_color, handleData=>{
+            console.log(handleData)
             if(handleData == 'OK'){
                 intoGame(room_name)
-            }
+            }   
         })
     
     });

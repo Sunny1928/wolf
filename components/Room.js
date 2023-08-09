@@ -6,7 +6,14 @@ class RoomItem extends HTMLElement{
         this.innerHTML = `
         <div class="max-w-sm px-6 py-3 bg-white border border-gray-200 rounded-lg shadow text-left">
           <div class="flex justify-between items-center">
-            <h6 class="uppercase text-base font-bold tracking-tight text-gray-900"><span>${room.room_name}</span> : ${room.room_state}</h6>
+            <h6 class="flex items-center justify-center uppercase text-base font-bold tracking-tight text-gray-900">
+              <span>${room.room_name}</span> : ${room.room_state}
+
+              <div class="relative mr-2  inline-flex shadow items-center justify-center w-4 h-4 overflow-hidden bg-yellow-500 rounded-full">
+                <span class="font-medium text-white text-[3px]">${room.room_user.length}</span>
+              </div>
+
+            </h6>
             <button id="joinBtn" class="inline-flex items-center px-2 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 ${room.room_state == 'started' ? 'hidden':''}">
                 加入
                 <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

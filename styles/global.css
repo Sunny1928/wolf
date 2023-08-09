@@ -35,8 +35,8 @@ body {
 }
 
 .menu{
-    position: absolute;
-    height: 600px;
+    /* position: absolute; */
+    height: 720px;
     width: 360px;
     background: #fff;
     top: 96px;

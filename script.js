@@ -15,16 +15,32 @@ const ROOM = 'TESTROOM'
 // get random color and set color into class and session
 var randomColor = () => {
 
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
+    // var letters = '0123456789ABCDEF';
+    // var color = '#';
+    // for (var i = 0; i < 6; i++) {
+    //     color += letters[Math.floor(Math.random() * 16)];
+    // }
+
+    var rand = Math.floor(Math.random()* 360);
+    var color = "hsl(" + rand + ", 100%, 75%)"; 
+    color = hslToHex(rand, 100, 75)
 
     $(".colorpad").css("background-color", color);
+    // console.log(hslToHex(rand, 100, 75))
     return color
 
 }
+
+function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
 
 var setColor = (id, color) => {
     
@@ -304,6 +320,17 @@ $(document).ready(function () {
                 // room leader
                 if(user_name == room_data.room_leader){
                     $("button[id^='settingRoleBtn']").show()
+
+                    $("#operation_time_input").val(room_data.game_setting.operation_time)
+                    $("#dialogue_time_input").val(room_data.game_setting.dialogue_time)
+                    $("#predictor_input").val(room_data.game_setting.seer)
+                    $("#witch_input").val(room_data.game_setting.witch)
+                    $("#villager_input").val(room_data.game_setting.village)
+                    $("#wolf_input").val(room_data.game_setting.werewolf)
+                    $("#hunter_input").val(room_data.game_setting.hunter)
+
+
+                    
                 }
 
                 // if player num == the need, show start game button
@@ -685,7 +712,7 @@ $(document).ready(function () {
    
     // test
     // user_name ='b'
-    // user_name ='yui'
+    // user_name ='sunny'
     // room_name = ROOM
     // updateRoom()
     // get_user_role()
@@ -694,7 +721,6 @@ $(document).ready(function () {
     // $("#findARoomPage").show();
     // API.get_all_rooms()
 
-    // $("#gamePage").hide();
     // $("#gamePage").hide();
     // $("#settingGamePage").show();
     

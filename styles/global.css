@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-.game-container{
+/* .game-container{
     position: absolute;
     width: 256px;
     height: 198px;
@@ -28,11 +28,11 @@ body {
     margin: 0 auto;
     top: 0px;
     left: 0px;
-}
+} */
 
-.game-container canvas {
+/* .game-container canvas {
     image-rendering: pixelated;
-}
+} */
 
 .menu{
     /* position: absolute; */

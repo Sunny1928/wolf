@@ -4,7 +4,7 @@ class BarItem extends HTMLElement{
     constructor(){
         super()
         this.innerHTML = `
-        <div class="flex bg-white w-full px-3 py-3 ">
+        <div class="flex bg-white w-full px-3 py-3 rounded-t-xl">
             <div class="flex w-full">
               <button id="backBtn" class="px-2">
                 <i class="fa-solid fa-chevron-left"></i>

@@ -1,7 +1,7 @@
 import {RoomItem} from "./components/Room.js"
 
-const api_url = 'api/'
-// const api_url = 'http://localhost:8001/api/'
+// const api_url = 'api/'
+const api_url = 'http://localhost:8001/api/'
 
 
 // api
@@ -17,6 +17,8 @@ export var get_all_rooms = () => {
             
             let dev = $("#roomCol")
             dev.empty()
+
+            console.log(info)
 
             Object.keys(info).forEach(key => {
                 let rooms = new RoomItem(info[key])

@@ -24,7 +24,7 @@
 
   </head>
   <body>
-    <div class="container w-full flex items-center justify-center h-screen">
+    <div class="flex items-center justify-center h-screen rounded-xl">
       <!-- <div class="relative"> -->
       
       
@@ -35,7 +35,7 @@
 
 
       <!-- WOLF -->
-      <div class="menu text-center bg-gray-100 bg-white ">
+      <div class="text-center bg-gray-100 bg-white h-3/4 rounded-xl w-[360px]  ">
         <!-- <div class="flex">
             <div class="items-center justify-center">
               <img class="w-20" src="/images/Logo.png">
@@ -44,7 +44,7 @@
         
         
         <!-- MAIN PAGE -->
-        <div id="initialPage" class="h-full flex items-center justify-center">
+        <div id="initialPage" class="h-full flex items-center justify-center w-full">
           <div id="page_front" class="z-10 relative">
             
             <!-- <p class="font-semibold text-xl leading-relaxed ">歡迎來玩狼人殺 WOLF!</p> -->
@@ -86,7 +86,7 @@
               </button>
             </div>
           </div>
-          <div class="bg-gradient-to-t from-gray-100 to-transparent  w-full h-full absolute top-0 left-0 z-0"></div>
+          <div class="bg-gradient-to-t from-gray-100 to-transparent   h-full absolute top-0 left-0 z-0"></div>
           
         </div>
 
@@ -94,7 +94,7 @@
 
 
         <!-- FIND A ROOM PAGE -->
-        <div id="findARoomPage" class="flex flex-col h-full ">
+        <div id="findARoomPage" class="flex flex-col h-full w-full">
           <bar-item>找遊戲房間!</bar-item>
           
           <!-- ROOM COL -->
@@ -112,9 +112,9 @@
 
         <!-- BUILD A ROOM PAGE -->
         
-        <div id="settingGamePage">
+        <div id="settingGamePage" class="w-full">
           
-          <div class="flex bg-white w-full px-3 py-3 ">
+          <div class="flex bg-white w-full px-3 py-3 rounded-t-xl">
             <div class="flex w-full">
               <button id="backToGameBtn" class="px-2">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -124,12 +124,12 @@
             
           </div>
 
-          <div class="mt-3 mx-4">
+          <div class="mt-2 mx-4">
             <div class="w-full max-w-lg  ">
               
-              <div class="grid grid-cols-3 gap-2">
+              <div class="grid grid-cols-2 gap-2">
                 <div class="w-full">
-                 
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">操作時間</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="operation_time_input"
@@ -138,16 +138,17 @@
                   />
                 </div>
                 <div class="w-full">
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">對話時間</label>
                  
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="dialogue_time_input"
                     type="number"
-                    placeholder="dialogue_time"
+                    placeholder=""
                   />
                 </div>
                 <div class="w-full">
-                 
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">村民</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="villager_input"
@@ -157,6 +158,7 @@
                   <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
                 </div>
                 <div class="w-full">
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">狼人</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="wolf_input"
@@ -165,6 +167,7 @@
                   />
                 </div>
                 <div class="w-full">
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">預言家</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="predictor_input"
@@ -173,6 +176,7 @@
                   />
                 </div>
                 <div class="w-full">
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">女巫</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="witch_input"
@@ -181,6 +185,7 @@
                   />
                 </div>
                 <div class="w-full">
+                  <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">獵人</label>
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="hunter_input"
@@ -204,7 +209,7 @@
         </div>
        
 
-        <div id="gamePage" class="flex flex-col h-full bg-[url('/images/wolf-gray.png')] bg-contain">
+        <div id="gamePage" class="w-full flex flex-col h-full bg-[url('/images/wolf-gray.png')] bg-contain">
           <bar-item></bar-item>
 
           
@@ -293,7 +298,7 @@
               <!-- MESSAGE BUTTON -->
               <div class="flex flex-row items-center h-12 ">
                 <div
-                  class="flex flex-row items-center w-full border rounded-t-lg h-12 px-2 bg-white"
+                  class="flex flex-row items-center w-full border rounded-xl h-12 px-2 bg-white"
                 >
                   <button
                     id="skipStageBtn"

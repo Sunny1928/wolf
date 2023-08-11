@@ -40,7 +40,7 @@ function hslToHex(h, s, l) {
       return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
     };
     return `#${f(0)}${f(8)}${f(4)}`;
-  }
+}
 
 var setColor = (id, color) => {
     
@@ -203,7 +203,7 @@ $(document).ready(function () {
     var timerId = -1
     var game_over = 0
 
-    var room_state = "ready"
+    // var room_state = "ready"
 
 
 
@@ -372,8 +372,7 @@ $(document).ready(function () {
                 // chatRoom.empty()
             }
 
-            if(room_data.room_state == "started" && room_state == "ready"){
-                room_state = "started"
+            if(room_data.room_state == "started"){
 
                 $('#startGameBtn').hide()
                 $('#room_cant_start').hide()
@@ -399,7 +398,7 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-                clearInterval(refreshGameId)
+                // clearInterval(refreshGameId)
                 refreshGameId =  setInterval(updateGame, 1000);
             }
         })

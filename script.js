@@ -973,15 +973,19 @@ $(document).ready(function () {
     
         API.setGame(room_name, settingData, handleData=>{
             if(handleData == 'OK'){
-                intoGame(room_name)
+                // intoGame(room_name)
+                $("#initialPage").hide();
+                $("#findARoomPage").hide();
+                $("#settingGamePage").hide();
+                $("#gamePage").show();
                 $('#settingGameError').text('')
-                $("#operation_time_input").val('')
-                $("#dialogue_time_input").val('')
-                $("#predictor_input").val('')
-                $("#witch_input").val('')
-                $("#villager_input").val('')
-                $("#wolf_input").val('')
-                $("#hunter_input").val('')
+                // $("#operation_time_input").val('')
+                // $("#dialogue_time_input").val('')
+                // $("#predictor_input").val('')
+                // $("#witch_input").val('')
+                // $("#villager_input").val('')
+                // $("#wolf_input").val('')
+                // $("#hunter_input").val('')
             }else{
                 $('#settingGameError').text(handleData.responseJSON.Error)
             }

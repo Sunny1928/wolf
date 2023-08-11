@@ -203,6 +203,8 @@ $(document).ready(function () {
     var timerId = -1
     var game_over = 0
 
+    var room_state = "ready"
+
 
 
 
@@ -366,11 +368,12 @@ $(document).ready(function () {
         
                 });
         
-                let chatRoom = $("#chatRoom")
+                // let chatRoom = $("#chatRoom")
                 // chatRoom.empty()
             }
 
-            if(room_data.room_state == "started"){
+            if(room_data.room_state == "started" && room_state == "ready"){
+                room_state = "started"
 
                 $('#startGameBtn').hide()
                 $('#room_cant_start').hide()
@@ -396,7 +399,7 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-
+                clearInterval(refreshGameId)
                 refreshGameId =  setInterval(updateGame, 1000);
             }
         })

@@ -1,4 +1,4 @@
-class MessageGod extends HTMLElement{
+export class MessageGod extends HTMLElement{
   constructor(text){
       super()
 
@@ -12,7 +12,7 @@ class MessageGod extends HTMLElement{
   }
 }
 
-class MessageMe extends HTMLElement{
+export class MessageMe extends HTMLElement{
     constructor(id, text){
         super()
         
@@ -29,7 +29,7 @@ class MessageMe extends HTMLElement{
     }
 }
 
-class MessageOthers extends HTMLElement{
+export class MessageOthers extends HTMLElement{
     constructor(item){
         super()
         
@@ -39,7 +39,7 @@ class MessageOthers extends HTMLElement{
             ${item.user}
             </div>
             <div class="relative ml-2">
-              <p class="tracking-wide text-gray-700 text-xs font-bold text-left">
+              <p class="tracking-wide text-white text-xs font-bold text-left">
                 ${item.room_user[item.user]}
               </p>
 
@@ -60,4 +60,4 @@ customElements.define("message-god", MessageGod)
 customElements.define("message-me", MessageMe)
 customElements.define("message-others", MessageOthers)
 
-export {MessageGod, MessageMe, MessageOthers}
+// export {MessageGod, MessageMe, MessageOthers}

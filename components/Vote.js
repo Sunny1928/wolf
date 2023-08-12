@@ -101,6 +101,22 @@ export class VoteData extends HTMLElement{
 
       //back
       html += `
+                <li>
+                <label  class="font-medium text-gray-900 ">
+                  <div class="flex p-2 rounded hover:bg-gray-100 ">
+                    
+                    <div class="w-full ml-2 text-sm">
+                    <div class="w-full flex justify-between">
+                      <div>棄票</div>
+                      <div class="ml-2 relative inline-flex items-center justify-center w-5 h-5 overflow-hidden bg-blue-400 rounded-full ">
+                        <p id="vote-num-text-${data.stage}--1" class="font-medium text-white "></p>
+                      </div>
+                    </div>
+                          <p id="vote-result-text-${data.stage}--1" class="text-xs font-normal text-gray-500 "></p>
+                    </div>
+                  </div>
+                </label>
+              </li>
               
             </ul>
           </div>

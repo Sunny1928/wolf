@@ -2,6 +2,7 @@
 import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
 import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vote.js"
 import {PlayerItem} from "./components/Player.js"
+import * as workerTimers from 'worker-timers';
 
 import * as API from './api.js'
 
@@ -238,10 +239,19 @@ $(document).ready(function () {
     // reset all the game data
     var quit_game = () => {
 
+        console.log("room_name")
+        console.log(room_name)
+        console.log(user_name)
+
         clearInterval(refreshRoomId)
         clearInterval(refreshGameId)
 
-        API.quit_room(room_name, user_name)
+        
+
+        if(room_name != ''){
+            API.quit_room(room_name, user_name)
+        }
+
 
 
         $("#findARoomPage").hide();
@@ -250,6 +260,10 @@ $(document).ready(function () {
         $("#initialPage").show();
         $("#startBtns").hide()
         $("#user_name").val('')
+
+        // change bar title
+        $('bar-item #room').text('找遊戲房間!')
+
 
         user_name = ''
         user_id = -1
@@ -294,7 +308,7 @@ $(document).ready(function () {
 
         game_over = 0
 
-        refreshRoomId =  setInterval(updateRoom, 1000);
+        refreshRoomId =  workerTimers.setInterval(updateRoom, 1000);
 
     }
 
@@ -359,7 +373,7 @@ $(document).ready(function () {
                 let id = 0
                 room_data.room_user.forEach(player => {
                     
-                    let item = new PlayerItem(id, 'alive', player)
+                    let item = new PlayerItem(user_name, id, player)
                     playerCol.append(item)
         
                     setColor(id, room_data.user_color[id])
@@ -399,7 +413,7 @@ $(document).ready(function () {
                 }
 
                 // clearInterval(refreshGameId)
-                refreshGameId =  setInterval(updateGame, 1000);
+                refreshGameId =  workerTimers.setInterval(updateGame, 1000);
             }
         })
     }
@@ -411,7 +425,7 @@ $(document).ready(function () {
 
         let timeLeft = time-GAP;
         let elem = document.getElementById('timer');
-        timerId = setInterval(countdown, 1000);
+        timerId = workerTimers.setInterval(countdown, 1000);
         $( "#stage_description" ).text(description) 
         
         function countdown() {
@@ -434,7 +448,7 @@ $(document).ready(function () {
 
         let timeLeft = time-GAP;
         let elem = document.getElementById('timer');
-        let restartTimerId = setInterval(countdown, 1000);
+        let restartTimerId = workerTimers.setInterval(countdown, 1000);
         $( "#stage_description" ).text(description) 
         
         function countdown() {
@@ -512,6 +526,19 @@ $(document).ready(function () {
                             $("#vote-result-text-"+stage_now+"-"+i).text(voter)
                             $("#vote-num-text-"+stage_now+"-"+i).text(voter_num)
                         }
+
+                        // give up vote
+                        let voter = ''
+                        let voter_num = 0
+                        for(let j in data.vote_info){
+                            if(data.vote_info[j] === -1) {
+                                voter+= `${room_data.room_user[j]} `
+                                voter_num+=1
+                            }
+                        }
+                        $("#vote-result-text-"+stage_now+"--1").text(voter)
+                        $("#vote-num-text-"+stage_now+"--1").text(voter_num)
+
                     }
                     
 
@@ -639,6 +666,7 @@ $(document).ready(function () {
 
                             }else{
                                 $("#sendMessageBtn").show();
+                                $("#sendMessageBtn").show();
                             }
 
 
@@ -714,11 +742,14 @@ $(document).ready(function () {
    
     // test
     // user_name ='b'
+    // user_name ='b'
+    user_name ='yui'
+    // user_name ='pinyu'
     // user_name ='sunny'
-    // room_name = ROOM
-    // updateRoom()
-    // get_user_role()
-    // intoGame(room_name)
+    room_name = ROOM
+    updateRoom()
+    get_user_role()
+    intoGame(room_name)
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()
@@ -914,7 +945,7 @@ $(document).ready(function () {
         if($('#user_name').val()){
             $("#startBtns").show()
             $("#page_front").addClass("goUp")
-            user_name = $('#user_name').val()
+            user_name = $('#user_name').val() + Math.floor(Math.random() * 999)
             // sessionStorage.setItem("user_name", $('#user_name').val());
         }else{
             $("#startBtns").hide()

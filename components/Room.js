@@ -4,7 +4,7 @@ class RoomItem extends HTMLElement{
     constructor(room){
         super()
         this.innerHTML = `
-        <div class="max-w-sm px-6 py-3 bg-white border border-gray-200 rounded-lg shadow text-left">
+        <div class="px-6 py-4 bg-white border border-gray-200 rounded-lg shadow text-left">
           <div class="flex justify-between items-center">
             <h6 class="flex items-center justify-center uppercase text-base font-bold tracking-tight text-gray-900">
               <span>${room.room_name}</span> : ${room.room_state}

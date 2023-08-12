@@ -2,7 +2,7 @@
 import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
 import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vote.js"
 import {PlayerItem} from "./components/Player.js"
-import * as workerTimers from 'worker-timers';
+import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
 
 import * as API from './api.js'
 
@@ -743,13 +743,13 @@ $(document).ready(function () {
     // test
     // user_name ='b'
     // user_name ='b'
-    user_name ='yui'
+    // user_name ='yui'
     // user_name ='pinyu'
     // user_name ='sunny'
-    room_name = ROOM
-    updateRoom()
-    get_user_role()
-    intoGame(room_name)
+    // room_name = ROOM
+    // updateRoom()
+    // get_user_role()
+    // intoGame(room_name)
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()

@@ -478,7 +478,7 @@ $(document).ready(function () {
 
 
             // if(JSON.stringify(data)=== JSON.stringify(data_former)){
-            if(data.stage_description === data_former.stage_description && data.information.length=== data_former.information.length) {
+            if(data.stage_description === data_former.stage_description && JSON.stringify(data.announcement)=== JSON.stringify(data_former.announcement)) {
                 
                 // console.log("same game")
 

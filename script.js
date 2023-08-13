@@ -478,11 +478,15 @@ $(document).ready(function () {
 
 
             // if(JSON.stringify(data)=== JSON.stringify(data_former)){
-            if(data.stage_description === data_former.stage_description && JSON.stringify(data.announcement)=== JSON.stringify(data_former.announcement)) {
+            // if(data.stage_description === data_former.stage_description && JSON.stringify(data.announcement) === JSON.stringify(data_former.announcement)) {
+            if(data.stage_description === data_former.stage_description) {
                 
                 // console.log("same game")
 
             }else{
+
+                console.log(data)
+
 
                 $("#sendMessageBtn").hide();
 
@@ -491,9 +495,7 @@ $(document).ready(function () {
                 $(':radio:not(:checked)').attr('disabled', true);
 
 
-                console.log(data)
 
-                
 
                 // check vote info
                if(data.empty === 2 && Object.keys(data.vote_info).length !== 0){
@@ -546,9 +548,11 @@ $(document).ready(function () {
 
 
                 
-                countDown(data.stage_description, data.timer)
+                countDown(data.stage_description.split('#')[0], data.timer)
 
                 data_former = data
+                // data_former =  Object.assign({}, data)
+
                 stage_now = data.stage
                 stage_name = stage_now.split('-')[2]
 
@@ -748,7 +752,7 @@ $(document).ready(function () {
    
     // test
     // user_name ='b'
-    // user_name ='b'
+    // user_name ='a'
     // user_name ='yui'
     // user_name ='pinyu'
     // user_name ='sunny'

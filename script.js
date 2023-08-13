@@ -749,13 +749,13 @@ $(document).ready(function () {
     // test
     // user_name ='b'
     // user_name ='b'
-    user_name ='yui'
+    // user_name ='yui'
     // user_name ='pinyu'
     // user_name ='sunny'
-    room_name = ROOM
-    updateRoom()
-    get_user_role()
-    intoGame(room_name)
+    // room_name = ROOM
+    // updateRoom()
+    // get_user_role()
+    // intoGame(room_name)
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()

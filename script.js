@@ -660,7 +660,7 @@ $(document).ready(function () {
                     // console.log("information")
                     
                     // change background color
-                    $("#main").css("background-color", "#666");
+                    $("#main").css("background-color", "rgb(117, 149, 172)");
 
 
                     for(let item of data.information){
@@ -749,13 +749,13 @@ $(document).ready(function () {
     // test
     // user_name ='b'
     // user_name ='b'
-    // user_name ='yui'
+    user_name ='yui'
     // user_name ='pinyu'
     // user_name ='sunny'
-    // room_name = ROOM
-    // updateRoom()
-    // get_user_role()
-    // intoGame(room_name)
+    room_name = ROOM
+    updateRoom()
+    get_user_role()
+    intoGame(room_name)
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()

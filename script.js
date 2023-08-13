@@ -345,7 +345,6 @@ $(document).ready(function () {
                     $("#wolf_input").val(room_data.game_setting.werewolf)
                     $("#hunter_input").val(room_data.game_setting.hunter)
 
-
                     
                 }
 
@@ -432,7 +431,7 @@ $(document).ready(function () {
 
           if (timeLeft == -1) {
     
-            clearTimeout(timerId);
+            workerTimers.clearInterval(timerId);
 
     
           } else {
@@ -457,7 +456,7 @@ $(document).ready(function () {
 
             intoGame(room_name)
 
-            clearTimeout(restartTimerId);
+            workerTimers.clearInterval(restartTimerId);
 
     
           } else {
@@ -476,7 +475,7 @@ $(document).ready(function () {
         API.get_info(user_name, room_name, function(data){
 
             if(data == "err") {
-                clearTimeout(refreshGameId);
+                workerTimers.clearInterval(refreshGameId);
                 return
             }
 
@@ -489,7 +488,7 @@ $(document).ready(function () {
             }else{
                 $("#sendMessageBtn").hide();
 
-                clearTimeout(timerId);
+                workerTimers.clearInterval(timerId);
 
                 $(':radio:not(:checked)').attr('disabled', true);
 
@@ -945,7 +944,8 @@ $(document).ready(function () {
         if($('#user_name').val()){
             $("#startBtns").show()
             $("#page_front").addClass("goUp")
-            user_name = $('#user_name').val() +'('+ Math.floor(Math.random() * 999)+')'
+            user_name = $('#user_name').val() +':'+ Math.floor(Math.random() * 999)
+            // user_name = $('#user_name').val() +':'+ Math.floor(Math.random() * 999).toString().padEnd(3, '0')
             // sessionStorage.setItem("user_name", $('#user_name').val());
         }else{
             $("#startBtns").hide()

@@ -7,6 +7,7 @@ import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75
 import * as API from './api.js'
 
 const PRE_WORK_TIME = 5 
+const UPDATE_TIME = 500 
 const GAP = 2 
 const ROOM = 'TESTROOM'
 
@@ -306,7 +307,7 @@ $(document).ready(function () {
 
         game_over = 0
 
-        refreshRoomId =  workerTimers.setInterval(updateRoom, 1000);
+        refreshRoomId =  workerTimers.setInterval(updateRoom, UPDATE_TIME);
 
     }
 
@@ -412,7 +413,7 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-                refreshGameId =  workerTimers.setInterval(updateGame, 1000);
+                refreshGameId =  workerTimers.setInterval(updateGame, UPDATE_TIME);
             }
         })
     }

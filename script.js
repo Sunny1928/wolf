@@ -393,6 +393,9 @@ $(document).ready(function () {
                 $('#timer').show()
                 workerTimers.clearInterval(refreshRoomId)
 
+                let chatRoom = $("#chatRoom")
+                chatRoom.empty()
+
                 // append players
                 for(let i=0; i<room_data.game_setting.player_num; i++){
                     players.push(i);

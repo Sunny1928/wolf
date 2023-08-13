@@ -243,8 +243,8 @@ $(document).ready(function () {
         console.log(room_name)
         console.log(user_name)
 
-        clearInterval(refreshRoomId)
-        clearInterval(refreshGameId)
+        workerTimers.clearInterval(refreshRoomId)
+        workerTimers.clearInterval(refreshGameId)
 
         
 
@@ -394,7 +394,7 @@ $(document).ready(function () {
                 $("button[id^='settingRoleBtn']").hide()
                 $("#stage_description").show() 
                 $('#timer').show()
-                clearInterval(refreshRoomId)
+                workerTimers.clearInterval(refreshRoomId)
 
                 // append players
                 for(let i=0; i<room_data.game_setting.player_num; i++){
@@ -633,7 +633,7 @@ $(document).ready(function () {
                 //
                 if(game_over){
 
-                    clearInterval(refreshGameId);
+                    workerTimers.clearInterval(refreshGameId);
                     countDownAndRestart(game_over.description, game_over.timer)
                     $("button[id^='backBtn']").show()
                     displayMessageGod(game_over.description)
@@ -945,7 +945,7 @@ $(document).ready(function () {
         if($('#user_name').val()){
             $("#startBtns").show()
             $("#page_front").addClass("goUp")
-            user_name = $('#user_name').val() + Math.floor(Math.random() * 999)
+            user_name = $('#user_name').val() +'('+ Math.floor(Math.random() * 999)+')'
             // sessionStorage.setItem("user_name", $('#user_name').val());
         }else{
             $("#startBtns").hide()

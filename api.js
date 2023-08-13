@@ -97,6 +97,8 @@ export var get_a_room = (room_name, handleData) => {
         },
         error: function(err){
             // alert(err.responseJSON.Error);
+            handleData(err)
+
             console.log(err)
         }
     })

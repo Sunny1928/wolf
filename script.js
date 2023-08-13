@@ -239,13 +239,11 @@ $(document).ready(function () {
     // reset all the game data
     var quit_game = () => {
 
-        console.log("room_name")
-        console.log(room_name)
-        console.log(user_name)
 
-        workerTimers.clearInterval(refreshRoomId)
-        workerTimers.clearInterval(refreshGameId)
-
+        if(refreshRoomId!=-1) workerTimers.clearInterval(refreshRoomId)
+        if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId)
+        // workerTimers.clearInterval(refreshRoomId)
+        // workerTimers.clearInterval(refreshGameId)
         
 
         if(room_name != ''){
@@ -411,7 +409,6 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-                // clearInterval(refreshGameId)
                 refreshGameId =  workerTimers.setInterval(updateGame, 1000);
             }
         })
@@ -486,9 +483,10 @@ $(document).ready(function () {
                 // console.log("same game")
 
             }else{
+
                 $("#sendMessageBtn").hide();
 
-                workerTimers.clearInterval(timerId);
+                if(timerId!=-1) workerTimers.clearInterval(timerId);
 
                 $(':radio:not(:checked)').attr('disabled', true);
 
@@ -560,6 +558,8 @@ $(document).ready(function () {
 
                     get_user_role()
                 }
+
+
 
 
 
@@ -650,11 +650,18 @@ $(document).ready(function () {
                 // console.log("room data")
                 // console.log(room_data)
 
+                $("#main").css("background-color", "#333");
+
+
 
                 // check user is alive and has information and show
                 if(data.information.length!=0){
 
                     // console.log("information")
+                    
+                    // change background color
+                    $("#main").css("background-color", "#666");
+
 
                     for(let item of data.information){
 
@@ -742,13 +749,13 @@ $(document).ready(function () {
     // test
     // user_name ='b'
     // user_name ='b'
-    // user_name ='yui'
+    user_name ='yui'
     // user_name ='pinyu'
     // user_name ='sunny'
-    // room_name = ROOM
-    // updateRoom()
-    // get_user_role()
-    // intoGame(room_name)
+    room_name = ROOM
+    updateRoom()
+    get_user_role()
+    intoGame(room_name)
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()
@@ -942,13 +949,15 @@ $(document).ready(function () {
     $( "#user_name" ).on( "change", function() {
 
         if($('#user_name').val()){
+            
             $("#startBtns").show()
             $("#page_front").addClass("goUp")
-            user_name = $('#user_name').val() +':'+ Math.floor(Math.random() * 999)
-            // user_name = $('#user_name').val() +':'+ Math.floor(Math.random() * 999).toString().padEnd(3, '0')
-            // sessionStorage.setItem("user_name", $('#user_name').val());
+            user_name = $('#user_name').val() +':'+ Math.floor(Math.random() * 999).toString().padEnd(3, '0')
+
         }else{
+            
             $("#startBtns").hide()
+
         }
         
     });

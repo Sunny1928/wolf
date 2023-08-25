@@ -322,10 +322,9 @@ $(document).ready(function () {
                 return
             }
 
-
             if(JSON.stringify(data) === JSON.stringify(room_data)) {
                 
-                // console.log("same room")
+                console.log("same room")
 
             }else{
 
@@ -392,7 +391,7 @@ $(document).ready(function () {
                 $("button[id^='settingRoleBtn']").hide()
                 $("#stage_description").show() 
                 $('#timer').show()
-                workerTimers.clearInterval(refreshRoomId)
+                if(refreshRoomId!=-1) workerTimers.clearInterval(refreshRoomId)
 
                 let chatRoom = $("#chatRoom")
                 chatRoom.empty()
@@ -425,29 +424,36 @@ $(document).ready(function () {
 
         let timeLeft = time-GAP;
         let elem = document.getElementById('timer');
+
+        if(timerId != -1 ) workerTimers.clearInterval(timerId);
+
+
         timerId = workerTimers.setInterval(countdown, 1000);
         $( "#stage_description" ).text(description) 
         
         function countdown() {
 
           if (timeLeft == -1) {
-    
-            workerTimers.clearInterval(timerId);
 
-    
+            workerTimers.clearInterval(timerId);
+            timerId = -1
+            
           } else {
             elem.innerHTML = timeLeft + 's';
             timeLeft--;
           }
+
         }
     
     }
+
 
     // cound time and restart room
     var countDownAndRestart = (description, time) => {
 
         let timeLeft = time-GAP;
         let elem = document.getElementById('timer');
+
         let restartTimerId = workerTimers.setInterval(countdown, 1000);
         $( "#stage_description" ).text(description) 
         
@@ -457,8 +463,8 @@ $(document).ready(function () {
 
             intoGame(room_name)
 
-            workerTimers.clearInterval(restartTimerId);
-
+            if(restartTimerId!=-1) workerTimers.clearInterval(restartTimerId);
+            restartTimerId = -1
     
           } else {
             elem.innerHTML = timeLeft + 's';
@@ -475,8 +481,9 @@ $(document).ready(function () {
 
         API.get_info(user_name, room_name, function(data){
 
+            // game is over
             if(data == "err") {
-                workerTimers.clearInterval(refreshGameId);
+                if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId);
                 return
             }
 
@@ -489,14 +496,13 @@ $(document).ready(function () {
 
             }else{
 
-                console.log(data)
+                // console.log(data)
 
 
                 $("#sendMessageBtn").hide();
-
-                if(timerId!=-1) workerTimers.clearInterval(timerId);
-
                 $(':radio:not(:checked)').attr('disabled', true);
+
+               
 
 
 
@@ -640,7 +646,7 @@ $(document).ready(function () {
                 //
                 if(game_over){
 
-                    workerTimers.clearInterval(refreshGameId);
+                    if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId);
                     countDownAndRestart(game_over.description, game_over.timer)
                     $("button[id^='backBtn']").show()
                     displayMessageGod(game_over.description)
@@ -673,13 +679,11 @@ $(document).ready(function () {
 
                     for(let item of data.information){
 
-
                         if(item.operation == 'dialogue') {
 
                             if(data.information.length==2 && user_role=='hunter' && stage_name=='hunter'){
 
                             }else{
-                                $("#sendMessageBtn").show();
                                 $("#sendMessageBtn").show();
                             }
 
@@ -751,44 +755,15 @@ $(document).ready(function () {
         });
         
     }
-    
-
-   
-    // test
-    // user_name ='b'
-    // user_name ='a'
-    // user_name ='yui'
-    // user_name ='pinyu'
-    // user_name ='sunny'
-    // room_name = ROOM
-    // updateRoom()
-    // get_user_role()
-    // intoGame(room_name)
-    // $("#initialPage").hide();
-    // $("#findARoomPage").show();
-    // API.get_all_rooms()
-
-    // $("#gamePage").hide();
-    // $("#settingGamePage").show();
-    
 
 
+    var sendMessage = () => {
 
-
-
-    // button
-
-
-    // send message
-    $("#sendMessageBtn").on( "click", function() {
-        
         const message = $('#messageInput').val()
-        
         if (message === "") return
 
 
         let id = $(this).attr('id')
-        let stage = id.split('-')[2]
         let who = $(`input[name="vote-${id}"]:checked`).val()
         let data = {
             "stage_name" : stage_now,
@@ -816,11 +791,37 @@ $(document).ready(function () {
             }
         })
 
+    }
+    
 
-    });
+   
+    // test
+    // user_name ='b'
+    // user_name ='a'
+    // user_name ='yui'
+    // user_name ='pinyu'
+    // user_name ='sunny'
+    // room_name = ROOM
+    // updateRoom()
+    // get_user_role()
+    // intoGame(room_name)
+    // $("#initialPage").hide();
+    // $("#findARoomPage").show();
+    // API.get_all_rooms()
+
+    // $("#gamePage").hide();
+    // $("#settingGamePage").show();
 
 
 
+    
+    
+
+
+
+
+
+    // button
 
 
     // vote button
@@ -862,8 +863,6 @@ $(document).ready(function () {
 
 
 
-
-
     // dialogue wolf button
     $("#chatRoom").on("click", ".dialogueWolfBtn",function () {
 
@@ -875,9 +874,12 @@ $(document).ready(function () {
             chat='我同意'+$(`select[name=player1-${id}] option`).filter(':selected').val()
         }else if(who == 1){
             chat='我想刀'+$(`select[name=player2-${id}] option`).filter(':selected').val()+'因為他是'+$(`select[name=role-${id}] option`).filter(':selected').val()
-        }else{
+        }else if(who == 2){
             chat='無發言'
+        }else if(who == 3){
+            chat='我想自刀'
         }
+
         let data = {
             "stage_name" : id,
             "operation": "werewolf_dialogue",
@@ -898,8 +900,6 @@ $(document).ready(function () {
             }
         })
     });
-
-
 
 
 
@@ -950,8 +950,34 @@ $(document).ready(function () {
 
 
 
+    // send message
+    $("#sendMessageBtn").on( "click", function() {
+        
+        sendMessage()
+
+    });
 
 
+
+    // ENTER key and then send message
+    $('#messageInput').keypress(function (e) {
+        let key = e.which;
+        if(key == 13){
+            if($("#sendMessageBtn").is(":visible")) sendMessage()
+         }
+    });   
+
+
+
+
+
+
+    
+
+    
+
+
+    // INTO GAME BTNS
 
     // when user name change the buttons will show up
     $( "#user_name" ).on( "change", function() {
@@ -970,9 +996,15 @@ $(document).ready(function () {
         
     });
 
-    
+    // build a room button
+    $("#settingGamePageBtn").click(function () {
 
+        API.build_a_room(user_name, user_color, function(data){
+            room_name = data.room_name
+            intoGame(room_name)
+        });
 
+    });
 
     // find a room button
     $("#findARoomBtn").on("click", function () {
@@ -983,9 +1015,6 @@ $(document).ready(function () {
         API.get_all_rooms()
 
     });
- 
-
-
 
     // join a specific room by button 
     $("#roomCol").on("click", "room-item #joinBtn",function () {
@@ -993,16 +1022,30 @@ $(document).ready(function () {
         room_name = $(this).parent().children().children()[0].innerText
 
         API.join_a_room(user_name, room_name, user_color, handleData=>{
+
             if(handleData == 'OK'){
                 intoGame(room_name)
             }   
+
         })
     
     });
 
 
+
+
+
+    // SETTING GAME
+
     // show setting room page
-    // $("#confirmRoomBtn").hide()
+    $("button[id^='settingRoleBtn']").click(function () {
+      
+        $("#gamePage").hide()
+        $("#settingGamePage").show()
+        $("#settingRoleBtn").hide()
+    });
+
+    // set room roles btn
     $("button[id^='confirmRoomBtn']").click(function () {
       
         let settingData = {
@@ -1019,44 +1062,48 @@ $(document).ready(function () {
         
     
         API.setGame(room_name, settingData, handleData=>{
+
             if(handleData == 'OK'){
-                // intoGame(room_name)
+
                 $("#initialPage").hide();
                 $("#findARoomPage").hide();
                 $("#settingGamePage").hide();
                 $("#gamePage").show();
                 $('#settingGameError').text('')
-                // $("#operation_time_input").val('')
-                // $("#dialogue_time_input").val('')
-                // $("#predictor_input").val('')
-                // $("#witch_input").val('')
-                // $("#villager_input").val('')
-                // $("#wolf_input").val('')
-                // $("#hunter_input").val('')
+
+                API.get_a_room(room_name, function(data){
+                    if(data == null) {
+                        return
+                    }
+
+                    // room leader
+                    if(user_name == data.room_leader){
+
+                        $("#operation_time_input").val(data.game_setting.operation_time)
+                        $("#dialogue_time_input").val(data.game_setting.dialogue_time)
+                        $("#predictor_input").val(data.game_setting.seer)
+                        $("#witch_input").val(data.game_setting.witch)
+                        $("#villager_input").val(data.game_setting.village)
+                        $("#wolf_input").val(data.game_setting.werewolf)
+                        $("#hunter_input").val(data.game_setting.hunter)
+                    }
+                })
+
+
             }else{
+
                 $('#settingGameError').text(handleData.responseJSON.Error)
+
             }
         })
     
     });
 
-    
 
 
 
 
-    // build a room button
-    $("#settingGamePageBtn").click(function () {
-
-        API.build_a_room(user_name, user_color, function(data){
-            room_name = data.room_name
-            intoGame(room_name)
-        });
-
-    });
-
-
-
+    // GAME BTNS
 
     // start game button call api
     $("#startGameBtn").click(function () {
@@ -1065,8 +1112,25 @@ $(document).ready(function () {
 
     });
 
+    // show skip stage btn
+    $("button[id^='skipStageBtn']").click(function () {
+        API.skipStage(user_name, room_name, handleData =>{
+            if(handleData=='OK'){
+                displayMessageGod("SKIP STAGE: "+handleData)
+    
+            }else{
+                displayMessageGod("SKIP STAGE: "+handleData.responseJSON.Error)
+            }
+        })
+      
+        
+    });
 
 
+
+
+
+    // BACK TO MAIN PAGE
 
     // button for back to main page
     $("button[id^='backBtn']").click(function () {
@@ -1084,34 +1148,10 @@ $(document).ready(function () {
     });
 
     
-    // show setting room page
-    $("button[id^='settingRoleBtn']").click(function () {
-      
-        $("#gamePage").hide()
-        $("#settingGamePage").show()
-        $("#settingRoleBtn").hide()
-    });
-
-    // show setting room page
-    $("button[id^='skipStageBtn']").click(function () {
-        API.skipStage(user_name, room_name, handleData =>{
-            if(handleData=='OK'){
-                displayMessageGod("SKIP STAGE: "+handleData)
-    
-            }else{
-                displayMessageGod("SKIP STAGE: "+handleData.responseJSON.Error)
-            }
-        })
-      
-        
-    });
-
-    
     
 
 
-
-
+    // DEFAULTS
 
     // css: add classes
     $('body').find('*').filter(function(){

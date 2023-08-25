@@ -342,7 +342,20 @@ export class DialogueWolf extends HTMLElement{
         </label>
       </li>
 
-              <li class="${'seer' == data.stage.split('-')[2] ?'hidden':''}">
+            <li>
+              <label for="${data.stage}-3" class="font-medium text-gray-900 ">
+                <div class="flex p-2 rounded hover:bg-gray-100 ">
+                  <div class="flex items-center h-5">
+                      <input id="${data.stage}-3" name="${data.stage}" type="radio" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                  </div>
+                  <div class="ml-2 text-sm">
+                        <div>我想自刀</div>
+                  </div>
+                </div>
+              </label>
+            </li>
+
+            <li>
               <label for="${data.stage}-2" class="font-medium text-gray-900 ">
                 <div class="flex p-2 rounded hover:bg-gray-100 ">
                   <div class="flex items-center h-5">

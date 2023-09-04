@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wolf</title>
+    <link href="/styles/global.css" type="text/css" rel="stylesheet" />
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- tailwindcss -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+  </head>
+  <body>
+    <div id="main" class="flex items-center justify-center h-screen rounded-xl p-2 rounded-xl overflow-hidden overflow-y-auto">
+      <div class="bg-gray-100 bg-white h-5/6 w-full md:h-[750px] md:w-[480px] rounded-xl">
+
+        <!-- FIND A ROOM PAGE -->
+        <div class="flex flex-col h-full w-full rounded-xl font-medium ">
+          <h1 class="text-2xl font-bold m-4">遊戲介紹</h1>
+          
+          <!-- ROOM COL -->
+          <div class="grow h-full antialiased overflow-hidden overflow-y-auto">
+            
+            
+            <div id="accordion-open" data-accordion="open">
+              
+              <h2 id="accordion-open-heading-1">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-1" aria-expanded="true" aria-controls="accordion-open-body-1">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>介面操作</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-1" class="hidden" aria-labelledby="accordion-open-heading-1">
+                <div class="p-5 border border-b-0 border-gray-200">
+
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                      <li class="font-black text-gray-900">
+                        初始介面 
+                        <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                          <li>輸入姓名後，可以選擇加入或建立遊戲房間
+                            <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/rkqASL833.png" alt="initial interface">
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="font-black text-gray-900">
+                        建立遊戲房間
+                        <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                          <li>在初始介面選擇建立遊戲房間後，左上角會有房間號碼，可給予其他玩家加入房間</li>
+                          <li>建立房間的玩家為房主，可進行遊戲設定、開始遊戲，請注意當房主離開房間後，該房間就會解散</li>
+                        </ol>
+                      </li>
+                      <li class="font-black text-gray-900">
+                        加入遊戲房間
+                        <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                          <li>在初始介面選擇找遊戲房間後，可看到目前所有房間的資料，並可以點選右側的加入進入房間
+                            <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/ryw98L8h3.png" alt="rooms">
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="font-black text-gray-900">
+                        遊戲設定
+                        <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                          <li>點擊右上角的設定按鈕可以設定角色人數及操作時間
+                            <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/HkgLi8L33.png " alt="players">
+                            <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/SyBtqIL2n.png" alt="setting page">
+                          </li>
+                          <li>設定有誤時，會顯示紅字錯誤</li>
+                        </ol>
+                        
+                      </li>
+                      <li class="font-black text-gray-900">
+                        離開遊戲
+                        <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                          <li>點擊左上角的離開按鈕可以離開房間</li>
+                          <li>請注意當房主離開房間後，該房間就會解散</li>
+                        </ol>
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/HkgLi8L33.png" alt="exit btn">
+                      </li>
+                      <li class="font-black p-4 mb-4  text-red-800 rounded-lg bg-red-50">
+                        注意事項
+                        <ol class="mt-2 max-w-md space-y-2 list-decimal list-inside font-medium text-sm">
+                          <li>不能F5</li>
+                          <li>不能上一頁</li>
+                          <li>不能關掉視窗</li>
+                        </ol>
+                      </li>
+                  </ul>
+
+                </div>
+              </div>
+
+              <h2 id="accordion-open-heading-2">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-2" aria-expanded="false" aria-controls="accordion-open-body-2">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>遊戲內操作</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
+                <div class="p-5 border border-b-0 border-gray-200">
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                    <li class="font-black text-gray-900">
+                      目前狀態
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>開始遊戲後，會告知玩家身分，並且上方會顯示所有玩家的編號及狀態(透明代表該玩家已死亡)
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/Bkm0gvLnh.png" alt="">
+                        </li>
+                        <li>每個回合會更新玩家列表下的敘述文字及倒數時間，用於告知玩家目前遊戲狀態
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/r11WAUU3n.png" alt="">
+                        </li>
+                        <li>若輪到該玩家操作，背景顏色會改變
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/HkvgMPU2h.png" alt="">
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="font-black text-gray-900">
+                      公告
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>一開始會顯示角色身份
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/SJ2f088nh.png" alt="">
+                        </li>
+                        <li>每回合結束時，會在聊天視窗顯示訊息，像是玩家發言、玩家死亡等等
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/H1eIxvL22.png" alt="">
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="font-black text-gray-900">
+                      發言
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>若輪到該玩家發言，右下角發言按鈕會顯示，代表可送出訊息</li>
+                        <li>並注意訊息只能送出一次，送出後代表結束該發言回合
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/rJEGewU2h.png" alt="">
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="font-black text-gray-900">
+                      投票
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>第一階段投票，活著的玩家可以票一位玩家，會選擇最高票的玩家票出</li>
+                        <li>出現平票時，會讓平票的玩家進行第二次發言，再進入第二階段投票</li>
+                        <li>沒有玩家投票時，會讓所有玩家進行第二次發言，再進入第二階段投票</li>
+                        <li>第二階段投票結束後，若還是沒有決定出一位玩家，就沒人被票出</li>
+                        <li>第二階段投票結束後，若出現平票，則會選擇從中隨機選一位</li>
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/rJQjlPUh3.png" alt="rooms">
+                      </ol>
+                    </li>
+                  </ul>  
+                </div>
+              </div>
+
+              <h2 id="accordion-open-heading-3">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-3" aria-expanded="false" aria-controls="accordion-open-body-3">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>狼人</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-3" class="hidden" aria-labelledby="accordion-open-heading-3">
+                <div class="p-5 border border-b-0 border-gray-200">
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                    <li class="font-black text-gray-900">
+                      隊友
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/H1LN0L833.png" alt="">
+                      </ol>
+                    </li>
+                    <li class="font-black text-gray-900">
+                      發言
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>每回合狼人只能發言一次</li>
+                        <li>可選擇要投誰，覺得他是什麼身分</li>
+                        <li>或是同意其他狼人的發言</li>
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/SyTbkPI33.png" alt="">
+                      </ol>
+                    </li>
+                    <li class="font-black text-gray-900">
+                      投票
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>若所有狼人未進行操作，會隨機選擇一位玩家</li>
+                        <li>若狼人投票平票，會隨機殺一位平票玩家</li>
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/BkAP1DIhn.png" alt="rooms">
+                      </ol>
+                    </li>
+                  </ul>  
+                </div>
+              </div>
+
+              <h2 id="accordion-open-heading-4">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-4" aria-expanded="false" aria-controls="accordion-open-body-4">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>預言家</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-4" class="hidden" aria-labelledby="accordion-open-heading-4">
+                <div class="p-5 border border-b-0 border-gray-200">
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                    <li class="font-black text-gray-900"> 技能
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>每回合可以查驗一位活著的玩家，若沒有操作的話，會隨機選擇一位玩家
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/r1wqkwI23.png" alt="">
+                        </li>
+                        <li>查驗的結果會用公告的方式在下一回合顯示在聊天視窗
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/H1Ro1wL33.png" alt="">
+                        </li>
+                      </ol>
+                    </li>
+                  </ul>  
+                </div>
+              </div>
+
+              <h2 id="accordion-open-heading-5">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-5" aria-expanded="false" aria-controls="accordion-open-5">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>女巫</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-5" class="hidden" aria-labelledby="accordion-open-heading-5">
+                <div class="p-5 border border-b-0 border-gray-200">
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                    <li class="font-black text-gray-900">
+                      有解藥時會先提供救人選單，當選擇不救人且有毒藥時，才會出現毒人選單
+                      <ul class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>救人
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/ryBRkvUhh.png" alt="">
+                        </li>
+                        <li>毒人
+                          <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/ryGRJPU3n.png" alt="">
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>  
+                </div>
+              </div>
+
+              <h2 id="accordion-open-heading-6">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-open-body-6" aria-expanded="false" aria-controls="accordion-open-6">
+                  <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>獵人</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-open-body-6" class="hidden" aria-labelledby="accordion-open-heading-6">
+                <div class="p-5 border border-b-0 border-gray-200">
+                  <ul class="max-w-md space-y-4 text-gray-500 list-disc list-inside text-lg">
+                    <li class="font-black text-gray-900">
+                      發動技能
+                      <ol class="mt-2 max-w-md space-y-2 text-gray-500 list-decimal list-inside font-medium text-sm">
+                        <li>獵人必須先選擇是否發動技能後，才可以打字發言</li>
+                        <img class="h-auto max-w-xs w-xs" src="https://hackmd.io/_uploads/S1TVGPL23.png" alt="">
+                      </ol>
+                    </li>
+                  </ul>  
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          </div>
+          
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>
+
+

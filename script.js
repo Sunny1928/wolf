@@ -7,7 +7,7 @@ import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75
 import * as API from './api.js'
 
 const PRE_WORK_TIME = 5 
-const UPDATE_TIME = 500 
+const UPDATE_TIME = 500
 const GAP = 2 
 const ROOM = 'TESTROOM'
 
@@ -243,8 +243,6 @@ $(document).ready(function () {
 
         if(refreshRoomId!=-1) workerTimers.clearInterval(refreshRoomId)
         if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId)
-        // workerTimers.clearInterval(refreshRoomId)
-        // workerTimers.clearInterval(refreshGameId)
         
 
         if(room_name != ''){
@@ -1114,6 +1112,7 @@ $(document).ready(function () {
 
     // show skip stage btn
     $("button[id^='skipStageBtn']").click(function () {
+        
         API.skipStage(user_name, room_name, handleData =>{
             if(handleData=='OK'){
                 displayMessageGod("SKIP STAGE: "+handleData)

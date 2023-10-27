@@ -1,12 +1,11 @@
 import {RoomItem} from "./components/Room.js"
 
-const api_url = 'api/'
-// const api_url = 'http://localhost:8001/api/'
+// const api_url = 'api/'
+const api_url = 'http://localhost:8001/api/'
 
 // const api_url = 'http://192.168.1.132:8001/api/'
 
-
-// api
+// Room API
 
 
 // get all rooms info
@@ -134,7 +133,52 @@ export var quit_room = (room_name, user_name) => {
 
 
 
-//// start the game
+//// Game API
+
+// reset game
+export var reset_game = () => {
+
+
+    $.ajax({
+        type:'GET',
+        url: `${api_url}reset`,
+        success: function(info){
+            
+        },
+        error: function(err){
+            
+        }
+    })
+} 
+
+
+
+// add agent
+export var add_agent = (room_name, data, handleData) => {
+
+    // user_name = sessionStorage.getItem("user_name");
+    const user_token = sessionStorage.getItem("user_token");
+
+    $.ajax({
+        contentType: "application/json;charset=utf-8",
+        type:'POST',
+        url: `${api_url}agent/${room_name}/a`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
+        },
+        data: JSON.stringify(data),
+        success: function(info){
+
+            handleData(info)
+        },
+        error: function(err){
+
+            handleData(err)
+        }
+    })
+} 
+
+
 
 
 
@@ -313,6 +357,30 @@ export var skipStage = (name, room_name, handleData) => {
             // alert(err.responseJSON.Error);
             handleData(err)
             // console.log("err")
+        }
+    })
+} 
+
+
+// get all game info
+
+export var get_all_game_info = (room_name, handleData) => {
+
+    const user_token = sessionStorage.getItem("user_token");
+    
+    $.ajax({
+        type:'GET',
+        url: `${api_url}game/${room_name}/information`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
+        },
+        success: function(info){
+            
+            handleData(info)
+        },
+        error: function(err){
+
+            handleData("err")
         }
     })
 } 

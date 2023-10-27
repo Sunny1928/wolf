@@ -1,3 +1,4 @@
+
 export class MessageGod extends HTMLElement{
   constructor(text){
       super()

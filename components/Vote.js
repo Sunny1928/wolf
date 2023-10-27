@@ -62,7 +62,7 @@ export class VoteData extends HTMLElement{
   constructor(data){
       super()
 
-      console.log(data)
+      // console.log(data)
 
       // front
       var html = `
@@ -265,7 +265,6 @@ export class DialogueWolf extends HTMLElement{
     super()
     // console.log("data")
     // console.log(player)
-    console.log(data)
 
     let players_without_wolf = player
 
@@ -331,7 +330,6 @@ export class DialogueWolf extends HTMLElement{
                   <select name="role-${data.stage}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ml-1">`
                     
                   for(let i of roles){
-                    console.log(i)
                     html+=`<option value="${i}">${i}</option>`
                   }
                     

@@ -1004,7 +1004,7 @@ $(document).ready(function () {
             "agent_type" : "intelligent_agent" ,
             "agent_name" : "Test"+room_data['room_user'].length,
             "room_name" : room_name ,
-            "api_json" : "doc/secret/yui.key",
+            "api_json" : "doc/secret/openai.key",
             "color" : "f9a8d4" ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
@@ -1024,7 +1024,7 @@ $(document).ready(function () {
             "agent_type" : "memory_stream_agent" ,
             "agent_name" : "Test"+room_data['room_user'].length,
             "room_name" : room_name ,
-            "api_json" : "doc/secret/yui.key",
+            "api_json" : "doc/secret/openai.key",
             "color" : "f9a8d4" ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }

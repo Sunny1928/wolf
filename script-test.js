@@ -717,7 +717,7 @@ $(document).ready(function () {
                         let item = JSON.parse(JSON.stringify(i))
 
                         if(item['user'].length != 0) {
-                            console.log("Here")
+                            // console.log("Here")
                             user_name = players_info[item['user'][0]]['user_name']
                         }
 

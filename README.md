@@ -12,8 +12,15 @@
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/prepare_1.png)
 
 1. 右上角，設定左邊的按鈕是 reset game
-2. Add Agent可以新增你想要加的Agent
+2. 玩家右上角的叉叉可以移除玩家
+3. Add Agent可以新增你想要加入的Player
+    player -> add normal player
+    intelligent agent -> add intelligent agent
+    memory agent -> add memory agent
 
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/game_1.png)
 
 1. 上面的選項是選擇操作者，但我其實每次換stage都會幫你們填入操作的人(但沒有在選單上幫你們切換)，但有些情況會沒填到，如果沒送出成功，你們可以再切換一下角色
+
+![alt text](https://github.com/Sunny1928/wolf/blob/main/img/agentinfo.png)
+1. Agent Info 

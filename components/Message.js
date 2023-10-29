@@ -4,7 +4,7 @@ export class MessageGod extends HTMLElement{
       super()
 
       this.innerHTML = `
-        <div class="flex items-center justify-center m-1">
+        <div class="flex items-center justify-center m-1 mx-1">
           <div class="font-semibold relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
             ${text}
           </div>
@@ -47,7 +47,7 @@ export class MessageOthers extends HTMLElement{
               
 
               <div
-                  class="shadow relative  text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-normal break-all"
+                  class="shadow relative text-left text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-normal break-all"
               >
                     <div>${item.description} </div>
                     </div>

@@ -13,12 +13,13 @@ const GAP = 2
 const ROOM = 'TESTROOM'
 
 
-var addAgent = () => {
+var addAgentBar = () => {
         
     let item = new AddAgent()
     item.classList.add("col-start-1","col-end-13","rounded-lg")
 
     let chatRoom = $("#chatRoom")
+    chatRoom.empty()
     chatRoom.append(item)
     chatRoom.parent().scrollTop(chatRoom.prop('scrollHeight'));
 
@@ -369,7 +370,7 @@ $(document).ready(function () {
                     $('#room_cant_start').show()
                     $('#room_cant_start').text('人數不夠，還不能開始遊戲')
                     $('#startGameBtn').hide()
-                    addAgent()
+                    addAgentBar()
                 }
                     
                 let playerCol = $("#playerCol")
@@ -834,6 +835,47 @@ $(document).ready(function () {
 
     // button
 
+    // add Intelligent Agent button
+    $("#chatRoom").on("click", ".addIntelligentAgent",function () {
+        let data = {
+            "agent_type" : "intelligent_agent" ,
+            "agent_name" : "Agent"+room_data['room_user'].length,
+            "room_name" : room_name ,
+            "api_json" : "doc/secret/openai.key",
+            "color" : "99f6e4 " ,
+            "prompt_dir" : "doc/prompt/memory_stream/"
+        }
+
+        API.add_agent(room_name, data, handleData=>{
+            if(handleData.log=='ok'){
+
+            }else{
+                displayMessageGod("error")
+            }
+        })
+
+    });
+
+    $("#chatRoom").on("click", ".addMemmoryAgent",function () {
+        let data = {
+            "agent_type" : "memory_stream_agent" ,
+            "agent_name" : "Agent"+room_data['room_user'].length,
+            "room_name" : room_name ,
+            "api_json" : "doc/secret/openai.key",
+            "color" : "fca5a5" ,
+            "prompt_dir" : "doc/prompt/memory_stream/"
+        }
+
+        API.add_agent(room_name, data, handleData=>{
+            if(handleData.log=='ok'){
+
+            }else{
+                displayMessageGod("error")
+            }
+        })
+
+    });
+
 
     // vote button
     $("#chatRoom").on("click", ".voteBtn",function () {
@@ -1033,7 +1075,7 @@ $(document).ready(function () {
         
         room_name = $(this).parent().children().children()[0].innerText
 
-        API.join_a_room(user_name, room_name, user_color, handleData=>{
+        API.join_a_room(0, user_name, room_name, user_color, handleData=>{
 
             if(handleData == 'OK'){
                 intoGame(room_name)

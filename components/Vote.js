@@ -5,7 +5,7 @@ export class VoteWolf extends HTMLElement{
       
       // front
       var html = `
-      <div class="col-start-1 col-end-13 rounded-lg">
+      <div class="col-start-1 col-end-13 rounded-lg mx-1" >
         <div class="flex items-center justify-center m-1">
           <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
             <p class="text-xl font-black text-gray-900 mb-1">${data.information[0].description}</p>
@@ -66,7 +66,7 @@ export class VoteData extends HTMLElement{
 
       // front
       var html = `
-      <div class="col-start-1 col-end-13 rounded-lg">
+      <div class="col-start-1 col-end-13 rounded-lg mx-1">
         <div class="flex items-center justify-center m-1">
           <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
             <p class="text-xl font-black text-gray-900 mb-1">投票結果</p>
@@ -138,7 +138,7 @@ export class VoteDay extends HTMLElement{
     
     // front
     var html = `
-    <div class="col-start-1 col-end-13 rounded-lg">
+    <div class="col-start-1 col-end-13 rounded-lg mx-1">
       <div class="flex items-center justify-center m-1">
         <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
           <p class="text-xl font-black text-gray-900 mb-1">${data.information[0].description}</p>
@@ -207,7 +207,7 @@ export class VoteSave extends HTMLElement{
     
     // front
     var html = `
-    <div class="col-start-1 col-end-13 rounded-lg">
+    <div class="col-start-1 col-end-13 rounded-lg mx-1">
       <div class="flex items-center justify-center m-1">
         <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
           <p class="text-xl font-black text-gray-900 mb-1">${data.information[0].description}</p>
@@ -278,7 +278,7 @@ export class DialogueWolf extends HTMLElement{
     
 
     var html = `
-    <div class="col-start-1 col-end-13 rounded-lg">
+    <div class="col-start-1 col-end-13 rounded-lg mx-1">
       <div class="flex items-center justify-center m-1">
         <div class="relative text-center text-sm bg-blue-100 py-2 px-4 shadow rounded-xl w-full">
           <p class="text-xl font-black text-gray-900 mb-1">狼人玩家發言</p>

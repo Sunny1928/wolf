@@ -1,0 +1,78 @@
+:root {
+    --border-color: #291d4d;
+    --dialog-background: #fff3b4;
+
+    --menu-background: #FFE8D2;
+    --menu-border-color: #A48465;
+    --menu-font-color: #3A160D;
+    --menu-selected-background: #7fc2ff;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #333;
+    overflow: hidden;
+}
+
+/* .game-container{
+    position: absolute;
+    width: 256px;
+    height: 198px;
+    outline: 1px solid #fff;
+    transform: scale(3) translateY(50%) translateX(-30%);
+    margin: 0 auto;
+    top: 0px;
+    left: 0px;
+} */
+
+/* .game-container canvas {
+    image-rendering: pixelated;
+} */
+
+
+.menu{
+    /* position: absolute; */
+    height: 720px;
+    width: 360px;
+    background: #fff;
+    top: 96px;
+    /* left: 22px; */
+    left: 280px;
+
+    /* outline: 3px solid #fff; */
+
+}
+
+.goUp {
+    position: relative;
+    animation-name: showUp;
+    animation-duration: 4s;
+    animation-delay: -2s;
+}
+
+.bg-color-4{
+    background-color: "#111111";
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.overflow-y-auto::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.overflow-y-auto{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+  
+@keyframes showUp {
+    0%   {top:0px; display:hidden;}
+    50%  {top:100px;}
+    100% {top:0px; display:show;}
+}

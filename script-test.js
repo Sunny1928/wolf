@@ -3,6 +3,7 @@ import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
 import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vote.js"
 import {PlayerSelector} from "./components/PlayerSelector.js"
 import {AddAgent} from "./components/AddAgent.js"
+import {AgentInfo} from "./components/AgentInfo.js"
 import {PlayerItem} from "./components/Player.js"
 import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
 
@@ -12,6 +13,7 @@ const PRE_WORK_TIME = 5
 const UPDATE_TIME = 1000
 const GAP = 2 
 const ROOM = 'TESTROOM'
+
 
 
 var addAgent = () => {
@@ -166,6 +168,7 @@ var SelectPlayer = (data) => {
     item.classList.add("col-start-1","col-end-13","rounded-lg")
     
     let playerSelector = $("#playerSelector")
+    playerSelector.empty()
     playerSelector.append(item)
 
 }
@@ -203,7 +206,7 @@ $(document).ready(function () {
     var user_role = ''
     var user_state = '' 
     var user_color = randomColor()
-
+     
 
     
     var room_name = ''
@@ -212,6 +215,7 @@ $(document).ready(function () {
     var players_info = {}
     var roles = ['民','神']
 
+    var wolf_vote_shown = 0
 
 
     let stage_name = '' // 1-1-vote1
@@ -322,7 +326,7 @@ $(document).ready(function () {
         $("#settingGamePage").hide();
         $("#gamePage").show();
 
-        $('bar-item #room').text(room_name)
+        $('test-bar-item #room').text(room_name)
 
         // let chatRoom = $("#chatRoom")
         // chatRoom.empty()
@@ -400,7 +404,7 @@ $(document).ready(function () {
                 let id = 0
                 room_data.room_user.forEach(player => {
                     
-                    let item = new PlayerItem(user_name, id, player)
+                    let item = new PlayerItem(user_name, id, player, 1)
                     playerCol.append(item)
         
                     setColor(id, room_data.user_color[id])
@@ -423,6 +427,23 @@ $(document).ready(function () {
                 $('#timer').show()
                 if(refreshRoomId!=-1) workerTimers.clearInterval(refreshRoomId)
 
+                // update player without delete button
+                let playerCol = $("#playerCol")
+                playerCol.empty()
+        
+                let id = 0
+                room_data.room_user.forEach(player => {
+                    
+                    let item = new PlayerItem(user_name, id, player)
+                    playerCol.append(item)
+        
+                    setColor(id, room_data.user_color[id])
+
+                    id++
+        
+                });
+
+                // empty chat room
                 let chatRoom = $("#chatRoom")
                 chatRoom.empty()
 
@@ -536,59 +557,72 @@ $(document).ready(function () {
 
 
                 $("#sendMessageBtn").hide();
-                $(':radio:not(:checked)').attr('disabled', true);
 
-               
-
-
-
+            
 
                 // check vote info
-               if(data.empty === 2 && Object.keys(data.vote_info).length !== 0){
+               if(data.empty === 1 && Object.keys(data.vote_info).length !== 0){
+                    // console.log(data.stage.split('-')[2])
+                    if(data.stage.split('-')[2] == 'werewolf'){
+                        let data_wolf_vote = JSON.parse(JSON.stringify(data))
+                
+                        for(let i of data_wolf_vote.information[0].target){
+                            let voter = ''
+
+                            for(let j in data_wolf_vote.vote_info){
+                                if(data_wolf_vote.vote_info[j] == i) voter+= `${room_data.room_user[j]} `
+                            }
+
+                
+                            $("#vote-text-"+data.stage+"-"+i).text(voter)
+                        }
+
+                        return
+
+                    }else{
+
+                        let data_vote_info = JSON.parse(JSON.stringify(data_former))
+
+                        data_vote_info.room_user = room_data.room_user
+
+                        if(data_vote_info.information.length!=0){
+                            voteData(data_vote_info)
+
+                            for(let i of data_vote_info.information[0].target){
+                                let voter = ''
+                                let voter_num = 0
+
+                                for(let j in data.vote_info){
+                                    if(data.vote_info[j] == i) {
+                                        voter+= `${room_data.room_user[j]} `
+                                        voter_num+=1
+                                    }
+                                }
 
                     
+                                $("#vote-result-text-"+stage_now+"-"+i).text(voter)
+                                $("#vote-num-text-"+stage_now+"-"+i).text(voter_num)
+                            }
 
-                    let data_vote_info = JSON.parse(JSON.stringify(data_former))
-
-                    data_vote_info.room_user = room_data.room_user
-
-                    if(data_vote_info.information.length!=0){
-                        voteData(data_vote_info)
-
-                        for(let i of data_vote_info.information[0].target){
+                            // give up vote
                             let voter = ''
                             let voter_num = 0
-
                             for(let j in data.vote_info){
-                                if(data.vote_info[j] == i) {
+                                if(data.vote_info[j] === -1) {
                                     voter+= `${room_data.room_user[j]} `
                                     voter_num+=1
                                 }
                             }
+                            $("#vote-result-text-"+stage_now+"--1").text(voter)
+                            $("#vote-num-text-"+stage_now+"--1").text(voter_num)
 
-                
-                            $("#vote-result-text-"+stage_now+"-"+i).text(voter)
-                            $("#vote-num-text-"+stage_now+"-"+i).text(voter_num)
                         }
-
-                        // give up vote
-                        let voter = ''
-                        let voter_num = 0
-                        for(let j in data.vote_info){
-                            if(data.vote_info[j] === -1) {
-                                voter+= `${room_data.room_user[j]} `
-                                voter_num+=1
-                            }
-                        }
-                        $("#vote-result-text-"+stage_now+"--1").text(voter)
-                        $("#vote-num-text-"+stage_now+"--1").text(voter_num)
-
                     }
-                    
 
 
                 }
 
+                $(':radio:not(:checked)').attr('disabled', true);
 
 
 
@@ -609,6 +643,17 @@ $(document).ready(function () {
                 }
 
 
+                // check agent info
+                // if(JSON.stringify(data['agent_info']) !== JSON.stringify(data_former['agent_info'])){
+                    let agentCol = $("#agentCol")
+                    agentCol.empty()
+                    for (const [key, value] of Object.entries(data['agent_info'])) {
+                        let item = new AgentInfo(key, value)
+                        agentCol.append(item)
+                    }
+
+                // }
+                
 
 
 
@@ -700,7 +745,7 @@ $(document).ready(function () {
                 // console.log("room data")
                 // console.log(room_data)
 
-                $("#main").css("background-color", "#333");
+                $("#game").css("background-color", "#333");
 
 
                 // check user is alive and has information and show
@@ -709,12 +754,15 @@ $(document).ready(function () {
                     // console.log("information")
                     
                     // change background color
-                    $("#main").css("background-color", "rgb(117, 149, 172)");
+                    $("#game").css("background-color", "rgb(117, 149, 172)");
 
 
                     for(let i of data.information){
 
                         let item = JSON.parse(JSON.stringify(i))
+
+                        // wolf vote info immediately
+                        
 
                         if(item['user'].length != 0) {
                             // console.log("Here")
@@ -736,11 +784,15 @@ $(document).ready(function () {
 
                             show_data.room_user = room_data.room_user
                             show_data.information[0] = item
-                        
 
                             if(stage_name == "werewolf"){
 
-                                voteWolf(show_data)
+                                if(wolf_vote_shown == 0){ 
+                                    wolf_vote_shown = 1
+                                    voteWolf(show_data)
+                                }
+
+
 
                             }else if(stage_name == "werewolf_dialogue"){
                                 // console.log("players")
@@ -757,7 +809,7 @@ $(document).ready(function () {
         
                                 
                             }else{
-
+                                wolf_vote_shown = 0
                                 voteDay(show_data)
                                 
                             }
@@ -777,22 +829,7 @@ $(document).ready(function () {
                 
             }
             
-            // wolf vote info immediately
-            // if(data.empty == 1){
-
-                
-            //     for(let i of data.information[0].target){
-            //         let voter = ''
-
-            //         for(let j in data.vote_info){
-            //             if(data.vote_info[j] == i) voter+= `${room_data.room_user[j]} `
-            //         }
-
-        
-            //         $("#vote-text-"+stage_now+"-"+i).text(voter)
-            //     }
-
-            // }
+            
     
 
         });
@@ -841,15 +878,14 @@ $(document).ready(function () {
     // test
     // user_name ='b'
     // user_name ='a'
-    user_name ='yui'
-    sessionStorage.setItem("user_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJBMTA5NTVQWVNZIiwicm9vbV9uYW1lIjoiQTEwOTU1UFlTWSIsImxlYWRlciI6dHJ1ZSwiaWF0IjoxNjkxNjU0NTcxLCJleHAiOjE3MDAyOTQ1NzF9._6lU40QFRogdrjozyZIF8wVVJetoFUcuxeekJaQ_c6U");
-
     // user_name ='pinyu'
     // user_name ='sunny'
-    room_name = ROOM
-    get_user_role()
-    intoGame(room_name)
-    getPlayerInfo()
+
+    // user_name ='yui'
+    // room_name = ROOM
+    // get_user_role()
+    // intoGame(room_name)
+    // getPlayerInfo()
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()
@@ -998,14 +1034,38 @@ $(document).ready(function () {
     });
 
 
-    // witch save button
+    ////// add & delete agent
+
+    // delete player
+    $("#playerCol").on("click", ".deletePlayer",function () {
+        var player_name = $(this).attr('id');
+        // console.log(player_name)
+        if(player_name.includes("Agent")){
+            // API.quit_agent(room_name, player_name)
+        }else{
+            API.quit_room(room_name, player_name)
+        }
+
+    });
+
+
+    // add Player button
+    $("#chatRoom").on("click", ".addPlayer",function () {
+
+        API.join_a_room(1, "Player"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "000000", handleData=>{
+
+
+        })
+
+    });
+
     $("#chatRoom").on("click", ".addIntelligentAgent",function () {
         let data = {
             "agent_type" : "intelligent_agent" ,
-            "agent_name" : "Test"+room_data['room_user'].length,
+            "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
-            "color" : "f9a8d4" ,
+            "color" : "99f6e4 " ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
@@ -1022,10 +1082,10 @@ $(document).ready(function () {
     $("#chatRoom").on("click", ".addMemmoryAgent",function () {
         let data = {
             "agent_type" : "memory_stream_agent" ,
-            "agent_name" : "Test"+room_data['room_user'].length,
+            "agent_name" : "mAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
-            "color" : "f9a8d4" ,
+            "color" : "fca5a5" ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
@@ -1112,7 +1172,7 @@ $(document).ready(function () {
         
         room_name = $(this).parent().children().children()[0].innerText
 
-        API.join_a_room(user_name, room_name, user_color, handleData=>{
+        API.join_a_room(1, user_name, room_name, user_color, handleData=>{
 
             if(handleData == 'OK'){
                 intoGame(room_name)

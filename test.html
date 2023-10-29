@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wolf</title>
-    <link href="/styles/global.css" type="text/css" rel="stylesheet" />
+    <link href="./styles/global.css" type="text/css" rel="stylesheet" />
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- tailwindcss -->
@@ -22,36 +22,24 @@
 
   </head>
   <body>
-    <div class="md:w-880px flex items-center justify-center h-screen rounded-xl p-2 rounded-xl overflow-hidden overflow-y-auto">
-      <div id="main" class=" flex items-center justify-center h-screen rounded-xl p-2 rounded-xl overflow-hidden overflow-y-auto">
+    <div class="md:w-880px flex items-center justify-center h-screen rounded-xl p-2 rounded-xl ">
+      <div id="main" class="flex items-center justify-center h-screen rounded-xl p-2 rounded-xl">
         <!-- <div class="relative"> -->
 
         
-        <!-- <div class="grow overflow-hidden overflow-y-auto md:w-[480px] md:h-[750px] ">
-                <div class="grid gap-2">
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
+        <div class="grow no-scrollbar overflow-hidden overflow-y-auto no-scrollbar md:w-[580px] md:h-[750px] ">
+          <div id="agentCol" class="p-1 grid gap-4 h-auto max-w-full rounded-lg">
+            <!-- <div class="">
+              <h2 class="bg-white h-auto max-w-full rounded-lg p-4 text-3xl font-extrabold mb-2">Agent1</h2>
+              <div class="grid grid-cols-2 gap-2">
+                  <div class="bg-white h-auto max-w-full rounded-lg p-4">
+                    <h2 class="text-xl font-extrabold dark:text-white">Memmory</h2>
+                    <p class="my-4 text-md text-gray-500">Start developing with an open-source library of over 450+ UI components, sections, and pages built with the utility classes from Tailwind CSS and designed in Figma.</p>
                   </div>
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                  </div>
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                  </div>
-                </div>
-                <div class="grid gap-2">
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                  </div>
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                  </div>
-                  <div>
-                      <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                  </div>
-                </div>
-          
-        </div> -->
+              </div>
+            </div>  -->
+          </div>
+        </div>
 
         
         
@@ -65,17 +53,20 @@
 
         
         <!-- <div class="text-center bg-gray-100 bg-white h-full w-full md:h-[720px] md:w-[480px] rounded-xl "> -->
-          <div class="text-center bg-gray-100 bg-white h-5/6 w-full md:h-[750px] md:w-[480px] rounded-xl">
+        <div id="game" class="p-1 text-center bg-white h-5/6 w-full md:h-[750px] md:w-[480px] rounded-xl">
           <!-- <div class="flex">
               <div class="items-center justify-center">
                 <img class="w-20" src="/images/Logo.png">
               </div>
             </div> -->
           
+          <!-- Player Selector -->
           <div id="playerSelector">
             
 
           </div>
+
+
           <!-- MAIN PAGE -->
           <div id="initialPage" class="h-full flex items-center justify-center w-full rounded-xl">
             <div id="page_front" class="z-10 relative">
@@ -244,7 +235,7 @@
         
 
           <div id="gamePage" class="w-full flex flex-col h-full bg-[url('/images/wolf-gray.png')] bg-contain rounded-xl">
-            <bar-item></bar-item>
+            <test-bar-item></test-bar-item>
 
             
 

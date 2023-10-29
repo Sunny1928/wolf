@@ -62,7 +62,7 @@ export var build_a_room = (user_name, color, handleData) => {
 
 
 // join a room and go into the game
-export var join_a_room = (user_name, room_name, color, handleData) => {
+export var join_a_room = (test=0, user_name, room_name, color, handleData) => {
     
     // const user_name = sessionStorage.getItem("user_name");
 
@@ -70,8 +70,8 @@ export var join_a_room = (user_name, room_name, color, handleData) => {
         type:'GET',
         url: `${api_url}join_room/${room_name}/${user_name}/${color.slice(-6)}`,
         success: function(info){
-            
-            sessionStorage.setItem("user_token", info.user_token);
+            if(test) sessionStorage.setItem("user_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJBMTA5NTVQWVNZIiwicm9vbV9uYW1lIjoiQTEwOTU1UFlTWSIsImxlYWRlciI6dHJ1ZSwiaWF0IjoxNjkxNjU0NTcxLCJleHAiOjE3MDAyOTQ1NzF9._6lU40QFRogdrjozyZIF8wVVJetoFUcuxeekJaQ_c6U");
+            else sessionStorage.setItem("user_token", info.user_token);
             
             handleData('OK')
 
@@ -107,6 +107,25 @@ export var get_a_room = (room_name, handleData) => {
 }
 
 export var quit_room = (room_name, user_name) => {
+    const user_token = sessionStorage.getItem("user_token");
+    
+    $.ajax({
+        type:'GET',
+        url: `${api_url}quit_room/${room_name}/${user_name}`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
+        },
+        success: function(info){
+            // console.log("success")
+        },
+        error: function(err){
+            console.log(err)
+        }
+    })
+
+}
+
+export var quit_agent = (room_name, user_name) => {
     const user_token = sessionStorage.getItem("user_token");
     
     $.ajax({

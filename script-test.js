@@ -380,13 +380,13 @@ $(document).ready(function () {
 
                 // if player num == the need, show start game button
                 if(room_data.game_setting.player_num == room_data.room_user.length){
-                    $('#room_cant_start').text('等待房主開始')
+                    // $('#room_cant_start').text('等待房主開始')
                     
                     // room leader
-                    if(user_name == room_data.room_leader){
-                        $('#room_cant_start').hide()
-                        $('#startGameBtn').show()
-                    }
+                    // if(user_name == room_data.room_leader){
+                    $('#room_cant_start').hide()
+                    $('#startGameBtn').show()
+                    // }
 
                 }else{
                     $('#chatRoom').empty()

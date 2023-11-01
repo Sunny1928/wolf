@@ -199,6 +199,30 @@ export var add_agent = (room_name, data, handleData) => {
 } 
 
 
+// delete agent
+export var delete_agent = (room_name, user_name, handleData) => {
+
+    const user_token = sessionStorage.getItem("user_token");
+
+    $.ajax({
+        contentType: "application/json;charset=utf-8",
+        type:'DELETE',
+        url: `${api_url}agent/${room_name}/a/${user_name}`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
+        },
+        success: function(info){
+
+            handleData(info)
+        },
+        error: function(err){
+
+            handleData(err)
+        }
+    })
+} 
+
+
 
 
 

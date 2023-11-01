@@ -1041,7 +1041,13 @@ $(document).ready(function () {
         var player_name = $(this).attr('id');
         // console.log(player_name)
         if(player_name.includes("Agent")){
-            // API.quit_agent(room_name, player_name)
+            API.delete_agent(room_name, player_name, handleData=>{
+                if(handleData=='OK'){
+                    displayMessageGod(`成功刪除${player_name}，請等待五秒`)
+                }else{
+                    displayMessageGod(handleData.Error)
+                }
+            })
         }else{
             API.quit_room(room_name, player_name)
         }
@@ -1059,6 +1065,7 @@ $(document).ready(function () {
 
     });
 
+    // add Agent button
     $("#chatRoom").on("click", ".addIntelligentAgent",function () {
         let data = {
             "agent_type" : "intelligent_agent" ,
@@ -1070,10 +1077,10 @@ $(document).ready(function () {
         }
 
         API.add_agent(room_name, data, handleData=>{
-            if(handleData.log=='ok'){
+            if(handleData=='OK'){
 
             }else{
-                displayMessageGod("error")
+                displayMessageGod(handleData.Error)
             }
         })
 
@@ -1090,10 +1097,10 @@ $(document).ready(function () {
         }
 
         API.add_agent(room_name, data, handleData=>{
-            if(handleData.log=='ok'){
+            if(handleData=='OK'){
 
             }else{
-                displayMessageGod("error")
+                displayMessageGod(handleData.Error)
             }
         })
 

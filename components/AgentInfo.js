@@ -1,7 +1,12 @@
 export class AgentInfo extends HTMLElement{ 
   constructor(name, data){
     super()
-
+    
+    // name = "2"
+    // data = {
+    //       "memory": "1234",
+    //       "role_info": "45678"
+    //   }
     
 
     // front

@@ -222,6 +222,7 @@ $(document).ready(function () {
     var stage_now = '' // vote1
     var stage_former = ''
     var data_former = ''
+    var data_former_1 = ''
 
 
 
@@ -307,6 +308,7 @@ $(document).ready(function () {
         stage_now = '' // vote1
         stage_former = ''
         data_former = ''
+        data_former_1 = ''
 
         let playerCol = $("#playerCol")
         playerCol.empty()
@@ -535,8 +537,6 @@ $(document).ready(function () {
         API.get_all_game_info(room_name, function(data){
 
             
-            
-
             // game is over
             if(data == "err") {
                 if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId);
@@ -544,12 +544,44 @@ $(document).ready(function () {
             }
 
 
-            if(JSON.stringify(data) === JSON.stringify(data_former)){
-            // if(data.stage_description === data_former.stage_description && JSON.stringify(data.announcement) === JSON.stringify(data_former.announcement)) {
-            // if(data.stage_description === data_former.stage_description) {
-            // if(data === data_former) {
-                
+
+            if(JSON.stringify(data) === JSON.stringify(data_former_1)){
                 console.log("same game")
+
+            }else{
+                // check agent info
+                // let agentCol = $("#agentCol")
+                // agentCol.empty()
+                // for (const [key, value] of Object.entries(data['agent_info'])) {
+                //     let item = new AgentInfo(key, value)
+                //     agentCol.append(item)
+                // }    
+
+                if(data.stage.split('-')[2] == 'werewolf'){
+                    let data_wolf_vote = JSON.parse(JSON.stringify(data))
+            
+                    for(let i of data_wolf_vote.information[0].target){
+                        let voter = ''
+
+                        for(let j in data_wolf_vote.vote_info){
+                            if(data_wolf_vote.vote_info[j] == i) voter+= `${room_data.room_user[j]} `
+                        }
+
+            
+                        $("#vote-text-"+data.stage+"-"+i).text(voter)
+                    }
+
+                    // return
+
+                }
+                data_former_1 = data
+            }
+
+
+            // if(JSON.stringify(data) === JSON.stringify(data_former)){
+            if(data.stage_description === data_former.stage_description) {
+                
+                // console.log("same game")
 
             }else{
 
@@ -563,23 +595,7 @@ $(document).ready(function () {
                 // check vote info
                if(data.empty === 1 && Object.keys(data.vote_info).length !== 0){
                     // console.log(data.stage.split('-')[2])
-                    if(data.stage.split('-')[2] == 'werewolf'){
-                        let data_wolf_vote = JSON.parse(JSON.stringify(data))
-                
-                        for(let i of data_wolf_vote.information[0].target){
-                            let voter = ''
-
-                            for(let j in data_wolf_vote.vote_info){
-                                if(data_wolf_vote.vote_info[j] == i) voter+= `${room_data.room_user[j]} `
-                            }
-
-                
-                            $("#vote-text-"+data.stage+"-"+i).text(voter)
-                        }
-
-                        return
-
-                    }else{
+                    if(data.stage.split('-')[2] != 'werewolf'){
 
                         let data_vote_info = JSON.parse(JSON.stringify(data_former))
 
@@ -641,20 +657,7 @@ $(document).ready(function () {
                     get_user_role()
                     getPlayerInfo()
                 }
-
-
-                // check agent info
-                // if(JSON.stringify(data['agent_info']) !== JSON.stringify(data_former['agent_info'])){
-                    let agentCol = $("#agentCol")
-                    agentCol.empty()
-                    for (const [key, value] of Object.entries(data['agent_info'])) {
-                        let item = new AgentInfo(key, value)
-                        agentCol.append(item)
-                    }
-
-                // }
                 
-
 
 
                 // check announcement and show
@@ -787,10 +790,10 @@ $(document).ready(function () {
 
                             if(stage_name == "werewolf"){
 
-                                if(wolf_vote_shown == 0){ 
-                                    wolf_vote_shown = 1
-                                    voteWolf(show_data)
-                                }
+                                // if(wolf_vote_shown == 0){ 
+                                    // wolf_vote_shown = 1
+                                voteWolf(show_data)
+                                // }
 
 
 
@@ -809,7 +812,7 @@ $(document).ready(function () {
         
                                 
                             }else{
-                                wolf_vote_shown = 0
+                                // wolf_vote_shown = 0
                                 voteDay(show_data)
                                 
                             }
@@ -828,6 +831,8 @@ $(document).ready(function () {
                 stage_former = stage_now
                 
             }
+
+            
             
             
     
@@ -881,11 +886,11 @@ $(document).ready(function () {
     // user_name ='pinyu'
     // user_name ='sunny'
 
-    // user_name ='yui'
-    // room_name = ROOM
-    // get_user_role()
-    // intoGame(room_name)
-    // getPlayerInfo()
+    user_name ='yui'
+    room_name = ROOM
+    get_user_role()
+    intoGame(room_name)
+    getPlayerInfo()
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()

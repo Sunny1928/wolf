@@ -23,4 +23,8 @@
 1. 上面的選項是選擇操作者，但我其實每次換stage都會幫你們填入操作的人(但沒有在選單上幫你們切換)，但有些情況會沒填到，如果沒送出成功，你們可以再切換一下角色
 
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/agentinfo.png)
-1. Agent Info 
+1. Agent Info
+
+**NOTE**
+1. tabs有問題，但可以看
+2. 現在只能用一般的，像是memory, guess roles

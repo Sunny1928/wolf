@@ -285,7 +285,7 @@ export class DialogueWolf extends HTMLElement{
           
           <div class="bg-white divide-y divide-gray-100 rounded-lg shadow w-full" >
 
-            <ul id="vote-${data.stage}" class="p-3 space-y-1 text-sm text-gray-700 text-left">
+            <ul id="vote-${data.stage}-${players_without_wolf}" class="p-3 space-y-1 text-sm text-gray-700 text-left">
 
       <li>
         <label for="${data.stage}-0" class="font-medium text-gray-900 ">

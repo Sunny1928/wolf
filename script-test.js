@@ -550,12 +550,26 @@ $(document).ready(function () {
 
             }else{
                 // check agent info
-                // let agentCol = $("#agentCol")
-                // agentCol.empty()
-                // for (const [key, value] of Object.entries(data['agent_info'])) {
-                //     let item = new AgentInfo(key, value)
-                //     agentCol.append(item)
-                // }    
+                let agentCol = $("#agentCol")
+                agentCol.empty()
+                for (let [key, value] of Object.entries(data['agent_info'])) {
+                    let item = new AgentInfo(key, value)
+                    agentCol.append(item)
+
+                    $(`#${key}-memory-tab`).click(function () {
+                        $(`#${key}-memory`).show();
+                        $(`#${key}-guess-roles`).hide();
+                    });
+                    
+                    $(`#${key}-guess-roles`).show();
+                    $(`#${key}-guess-roles-tab`).click(function () {
+                        $(`#${key}-memory`).hide();
+                        $(`#${key}-guess-roles`).show();
+                    });
+
+                }
+                
+                
 
                 if(data.stage.split('-')[2] == 'werewolf'){
                     let data_wolf_vote = JSON.parse(JSON.stringify(data))
@@ -886,11 +900,11 @@ $(document).ready(function () {
     // user_name ='pinyu'
     // user_name ='sunny'
 
-    user_name ='yui'
-    room_name = ROOM
-    get_user_role()
-    intoGame(room_name)
-    getPlayerInfo()
+    // user_name ='yui'
+    // room_name = ROOM
+    // get_user_role()
+    // intoGame(room_name)
+    // getPlayerInfo()
     // $("#initialPage").hide();
     // $("#findARoomPage").show();
     // API.get_all_rooms()
@@ -908,6 +922,12 @@ $(document).ready(function () {
 
 
     // button
+
+    // vote button
+    $("#chatRoom").on("click", ".voteBtn",function () {
+
+
+    });
 
 
     // vote button
@@ -950,7 +970,7 @@ $(document).ready(function () {
     // dialogue wolf button
     $("#playerSelector").change(function(){
         user_name = $(`select[name=playerName] option`).filter(':selected').val()
-        console.log(user_name)
+        // console.log(user_name)
     });
 
     // dialogue wolf button
@@ -1334,6 +1354,7 @@ $(document).ready(function () {
 
 
 });
+
 
 
 

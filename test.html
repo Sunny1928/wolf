@@ -22,24 +22,18 @@
 
   </head>
   <body>
-    <div class="md:w-880px flex items-center justify-center h-screen rounded-xl p-2 rounded-xl ">
-      <div id="main" class="flex items-center justify-center h-screen rounded-xl p-2 rounded-xl">
+    <!-- Player Selector -->
+    <div id="playerSelector" class="absolute top-0 w-full">
+                          
+
+    </div>
+    
+    <div class="md:w-880px antialiased items-center justify-center h-screen p-2">
+      
+
+      <div id="main" class="flex items-center justify-center h-screen p-2">
         <!-- <div class="relative"> -->
 
-        
-        <div class="grow no-scrollbar overflow-hidden overflow-y-auto no-scrollbar md:w-[580px] md:h-[750px] ">
-          <div id="agentCol" class="p-1 grid gap-4 h-auto max-w-full rounded-lg">
-            <!-- <div class="">
-              <h2 class="bg-white h-auto max-w-full rounded-lg p-4 text-3xl font-extrabold mb-2">Agent1</h2>
-              <div class="grid grid-cols-2 gap-2">
-                  <div class="bg-white h-auto max-w-full rounded-lg p-4">
-                    <h2 class="text-xl font-extrabold dark:text-white">Memmory</h2>
-                    <p class="my-4 text-md text-gray-500">Start developing with an open-source library of over 450+ UI components, sections, and pages built with the utility classes from Tailwind CSS and designed in Figma.</p>
-                  </div>
-              </div>
-            </div>  -->
-          </div>
-        </div>
 
         
         
@@ -53,18 +47,14 @@
 
         
         <!-- <div class="text-center bg-gray-100 bg-white h-full w-full md:h-[720px] md:w-[480px] rounded-xl "> -->
-        <div id="game" class="p-1 text-center bg-white h-5/6 w-full md:h-[750px] md:w-[480px] rounded-xl">
+        <div id="game" class="p-1 text-center bg-white h-5/6 w-full md:h-[750px] md:w-[420px] rounded-lg">
           <!-- <div class="flex">
               <div class="items-center justify-center">
                 <img class="w-20" src="/images/Logo.png">
               </div>
             </div> -->
           
-          <!-- Player Selector -->
-          <div id="playerSelector">
-            
-
-          </div>
+          
 
 
           <!-- MAIN PAGE -->
@@ -131,9 +121,7 @@
             
           </div>
 
-
-
-
+          
 
           <!-- BUILD A ROOM PAGE -->
           
@@ -338,13 +326,114 @@
             </div>
 
           </div>
-          
+
+                    
+        </div>
+
+
+
+        <!-- overflow-hidden overflow-x-auto  -->
+        <div class="no-scrollbar rounded-lg md:w-[880px] md:h-[750px] ml-1  bg-white"> 
+          <div id="agentCol" class="p-4 gap-2 h-auto max-w-full h-full flex w-full overflow-hidden overflow-x-auto ">
+                <!-- <div class="">
+                  <div class="md:w-[420px] h-full border border-gray-200 rounded-lg shadow">
+                      <div class="w-full p-4 pb-2 flex justify-between flex-wrap text-sm font-medium text-center  border-gray-200 rounded-t-lg bg-gray-50" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+                        <div class="text-3xl font-extrabold flex items-center justify-center">mAgent888</div>
+                        <div class="bg-white p-2 rounded-lg leading-tight text-gray-500 block text-left">
+                          <div class="flex"><span class="mr-1">Token Used:</span>1000</div>
+                          <div class="flex">
+                            <span class="mr-1">Role Accuracy: </span>
+                            <div class="flex items-center justify-center">
+                              <div class="bg-gray-200 rounded-full  p-0.2 md:w-[80px] ">
+                                <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.2 leading-none rounded-full" style="width: 45%"> 45%</div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+                      <ul class="w-full flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+                          <li class="mr-2">
+                              <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block p-4 py-2 rounded-tl-lg hover:bg-gray-100">Memory</button>
+                          </li>
+                          <li class="mr-2">
+                              <button id="services-tab" data-tabs-target="#services" type="button" role="tab" aria-controls="services" aria-selected="false" class="inline-block p-4 py-2 hover:bg-gray-100">Prompts</button>
+                          </li>
+                          <li class="mr-2">
+                              <button id="statistics-tab" data-tabs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true" class="inline-block p-4 py-2 hover:bg-gray-100 text-blue-600 hover:text-blue-600">Guess Roles</button>
+                          </li>
+                      </ul>
+
+                      <div class="h-full w-full"  id="defaultTabContent">
+                          <div class="md:h-[580px] overflow-hidden overflow-y-auto bg-gray-500 p-6 bg-white rounded-lg hidden" id="about" role="tabpanel" aria-labelledby="about-tab">
+                              <p class="mb-1 text-gray-500">1. 1號玩家無遺言。</p>
+                              <p class="mb-1 text-gray-500">2. 我在狼人階段發言 選項2，選擇5號玩家，猜測他是獵人，因為在第一天1號玩家無遺言的情況下，你知道3號玩家是神職，而獵人是神職中唯一有殺人能力的職業，因此你認為5號玩家是獵人。</p>
+                          </div>
+                          <div class="md:h-[580px] overflow-hidden overflow-y-auto p-6 bg-white rounded-lg hidden" id="services" role="tabpanel" aria-labelledby="services-tab">
+                              <h2 class="mb-5 text-xl font-extrabold tracking-tight text-gray-900">Q: We invest in the world’s potential</h2>
+                              <p class="mb-1 text-gray-500">A: 2. 我在狼人階段發言 選項2，選擇5號玩家，猜測他是獵人，因為在第一天1號玩家無遺言的情況下，你知道3號玩家是神職，而獵人是神職中唯一有殺人能力的職業，因此你認為5號玩家是獵人。</p>
+                          </div>
+                          <div class="md:h-[580px] overflow-hidden overflow-y-auto p-6 bg-white rounded-lg dark:bg-gray-800" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                      <tr>
+                                          <th scope="col" class="px-4 py-2">
+                                              玩家
+                                          </th>
+                                          <th scope="col" class="px-4 py-2">
+                                              信心程度
+                                          </th>
+                                          <th scope="col" class="px-4 py-2">
+                                              猜測身份
+                                          </th>
+                                          <th scope="col" class="px-4 py-2">
+                                              真實身份
+                                          </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
+                                          <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap dark:text-white">
+                                              <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                <span class="font-medium text-gray-600 dark:text-gray-300">1</span>
+                                              </div>
+                                          </th>
+                                          <td class="px-3 py-4">
+                                            <div class="bg-gray-200 rounded-full w-full  md:w-[50px]">
+                                              <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 45%"> 45%</div>
+                                            </div>
+                                          </td>
+                                          <td class="px-3 py-4">
+                                              <div class="flex items-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> 狼人
+                                              </div>
+                                          </td>
+                                          <td class="px-3 py-4">
+                                            <div class="flex items-center">
+                                              狼人
+                                            </div>
+                                        </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>  -->
+
+
           </div>
+        </div>
 
 
         <!-- </div> -->
       </div>
+
+      
     </div>
+
+    
     <!-- Scripts -->
     <!-- <script src="/scripts/utils.js"></script>
     <script src="/scripts/DirectionInput.js"></script>
@@ -355,6 +444,10 @@
     <script src="/scripts/OverworldMap.js"></script>
     <script src="/scripts/init.js"></script> -->
   </body>
+  <script src="https://flowbite.com/docs/flowbite.min.js"></script>
+  <script src="https://flowbite.com/docs/datepicker.min.js"></script>
+  <script>window.onload = function () { const anchorTags = document.querySelectorAll('a'); anchorTags.forEach(function(a){a.addEventListener('click', function(ev){ev.preventDefault();})});  const dropdownEl = document.querySelector('[data-dropdown-toggle]'); if (dropdownEl) {dropdownEl.click();} const modalEl = document.querySelector('[data-modal-toggle]'); if(modalEl) {modalEl.click(); }  const dateRangePickerEl = document.querySelector('[data-rangepicker] input'); if (dateRangePickerEl) { dateRangePickerEl.focus(); } const drawerEl = document.querySelector('[data-drawer-show]'); if (drawerEl) { drawerEl.click(); }  }
+  </script>
 </html>
 
 

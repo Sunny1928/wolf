@@ -60,8 +60,9 @@ export class AgentInfo extends HTMLElement{
               <div class="flex">
                 <span class="mr-1">Role Accuracy: </span>
                 <div class="flex items-center justify-center">
-                  <div class="bg-gray-200 rounded-full  p-0.2 md:w-[80px] ">
-                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.2 leading-none rounded-full" style="width: ${data.detail.role_accuracy}%"> ${data.detail.role_accuracy}%</div>
+                  <div class="relative bg-gray-400 rounded-full p-0.2 md:w-[100px] ">
+                    <div class="bg-blue-600 text-gray-200 p-0.2 leading-none rounded-full" style="width: ${data.detail.role_accuracy}%">&nbsp;</div>
+                    <div class="absolute top-0 left-0 text-xs font-medium text-white text-left leading-none rounded-full" style="padding: 2px;">${data.detail.role_accuracy}%</div>
                   </div>
                 </div>
               </div>
@@ -110,7 +111,9 @@ export class AgentInfo extends HTMLElement{
                       </thead>
                       <tbody>`
 
+
                       for (const [id, arr] of Object.entries(data.guess_roles)) {
+
                         html+=`
                               <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
                                   <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap dark:text-white">
@@ -122,8 +125,9 @@ export class AgentInfo extends HTMLElement{
                                   if(arr[2]!=-1){
 
                                     html+=`
-                                      <div class="bg-gray-200 rounded-full w-full  md:w-[50px]">
-                                        <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: ${arr[2]}%"> ${arr[2]}%</div>
+                                      <div class="relative bg-gray-400 rounded-full p-0.2 md:w-[50px]">
+                                        <div class="bg-blue-600 text-gray-200 p-0.2 leading-none rounded-full" style="width: ${arr[2]}%">&nbsp;</div>
+                                        <div class="absolute top-0 left-0 text-xs font-medium text-white text-left leading-none rounded-full" style="padding: 2px;">${arr[2]}%</div>
                                       </div>`
                                   }
                                     
@@ -131,7 +135,7 @@ export class AgentInfo extends HTMLElement{
                                   </td>
                                   <td class="px-3 py-4">
                                       <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-${(arr[0]==arr[1]) ? 'green' : 'red'}-500 mr-2"></div> ${arr[0]}
+                                        <div class="h-2.5 w-2.5 rounded-full bg-${(arr[3]==1) ? 'green' : (arr[3]==0) ? 'red' :'yello'}-500 mr-2"></div> ${arr[0]}
                                       </div>
                                   </td>
                                   <td class="px-3 py-4">

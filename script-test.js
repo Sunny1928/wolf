@@ -955,14 +955,16 @@ $(document).ready(function () {
             // console.log(handleData)
             // console.log(data.stage_name)
             if(handleData=='OK'){
-                $(`#error-${data.stage_name}`).text(handleData)
+                displayMessageGod('Send operation: '+handleData)
+                // $(`#error-${data.stage_name}`).text(handleData)
                 if(user_role == 'hunter' && stage_name == "hunter"){
                     $(`#${id}`).hide()
                     $(':radio:not(:checked)').attr('disabled', true);
                     $("#sendMessageBtn").show();
                 }
             }else{
-                $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
+                displayMessageGod(handleData.responseJSON.Error)
+                // $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
             }
         })
     });
@@ -1004,9 +1006,12 @@ $(document).ready(function () {
             // console.log(handleData)
             // console.log(data.stage_name)
             if(handleData=='OK'){
-                $(`#error-${data.stage_name}`).text(handleData)
+                displayMessageGod('Send operation: '+handleData)
+                // $(`#error-${data.stage_name}`).text(handleData)
+
             }else{
-                $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
+                displayMessageGod(handleData.responseJSON.Error)
+                // $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
             }
         })
     });
@@ -1045,12 +1050,16 @@ $(document).ready(function () {
         }else{
             API.operation(user_name, room_name, data, handleData=>{
                 if(handleData=='OK'){
-                    $(`#error-${data.stage_name}`).text(handleData)
+                    displayMessageGod('Send operation: '+handleData)
+                    // $(`#error-${data.stage_name}`).text(handleData)
+
                     $(`#${id}`).hide()
                     $(':radio:not(:checked)').attr('disabled', true);
 
                 }else{
-                    $(`#error-save-${data.stage_name}`).text(handleData.responseJSON.Error)
+                    displayMessageGod(handleData.responseJSON.Error)
+                    // $(`#error-save-${data.stage_name}`).text(handleData.responseJSON.Error)
+
                 }
             })
         }

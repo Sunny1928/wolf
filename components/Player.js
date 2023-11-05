@@ -7,10 +7,11 @@ export class PlayerItem extends HTMLElement{
             <div id="player-${id}" class=" ">
                 <div class="flex flex-row items-start justify-center ">
                     <div class="relative">
-                        <div class="${me == user_name ?'border-dotted border-2 border-black ':''} relative shadow-xl font-medium flex items-center justify-center h-10 w-10 rounded bg-gray-300 flex-shrink-0 bg-color-${id}" >
-                            <div>
-                                <p>${id}</p>
-                            </div>
+                    
+                        <div class="${me == user_name ?'border-dotted border-2 border-black ':''} relative shadow-xl font-medium flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${id}" >
+                            <img class="absolute w-6 h-6" src="/images/animal-track.png" alt="Medium avatar">
+                            <div class="font-extrabold z-10">${id}</div>
+
                         </div>`
         if(delte_btn){
             html+= `<div id="${user_name}" class="deletePlayer flex text-white items-center justify-center absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-gray-900 border-2 border-white dark:border-gray-800 rounded-full">

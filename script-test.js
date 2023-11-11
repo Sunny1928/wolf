@@ -1076,7 +1076,7 @@ $(document).ready(function () {
     // add Player button
     $("#chatRoom").on("click", ".addPlayer",function () {
 
-        API.join_a_room(1, "Player"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "000000", handleData=>{
+        API.join_a_room(1, "Player:"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "000000", handleData=>{
 
 
         })

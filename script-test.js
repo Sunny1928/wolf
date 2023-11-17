@@ -3,7 +3,7 @@ import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
 import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vote.js"
 import {PlayerSelector} from "./components/PlayerSelector.js"
 import {AddAgent} from "./components/AddAgent.js"
-import {AgentInfo} from "./components/AgentInfo.js"
+import {IntelligentAgentInfo, MemoryAgentInfo} from "./components/AgentInfo.js"
 import {PlayerItem} from "./components/Player.js"
 import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
 
@@ -35,7 +35,6 @@ var randomColor = () => {
     color = hslToHex(rand, 100, 75)
 
     $(".colorpad").css("background-color", color);
-    // console.log(hslToHex(rand, 100, 75))
     return color
 
 }
@@ -53,10 +52,10 @@ function hslToHex(h, s, l) {
 
 var setColor = (id, color) => {
     
-    // let font_color = (parseInt(color.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff'
+    let font_color = (parseInt(color.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff'
     
-    // $(`.bg-color-${id}`).css("color", font_color);
-    // $(`.bg-color-${id}`).css("background-color", color);
+    $(`.bg-color-${id}`).css("color", font_color);
+    $(`.bg-color-${id}`).css("background-color", color);
 
 }
 
@@ -164,6 +163,7 @@ var SelectPlayer = (data) => {
     let playerSelector = $("#playerSelector")
     playerSelector.empty()
     playerSelector.append(item)
+    $("button[id^='agentDataBtn']").show()
 
 }
 
@@ -792,20 +792,10 @@ $(document).ready(function () {
                 let agentCol = $("#agentCol")
                 agentCol.empty()
                 for (let [key, value] of Object.entries(data['agent_info'])) {
-                    let item = new AgentInfo(key, value)
+                    let item 
+                    if(key.includes('iAgent')) item = new IntelligentAgentInfo(key, value, current_tab)
+                    if(key.includes('mAgent')) item = new MemoryAgentInfo(key, value, current_tab)
                     agentCol.append(item)
-
-                    $(`#${key}-memory-tab`).click(function () {
-                        $(`#${key}-memory`).show();
-                        $(`#${key}-guess-roles`).hide();
-                    });
-                    
-                    $(`#${key}-guess-roles`).show();
-                    $(`#${key}-guess-roles-tab`).click(function () {
-                        $(`#${key}-memory`).hide();
-                        $(`#${key}-guess-roles`).show();
-                    });
-
                 }
                 
                 
@@ -879,12 +869,9 @@ $(document).ready(function () {
 
    
     // test
-    // user_name ='b'
-    // user_name ='a'
-    // user_name ='pinyu'
     // user_name ='sunny'
-
     // user_name ='yui'
+
     // room_name = ROOM
     // get_user_role()
     // intoGame(room_name)
@@ -907,11 +894,6 @@ $(document).ready(function () {
 
     // button
 
-    // vote button
-    $("#chatRoom").on("click", ".voteBtn",function () {
-
-
-    });
 
 
     // vote button
@@ -953,7 +935,7 @@ $(document).ready(function () {
         })
     });
 
-    // dialogue wolf button
+    // change player for the operation
     $("#playerSelector").change(function(){
         user_name = $(`select[name=playerName] option`).filter(':selected').val()
         // console.log(user_name)
@@ -1051,6 +1033,32 @@ $(document).ready(function () {
 
     });
 
+    
+
+    let current_tab = 'guess-roles-tab'
+    let tabs = ['memory-tab', 'guess-roles-tab']
+
+    // Agent Tab
+    $("#agentCol").on("click", ".tab",function () {
+
+        let id = $(this).attr('data-tabs-target')
+        current_tab = id
+        
+        for(let tab of tabs){
+            if(tab == current_tab) {
+                $(`*[id*=${tab}]`).show()
+                $(`*[data-tabs-target*=${tab}]`).addClass('text-blue-600')
+            }
+            else {
+                $(`*[id*=${tab}]`).hide()
+                $(`*[data-tabs-target*=${tab}]`).removeClass('text-blue-600')
+            }
+        }
+    });
+    
+
+
+
 
     ////// add & delete agent
 
@@ -1076,7 +1084,7 @@ $(document).ready(function () {
     // add Player button
     $("#chatRoom").on("click", ".addPlayer",function () {
 
-        API.join_a_room(1, "Player:"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "000000", handleData=>{
+        API.join_a_room(1, "Player:"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "99f6e4", handleData=>{
 
 
         })
@@ -1090,7 +1098,7 @@ $(document).ready(function () {
             "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
-            "color" : "99f6e4 " ,
+            "color" : "f9a8d4" ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
@@ -1110,7 +1118,7 @@ $(document).ready(function () {
             "agent_name" : "mAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
-            "color" : "fca5a5" ,
+            "color" : "fdba74" ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
@@ -1310,6 +1318,19 @@ $(document).ready(function () {
       
         
     });
+
+    $("button[id^='agentDataBtn']").hide()
+
+    
+    // save agent data btn
+    $("button[id^='agentDataBtn']").click(function () {
+        let state = $(this).attr('state')
+        API.change_save_state(room_name, state, handleData=>{
+            displayMessageGod("CHANGE AGENT DATA STATE: "+handleData)
+        })
+    });
+
+
 
 
 

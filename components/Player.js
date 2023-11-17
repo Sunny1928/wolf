@@ -1,4 +1,4 @@
-var max_name_length = 8
+var max_name_length = 6
 
 export class PlayerItem extends HTMLElement{
     constructor(me, id, user_name, delte_btn=0){
@@ -21,7 +21,7 @@ export class PlayerItem extends HTMLElement{
                 
             html+= `</div>
                 </div>
-                <p class="tracking-wide text-gray-600 text-xs font-semibold"> ${user_name.length > max_name_length ? user_name.substring(0,max_name_length)+'...' : user_name} </p>
+                <p class="tracking-wide text-gray-600 text-xs font-semibold">${user_name.length > max_name_length ? user_name.substring(0,max_name_length)+'...' : user_name} </p>
             </div>`
 
         

@@ -5,7 +5,7 @@ export class AddAgent extends HTMLElement{
     // front
     var html = `<div class="col-start-1 col-end-13 rounded-lg">
     <div class="flex items-center justify-center m-1">
-      <div class="font-semibold relative text-center text-sm bg-blue-100 py-4 px-2 shadow rounded-xl w-full">
+      <div class="font-semibold relative text-center text-sm bg-gray-800 text-white py-4 px-2 shadow rounded-xl w-full">
         <div class="">
           <h2 class="text-md font-extrabold dark:text-white my-1">Add Agent</h2>`
           

@@ -155,6 +155,25 @@ export var quit_agent = (room_name, user_name) => {
 
 //// Game API
 
+// save agent record for a room
+export var change_save_state = (room, state, handleData) => {
+
+
+    $.ajax({
+        type:'GET',
+        url: `${api_url}agent/${room}/${state}`,
+        success: function(info){
+            handleData(info)
+        },
+        error: function(err){
+            handleData(err)
+        }
+    })
+} 
+
+
+
+
 // reset game
 export var reset_game = () => {
 

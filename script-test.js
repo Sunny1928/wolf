@@ -1092,9 +1092,50 @@ $(document).ready(function () {
     });
 
     // add Agent button
+    $("#chatRoom").on("click", ".addSimpleAgent",function () {
+        let data = {
+            "agent_type" : "simple_agent" ,
+            "agent_name" : "sAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
+            "room_name" : room_name ,
+            "api_json" : "doc/secret/openai.key",
+            "color" : "f9a8d4" ,
+            "prompt_dir" : "doc/prompt/memory_stream/"
+        }
+
+        API.add_agent(room_name, data, handleData=>{
+            if(handleData=='OK'){
+
+            }else{
+                displayMessageGod(handleData.Error)
+            }
+        })
+
+    });
+
+    // add Agent button
     $("#chatRoom").on("click", ".addIntelligentAgent",function () {
         let data = {
             "agent_type" : "intelligent_agent" ,
+            "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
+            "room_name" : room_name ,
+            "api_json" : "doc/secret/openai.key",
+            "color" : "f9a8d4" ,
+            "prompt_dir" : "doc/prompt/memory_stream/"
+        }
+
+        API.add_agent(room_name, data, handleData=>{
+            if(handleData=='OK'){
+
+            }else{
+                displayMessageGod(handleData.Error)
+            }
+        })
+
+    });
+
+    $("#chatRoom").on("click", ".addSummaryIntelligentAgent",function () {
+        let data = {
+            "agent_type" : "summary_intelligent_agent" ,
             "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
@@ -1131,6 +1172,28 @@ $(document).ready(function () {
         })
 
     });
+
+    $("#chatRoom").on("click", ".addSummaryMemmoryAgent",function () {
+        let data = {
+            "agent_type" : "summary_memory_stream_agent" ,
+            "agent_name" : "mAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
+            "room_name" : room_name ,
+            "api_json" : "doc/secret/openai.key",
+            "color" : "fdba74" ,
+            "prompt_dir" : "doc/prompt/memory_stream/"
+        }
+
+        API.add_agent(room_name, data, handleData=>{
+            if(handleData=='OK'){
+
+            }else{
+                displayMessageGod(handleData.Error)
+            }
+        })
+
+    });
+
+
 
 
 

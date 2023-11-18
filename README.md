@@ -20,14 +20,17 @@
     memory agent -> add memory agent
 
 
-### New
+
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/agentinfo_1.png)
+
 1. 上面的選項是選擇操作者，但我其實每次換stage都會幫你們填入操作的人(但沒有在選單上幫你們切換)，但有些情況會沒填到，如果沒送出成功，你們可以再切換一下角色
 2. 狼人發言第二個人不會跳ok
 3. Agent Info 如圖，可以正常使用，切換tab會同時切換其他角色的
 4. 現在只能傳入一般的，像是memory, guess roles (開會討論看有沒有其他需求)
 5. 右上角的按鈕可以改變是否存取 agent info state
 
+
+### New
 
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/stageinfo.png)
 1. 現在每次更換stage會跳出圖示及通知，時間為0.5s

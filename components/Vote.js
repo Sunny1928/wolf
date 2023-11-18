@@ -23,7 +23,7 @@ export class VoteWolf extends HTMLElement{
           <label for="vote-${data.stage}-${i}" class="font-medium text-gray-900 ">
             <div class="flex p-2 rounded hover:bg-gray-100 ">
               <div class="flex items-center h-5">
-                  <input id="vote-${data.stage}-${i}" name="vote-${data.stage}" type="radio" value=${i} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <input id="vote-${data.stage}-${i}" name="vote-${data.stage}" type="radio" value=${i} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
               
               
               </div>
@@ -220,7 +220,7 @@ export class VoteSave extends HTMLElement{
               <label for="save-vote-${data.stage}" class="font-medium text-gray-900 ">
                 <div class="flex p-2 rounded hover:bg-gray-100 ">
                   <div class="flex items-center h-5">
-                      <input id="save-vote-${data.stage}" name="save-vote-${data.stage}" type="radio" value="${data.information[0].user[0]}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="save-vote-${data.stage}" name="save-vote-${data.stage}" type="radio" value="${data.information[0].user[0]}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
                   </div>
                   <div class="ml-2 text-sm">
                         <div>YES</div>
@@ -232,7 +232,7 @@ export class VoteSave extends HTMLElement{
               <label for="poison-vote-${data.stage}" class="font-medium text-gray-900 ">
                 <div class="flex p-2 rounded hover:bg-gray-100 ">
                   <div class="flex items-center h-5">
-                      <input id="poison-vote-${data.stage}" name="save-vote-${data.stage}" type="radio" value="poison" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="poison-vote-${data.stage}" name="save-vote-${data.stage}" type="radio" value="poison" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
                   </div>
                   <div class="ml-2 text-sm">
                         <div>NO</div>
@@ -244,7 +244,7 @@ export class VoteSave extends HTMLElement{
       
             <div class="flex justify-end">
               <div>
-                <button id="${data.stage}" type="button" class="voteSaveBtn text-black bg-gray-800 text-white hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+                <button id="${data.stage}" type="button" class="voteSaveBtn bg-gray-800 text-white hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
                 <p id="error-save-${data.stage}" class="text-yellow-500 text-xs italic mt-2 text-right"></p>
               </div>
             </div>
@@ -368,7 +368,7 @@ export class DialogueWolf extends HTMLElement{
 
             <div class="flex justify-end">
             <div>
-            <button id="${data.stage}" type="button" class="dialogueWolfBtn text-black bg-gray-800 text-white hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
+            <button id="${data.stage}" type="button" class="dialogueWolfBtn bg-gray-800 text-white hover:bg-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">確認</button>
             <p id="error-${data.stage}" class="text-yellow-500 text-xs italic mt-2 text-right"></p>
             </div>
             </div>

@@ -14,7 +14,7 @@ export class PlayerItem extends HTMLElement{
 
                         </div>`
         if(delte_btn){
-            html+= `<div id="${user_name}" class="deletePlayer flex text-white items-center justify-center absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-gray-900 border-2 border-white dark:border-gray-800 rounded-full">
+            html+= `<div id="${user_name}" class="deletePlayer flex text-white items-center justify-center absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-gray-900 border-2 border-white rounded-full">
                 <p class="ml-[1px] mb-[2px]">×</p>
             </div>`
         }
@@ -31,8 +31,3 @@ export class PlayerItem extends HTMLElement{
 customElements.define("player-item", PlayerItem)
 
 
-/* <div id="teammate-${id}" class=" top-0 left-7 absolute  w-4 h-4 bg-gray-600 border-2 border-white dark:border-gray-800 rounded-full text-[2px] text-white flex items-center justify-center">
-    <p>T</p>
-</div>  */
-
-/* <p id="player-state-${id}" class="-mt-2" style="font-size: 4px;">${state}</p> */

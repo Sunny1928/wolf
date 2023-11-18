@@ -27,3 +27,9 @@
 3. Agent Info 如圖，可以正常使用，切換tab會同時切換其他角色的
 4. 現在只能傳入一般的，像是memory, guess roles (開會討論看有沒有其他需求)
 5. 右上角的按鈕可以改變是否存取 agent info state
+
+
+![alt text](https://github.com/Sunny1928/wolf/blob/main/img/stageinfo.png)
+1. 現在每次更換stage會跳出圖示及通知，時間為0.5s
+2. 挑出通知時無法做操作
+3. 在script-test.js中，第13行有一個變數show_notification_about_changing_stage，設為0可以把它關掉

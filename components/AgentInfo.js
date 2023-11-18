@@ -45,8 +45,8 @@ export class IntelligentAgentInfo extends HTMLElement{
               </div>
               <div id="guess-roles-tab" class="md:h-[600px] overflow-hidden overflow-y-auto p-6 bg-white rounded-lg ${current_tab == 'guess-roles-tab'? '':'hidden'}" >
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                           <tr>
                               <th scope="col" class="px-4 py-2">
                                   玩家
@@ -68,10 +68,10 @@ export class IntelligentAgentInfo extends HTMLElement{
                       for (const [id, arr] of Object.entries(data.guess_roles)) {
 
                         html+=`
-                              <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
-                                  <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap dark:text-white">
-                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                                        <span class="font-medium text-gray-600 dark:text-gray-300">${id}</span>
+                              <tr class="bg-white border-b hover:bg-gray-50 ">
+                                  <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap ">
+                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full ">
+                                        <span class="font-medium text-gray-600 ">${id}</span>
                                       </div>
                                   </th>
                                   <td class="px-3 py-4">
@@ -168,8 +168,8 @@ export class MemoryAgentInfo extends HTMLElement{
               </div>
               <div id="guess-roles-tab" class="md:h-[600px] overflow-hidden overflow-y-auto p-6 bg-white rounded-lg ${current_tab == 'guess-roles-tab'? '':'hidden'}" >
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                           <tr>
                               <th scope="col" class="px-4 py-2">
                                   玩家
@@ -188,10 +188,10 @@ export class MemoryAgentInfo extends HTMLElement{
                       for (const [id, arr] of Object.entries(data.guess_roles)) {
 
                         html+=`
-                              <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
-                                  <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap dark:text-white">
-                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                                        <span class="font-medium text-gray-600 dark:text-gray-300">${id}</span>
+                              <tr class="bg-white border-b hover:bg-gray-50">
+                                  <th scope="row" class="flex items-center px-3 py-2 text-gray-900 whitespace-nowrap">
+                                      <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full">
+                                        <span class="font-medium text-gray-600">${id}</span>
                                       </div>
                                   </th>`
                                     

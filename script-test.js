@@ -9,6 +9,9 @@ import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75
 
 import * as API from './api.js'
 
+
+const show_notification_about_changing_stage = 1
+
 const PRE_WORK_TIME = 5 
 const UPDATE_TIME = 1000
 const GAP = 2 
@@ -186,6 +189,7 @@ $(document).ready(function () {
     $("#findARoomPage").hide();
     $("#settingGamePage").hide();
     $("#gamePage").hide();
+    $("#change_stage").hide()
 
     $('#timer').hide()
     $("#sendMessageBtn").hide()
@@ -198,9 +202,8 @@ $(document).ready(function () {
     var user_name = ''
     var user_id = -1
     var user_role = ''
-    var user_state = '' 
     var user_color = randomColor()
-     
+    var user_state = ''
 
     
     var room_name = ''
@@ -208,8 +211,6 @@ $(document).ready(function () {
     var players = []
     var players_info = {}
     var roles = ['民','神']
-
-    var wolf_vote_shown = 0
 
 
     let stage_name = '' // 1-1-vote1
@@ -219,17 +220,14 @@ $(document).ready(function () {
     var data_former_1 = ''
 
 
-
     var refreshRoomId = -1
     var refreshGameId = -1
     var timerId = -1
     var game_over = 0
 
-    // var room_state = "ready"
 
 
     // get players info
-
     var getPlayerInfo = () => {
         API.get_game_room_info(room_name, function(game_room_info){
             players_info = game_room_info['player']
@@ -604,10 +602,12 @@ $(document).ready(function () {
                 
                 countDown(data.stage_description.split('#')[0], data.timer)
 
-                data_former = data
 
+                data_former = data
                 stage_now = data.stage
                 stage_name = stage_now.split('-')[2]
+                console.log(stage_name)
+
 
 
                 // first stage get the role
@@ -615,6 +615,21 @@ $(document).ready(function () {
 
                     get_user_role()
                     getPlayerInfo()
+                    stage_former = stage_now
+                    return
+                }
+
+
+
+                // show notification about changing stage
+                if(show_notification_about_changing_stage){
+                    $('#change_stage_description').html(data.stage_description);
+                    $('#change_stage_img').attr('src',`/images/stages/${stage_name}.png`);
+
+                    $("#change_stage").show()
+                    setInterval(function() {
+                        $("#change_stage").fadeOut("slow")
+                    }, 500);
                 }
                 
 
@@ -876,15 +891,9 @@ $(document).ready(function () {
     // get_user_role()
     // intoGame(room_name)
     // getPlayerInfo()
-    // $("#initialPage").hide();
-    // $("#findARoomPage").show();
-    // API.get_all_rooms()
-
-    // $("#gamePage").hide();
-    // $("#settingGamePage").show();
 
 
-
+    
     
     
 
@@ -1092,13 +1101,26 @@ $(document).ready(function () {
     });
 
     // add Agent button
-    $("#chatRoom").on("click", ".addSimpleAgent",function () {
+    $("#chatRoom").on("click", ".addAgent",function () {
+        
+        let agent_type = $(this).attr('id');
+        let agent_name = $(this).attr('agent-name');
+
+        let colors={
+            "simple_agent": "bef264",
+            "intelligent_agent": "f9a8d4",
+            "summary_intelligent_agent": "f9a8d4",
+            "memory_stream_agent": "fdba74",
+            "summary_memory_stream_agent": "fdba74",
+        }
+
+
         let data = {
-            "agent_type" : "simple_agent" ,
-            "agent_name" : "sAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
+            "agent_type" : agent_type ,
+            "agent_name" : agent_name + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
-            "color" : "f9a8d4" ,
+            "color" : colors[agent_type] ,
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
@@ -1112,86 +1134,6 @@ $(document).ready(function () {
 
     });
 
-    // add Agent button
-    $("#chatRoom").on("click", ".addIntelligentAgent",function () {
-        let data = {
-            "agent_type" : "intelligent_agent" ,
-            "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
-            "room_name" : room_name ,
-            "api_json" : "doc/secret/openai.key",
-            "color" : "f9a8d4" ,
-            "prompt_dir" : "doc/prompt/memory_stream/"
-        }
-
-        API.add_agent(room_name, data, handleData=>{
-            if(handleData=='OK'){
-
-            }else{
-                displayMessageGod(handleData.Error)
-            }
-        })
-
-    });
-
-    $("#chatRoom").on("click", ".addSummaryIntelligentAgent",function () {
-        let data = {
-            "agent_type" : "summary_intelligent_agent" ,
-            "agent_name" : "iAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
-            "room_name" : room_name ,
-            "api_json" : "doc/secret/openai.key",
-            "color" : "f9a8d4" ,
-            "prompt_dir" : "doc/prompt/memory_stream/"
-        }
-
-        API.add_agent(room_name, data, handleData=>{
-            if(handleData=='OK'){
-
-            }else{
-                displayMessageGod(handleData.Error)
-            }
-        })
-
-    });
-
-    $("#chatRoom").on("click", ".addMemmoryAgent",function () {
-        let data = {
-            "agent_type" : "memory_stream_agent" ,
-            "agent_name" : "mAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
-            "room_name" : room_name ,
-            "api_json" : "doc/secret/openai.key",
-            "color" : "fdba74" ,
-            "prompt_dir" : "doc/prompt/memory_stream/"
-        }
-
-        API.add_agent(room_name, data, handleData=>{
-            if(handleData=='OK'){
-
-            }else{
-                displayMessageGod(handleData.Error)
-            }
-        })
-
-    });
-
-    $("#chatRoom").on("click", ".addSummaryMemmoryAgent",function () {
-        let data = {
-            "agent_type" : "summary_memory_stream_agent" ,
-            "agent_name" : "mAgent" + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
-            "room_name" : room_name ,
-            "api_json" : "doc/secret/openai.key",
-            "color" : "fdba74" ,
-            "prompt_dir" : "doc/prompt/memory_stream/"
-        }
-
-        API.add_agent(room_name, data, handleData=>{
-            if(handleData=='OK'){
-
-            }else{
-                displayMessageGod(handleData.Error)
-            }
-        })
-
-    });
 
 
 
@@ -1199,9 +1141,7 @@ $(document).ready(function () {
 
     // send message
     $("#sendMessageBtn").on( "click", function() {
-        
         sendMessage()
-
     });
 
 
@@ -1431,7 +1371,3 @@ $(document).ready(function () {
 
 
 });
-
-
-
-

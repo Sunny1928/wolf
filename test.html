@@ -27,8 +27,8 @@
       <div id="playerSelector" class="w-5/6">
       </div>
       <div class="w-1/6 flex">
-        <button id='agentDataBtn' state='1' type="button" class="w-1/2 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
-        <button id='agentDataBtn' state='0' type="button" class="w-1/2 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Unsave</button>
+        <button id='agentDataBtn' state='1' type="button" class="w-1/2 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center hidden">Save</button>
+        <button id='agentDataBtn' state='0' type="button" class="w-1/2 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center hidden">Unsave</button>
       </div>
 
     </div>
@@ -75,7 +75,10 @@
               <div class=" mx-2">
                 <div class="w-full max-w-lg grid grid-cols-6">
                   <div class="flex items-center justify-center col-start-1 col-end-12 p-3 rounded-lg ">
-                      <div class="flex items-center justify-center h-28 w-28 rounded-full colorpad flex-shrink-0 shadow-xl"></div>
+                      <div class="flex items-center justify-center h-28 w-28 rounded-full colorpad flex-shrink-0 shadow-xl">
+                        <img class="absolute h-20 w-20" src="/images/animal-track.png" alt="Medium avatar">
+
+                      </div>
                   </div>
                   
                   <div class="grid col-start-2 col-end-6">
@@ -91,7 +94,7 @@
                 </div>
               </div>
               
-              <div id="startBtns" class="mt-4 gap-x-6 ">
+              <div id="startBtns" class="hidden mt-4 gap-x-6 ">
                 <button
                   id="findARoomBtn"
                   class="shadow-xl uppercase w-2/3 rounded-lg bg-gray-500 px-1 py-1 my-1 text-base font-semibold text-white shadow-lg hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
@@ -228,7 +231,7 @@
           </div>
         
 
-          <div id="gamePage" class="w-full flex flex-col h-full bg-[url('/images/wolf-gray.png')] bg-contain rounded-xl">
+          <div id="gamePage" class="relative w-full flex flex-col h-full bg-[url('/images/wolf-gray.png')] bg-contain rounded-xl">
             <test-bar-item></test-bar-item>
 
             
@@ -244,7 +247,7 @@
             <div class="rounded-b-lg col-start-1 col-end-13  flex items-center justify-center bg-white">
                 <div class=" relative text-center text-sm  py-2 px-4 shadow w-full flex items-center justify-center">
                   <div id="room_cant_start" class="text-base font-black text-gray-900"></div>
-                  <button type="button" id="startGameBtn" class="text-white bg-blue-400 dark:bg-blue-500  font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                  <button type="button" id="startGameBtn" class="text-white bg-blue-400 font-medium rounded-full text-sm px-5 py-2.5 text-center">
                     遊戲開始
                   </button>
 
@@ -255,16 +258,29 @@
 
             
             <!-- MESSAGE -->
+            <div id="change_stage" class="absolute z-10 w-full h-full">
+              <div  class="w-full h-full  flex items-center justify-center">
+                <div class="w-5/6 p-4 bg-white rounded-lg" >
+                  <div class="flex justify-center mb-2">
+                    <img id="change_stage_img" class="w-28 h-28" src="/images/stages/werewolf.png">
+                  </div>
+                  <b id="change_stage_description">女巫請睜眼</b>
+                </div> 
+              </div>
+            </div>
             
             <div class=" h-full grow overflow-hidden overflow-y-auto text-gray-800  ">
-              <div class="flex flex-col h-full w-full">
-                <div class="h-full antialiased overflow-y-auto">
-                  <div id="chatRoom" class="grid grid-cols-12 gap-y-1">
 
-                    
+              
+
+              <div class=" flex flex-col h-full w-full">
+                <div class=" h-full antialiased overflow-y-auto">
+                  <div id="chatRoom" class="grid grid-cols-12 gap-y-1">
 
                   </div>
                 </div>
+                
+                
 
                 <!-- MESSAGE BUTTON -->
                 <div class="flex flex-row items-center h-12 ">

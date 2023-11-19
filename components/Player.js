@@ -9,7 +9,7 @@ export class PlayerItem extends HTMLElement{
                     <div class="relative">
                     
                         <div class="${me == user_name ?'border-dotted border-2 border-black ':''} relative shadow-xl font-medium flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${id}" >
-                            <img class="absolute w-6 h-6" src="/images/animal-track.png" alt="Medium avatar">
+                            <img class="absolute w-6 h-6" src="/images/wolf.png" alt="Medium avatar">
                             <div class="font-extrabold z-10">${id}</div>
 
                         </div>`

@@ -2,7 +2,7 @@
 
 ### Steps
 1. run werewolf_kill, werewolf_kill_server, agent_server(generative_agent_with_werewolf_kill)
-2. search http://localhost:8001/test.html
+2. search http://localhost:8001/test/
 3. You can see the TESTROOM page
 
 ### Note
@@ -30,9 +30,15 @@
 5. 右上角的按鈕可以改變是否存取 agent info state
 
 
-### New
-
 ![alt text](https://github.com/Sunny1928/wolf/blob/main/img/stageinfo.png)
 1. 現在每次更換stage會跳出圖示及通知，時間為0.5s
 2. 挑出通知時無法做操作
 3. 在script-test.js中，第13行有一個變數show_notification_about_changing_stage，設為0可以把它關掉
+
+
+
+### New
+1. 現在的測試網址在 http://localhost:8001/test/
+2. 打開手機版本，點左下角Aa，關掉 tool bar，如圖
+![alt text](https://github.com/Sunny1928/wolf/blob/main/img/phone.png)
+

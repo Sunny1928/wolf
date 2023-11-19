@@ -1,13 +1,13 @@
 
-import {MessageGod,MessageMe,MessageOthers} from "./components/Message.js"
-import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vote.js"
-import {PlayerSelector} from "./components/PlayerSelector.js"
-import {AddAgent} from "./components/AddAgent.js"
-import {IntelligentAgentInfo, MemoryAgentInfo} from "./components/AgentInfo.js"
-import {PlayerItem} from "./components/Player.js"
+import {MessageGod,MessageMe,MessageOthers} from "/components/Message.js"
+import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "/components/Vote.js"
+import {PlayerSelector} from "/components/PlayerSelector.js"
+import {AddAgent} from "/components/AddAgent.js"
+import {IntelligentAgentInfo, MemoryAgentInfo} from "/components/AgentInfo.js"
+import {PlayerItem} from "/components/Player.js"
 import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
 
-import * as API from './api.js'
+import * as API from '../api.js'
 
 
 const show_notification_about_changing_stage = 1
@@ -550,8 +550,7 @@ $(document).ready(function () {
             
 
                 // check vote info
-               if(data.empty === 1 && Object.keys(data.vote_info).length !== 0){
-                    console.log(data.stage.split('-')[2])
+               if(data.empty === 2 && Object.keys(data.vote_info).length !== 0){
                     if(data.stage.split('-')[2] != 'werewolf'){
 
                     let data_vote_info = JSON.parse(JSON.stringify(data_former))
@@ -606,8 +605,6 @@ $(document).ready(function () {
                 data_former = data
                 stage_now = data.stage
                 stage_name = stage_now.split('-')[2]
-                console.log(stage_name)
-
 
 
                 // first stage get the role
@@ -721,9 +718,7 @@ $(document).ready(function () {
                 // console.log(user_state)
                 // console.log("room data")
                 // console.log(room_data)
-
-                $("#game").css("background-color", "#333");
-
+                $("#game").css("background-color", "#fff");
 
                 // check user is alive and has information and show
                 if(data.information.length!=0){
@@ -870,12 +865,12 @@ $(document).ready(function () {
                         // displayMessageGod("SKIP STAGE: "+handleData)
             
                     }else{
-                        displayMessageGod("SKIP STAGE: "+handleData.responseJSON.Error)
+                        displayMessageGod("SKIP STAGE: "+handleData.Error)
                     }
                 })
 
             }else{
-                displayMessageGod(handleData.responseJSON.Error)
+                displayMessageGod(handleData.Error)
             }
         })
 
@@ -938,8 +933,7 @@ $(document).ready(function () {
                     $("#sendMessageBtn").show();
                 }
             }else{
-                displayMessageGod(handleData.responseJSON.Error)
-                // $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
+                displayMessageGod(handleData.Error)
             }
         })
     });
@@ -947,7 +941,6 @@ $(document).ready(function () {
     // change player for the operation
     $("#playerSelector").change(function(){
         user_name = $(`select[name=playerName] option`).filter(':selected').val()
-        // console.log(user_name)
     });
 
     // dialogue wolf button
@@ -975,7 +968,6 @@ $(document).ready(function () {
             "position" : [1,2]
         }
 
-        // console.log(chat)
 
         API.operation(user_name, room_name, data, handleData=>{
             // console.log(handleData)
@@ -985,7 +977,7 @@ $(document).ready(function () {
                 // $(`#error-${data.stage_name}`).text(handleData)
 
             }else{
-                displayMessageGod(handleData.responseJSON.Error)
+                displayMessageGod(handleData.Error)
                 // $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
             }
         })
@@ -1032,9 +1024,7 @@ $(document).ready(function () {
                     $(':radio:not(:checked)').attr('disabled', true);
 
                 }else{
-                    displayMessageGod(handleData.responseJSON.Error)
-                    // $(`#error-save-${data.stage_name}`).text(handleData.responseJSON.Error)
-
+                    displayMessageGod(handleData.Error)
                 }
             })
         }
@@ -1076,12 +1066,9 @@ $(document).ready(function () {
         var player_name = $(this).attr('id');
         // console.log(player_name)
         if(player_name.includes("Agent")){
-            API.delete_agent(room_name, player_name, handleData=>{
-                if(handleData=='OK'){
-                    displayMessageGod(`成功刪除${player_name}，請等待五秒`)
-                }else{
-                    displayMessageGod(handleData.Error)
-                }
+            API.delete_agent(room_name, user_name, player_name, handleData=>{
+                if(handleData=='OK') displayMessageGod(`成功刪除${player_name}，請等待五秒`)
+                else displayMessageGod(handleData.Error)
             })
         }else{
             API.quit_room(room_name, player_name)
@@ -1093,7 +1080,7 @@ $(document).ready(function () {
     // add Player button
     $("#chatRoom").on("click", ".addPlayer",function () {
 
-        API.join_a_room(1, "Player:"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "99f6e4", handleData=>{
+        API.join_a_room(1, 1, "Player:"+Math.floor(Math.random() * 999).toString().padEnd(3, '0'), room_name, "99f6e4", handleData=>{
 
 
         })
@@ -1124,7 +1111,7 @@ $(document).ready(function () {
             "prompt_dir" : "doc/prompt/memory_stream/"
         }
 
-        API.add_agent(room_name, data, handleData=>{
+        API.add_agent(room_name, data, user_name, handleData=>{
             if(handleData=='OK'){
 
             }else{
@@ -1186,7 +1173,7 @@ $(document).ready(function () {
     // build a room button
     $("#settingGamePageBtn").click(function () {
 
-        API.build_a_room(user_name, user_color, function(data){
+        API.build_a_room(1, user_name, user_color, function(data){
             room_name = data.room_name
             intoGame(room_name)
         });
@@ -1208,7 +1195,7 @@ $(document).ready(function () {
         
         room_name = $(this).parent().children().children()[0].innerText
 
-        API.join_a_room(1, user_name, room_name, user_color, handleData=>{
+        API.join_a_room(1, 0, user_name, room_name, user_color, handleData=>{
 
             if(handleData == 'OK'){
                 intoGame(room_name)
@@ -1285,7 +1272,7 @@ $(document).ready(function () {
 
             }else{
 
-                $('#settingGameError').text(handleData.responseJSON.Error)
+                $('#settingGameError').text(handleData.Error)
 
             }
         })
@@ -1315,7 +1302,7 @@ $(document).ready(function () {
                 displayMessageGod("SKIP STAGE: "+handleData)
     
             }else{
-                displayMessageGod("SKIP STAGE: "+handleData.responseJSON.Error)
+                displayMessageGod("SKIP STAGE: "+handleData.Error)
             }
         })
       

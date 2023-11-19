@@ -1,11 +1,9 @@
 import {RoomItem} from "./components/Room.js"
 
-// const api_url = 'api/'
-const api_url = window.location.protocol + '//' + window.location.host+'/api/'
-// const api_url = 'http://localhost:8001/api/'
+const API_URL = window.location.protocol + '//' + window.location.host+'/api/'
+// const API_URL = 'http://192.168.31.28:8001/api/'
 
-// const api_url = 'http://192.168.1.132:8001/api/'
-
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJBMTA5NTVQWVNZIiwicm9vbV9uYW1lIjoiQTEwOTU1UFlTWSIsImxlYWRlciI6dHJ1ZSwiaWF0IjoxNzAwNDIxMTcwLCJleHAiOjE3MDkwNjExNzB9.HuIaq2bjJVxEtqSPDYbnaP1Qtsad56JYpnd9wrC0vGQ'
 // Room API
 
 
@@ -14,7 +12,7 @@ export var get_all_rooms = () => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}room`,
+        url: `${API_URL}room`,
         success: function(info){
             
             let dev = $("#roomCol")
@@ -40,15 +38,16 @@ export var get_all_rooms = () => {
 
 
 // build a room and go into the game
-export var build_a_room = (user_name, color, handleData) => {
+export var build_a_room = (test=0, user_name, color, handleData) => {
     
 
     $.ajax({
         type:'GET',
-        url: `${api_url}create_room/${user_name}/${color.slice(-6)}`,
+        url: `${API_URL}create_room/${user_name}/${color.slice(-6)}`,
         success: function(info){
             
-            sessionStorage.setItem("user_token", info.user_token);
+            if(test) sessionStorage.setItem("user_token", TOKEN);
+            else sessionStorage.setItem("user_token", info.user_token);
 
             handleData(info)
 
@@ -62,17 +61,16 @@ export var build_a_room = (user_name, color, handleData) => {
 
 
 // join a room and go into the game
-export var join_a_room = (test=0, user_name, room_name, color, handleData) => {
+export var join_a_room = (test, agent, user_name, room_name, color, handleData) => {
     
     // const user_name = sessionStorage.getItem("user_name");
 
     $.ajax({
         type:'GET',
-        url: `${api_url}join_room/${room_name}/${user_name}/${color.slice(-6)}`,
+        url: `${API_URL}join_room/${room_name}/${user_name}/${color.slice(-6)}`,
         success: function(info){
-            if(test) sessionStorage.setItem("user_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJBMTA5NTVQWVNZIiwicm9vbV9uYW1lIjoiQTEwOTU1UFlTWSIsImxlYWRlciI6dHJ1ZSwiaWF0IjoxNjkxNjU0NTcxLCJleHAiOjE3MDAyOTQ1NzF9._6lU40QFRogdrjozyZIF8wVVJetoFUcuxeekJaQ_c6U");
-            else sessionStorage.setItem("user_token", info.user_token);
-            
+            if(test) sessionStorage.setItem("user_token", TOKEN);
+            else if(!agent) sessionStorage.setItem("user_token", info.user_token);
             handleData('OK')
 
         },
@@ -92,7 +90,7 @@ export var get_a_room = (room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}room/${room_name}`,
+        url: `${API_URL}room/${room_name}`,
         success: function(info){
             
             handleData(info)
@@ -111,7 +109,7 @@ export var quit_room = (room_name, user_name) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}quit_room/${room_name}/${user_name}`,
+        url: `${API_URL}quit_room/${room_name}/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -130,7 +128,7 @@ export var quit_agent = (room_name, user_name) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}quit_room/${room_name}/${user_name}`,
+        url: `${API_URL}quit_room/${room_name}/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -161,7 +159,7 @@ export var change_save_state = (room, state, handleData) => {
 
     $.ajax({
         type:'GET',
-        url: `${api_url}agent/${room}/${state}`,
+        url: `${API_URL}agent/${room}/${state}`,
         success: function(info){
             handleData(info)
         },
@@ -180,7 +178,7 @@ export var reset_game = () => {
 
     $.ajax({
         type:'GET',
-        url: `${api_url}reset`,
+        url: `${API_URL}reset`,
         success: function(info){
             
         },
@@ -193,15 +191,16 @@ export var reset_game = () => {
 
 
 // add agent
-export var add_agent = (room_name, data, handleData) => {
+export var add_agent = (room_name, data, user_name, handleData) => {
 
     // user_name = sessionStorage.getItem("user_name");
     const user_token = sessionStorage.getItem("user_token");
+    console.log(sessionStorage.getItem("user_token"))
 
     $.ajax({
         contentType: "application/json;charset=utf-8",
         type:'POST',
-        url: `${api_url}agent/${room_name}/a`,
+        url: `${API_URL}agent/${room_name}/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -211,22 +210,22 @@ export var add_agent = (room_name, data, handleData) => {
             handleData(info)
         },
         error: function(err){
-
-            handleData(err)
+            console.log(err)
+            handleData(err.responseJSON)
         }
     })
 } 
 
 
 // delete agent
-export var delete_agent = (room_name, user_name, handleData) => {
+export var delete_agent = (room_name, user_name, agent_name, handleData) => {
 
     const user_token = sessionStorage.getItem("user_token");
-
     $.ajax({
         contentType: "application/json;charset=utf-8",
         type:'DELETE',
-        url: `${api_url}agent/${room_name}/a/${user_name}`,
+        // url: `${API_URL}agent/${room_name}/a/${agent_name}`,
+        url: `${API_URL}agent/${room_name}/${user_name}/${agent_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -236,7 +235,7 @@ export var delete_agent = (room_name, user_name, handleData) => {
         },
         error: function(err){
 
-            handleData(err)
+            handleData(err.responseJSON)
         }
     })
 } 
@@ -252,7 +251,7 @@ export var start_game = (room_name) => {
 
     $.ajax({
         type:'GET',
-        url: `${api_url}start_game/${room_name}`,
+        url: `${API_URL}start_game/${room_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -276,7 +275,7 @@ export var get_a_role = (user_name, room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}game/${room_name}/role/${user_name}`,
+        url: `${API_URL}game/${room_name}/role/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -302,7 +301,7 @@ export var get_info = (user_name, room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}game/${room_name}/information/${user_name}`,
+        url: `${API_URL}game/${room_name}/information/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -325,7 +324,7 @@ export var get_game_room_info = (room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}game/${room_name}`,
+        url: `${API_URL}game/${room_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -354,7 +353,7 @@ export var operation = (user_name, room_name, data, handleData) => {
     $.ajax({
         contentType: "application/json;charset=utf-8",
         type:'POST',
-        url: `${api_url}game/${room_name}/operation/${user_name}`,
+        url: `${API_URL}game/${room_name}/operation/${user_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -367,7 +366,7 @@ export var operation = (user_name, room_name, data, handleData) => {
 
 
             // console.log("err")
-            handleData(err)
+            handleData(err.responseJSON)
         }
     })
 } 
@@ -382,7 +381,7 @@ export var setGame = (room_name, data, handleData) => {
     $.ajax({
         contentType: "application/json;charset=utf-8",
         type:'POST',
-        url: `${api_url}room/${room_name}`,
+        url: `${API_URL}room/${room_name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
@@ -393,7 +392,7 @@ export var setGame = (room_name, data, handleData) => {
         },
         error: function(err){
 
-            handleData(err)
+            handleData(err.responseJSON)
         }
     })
 }
@@ -407,19 +406,16 @@ export var skipStage = (name, room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}game/${room_name}/skip/1-0-werewolf/${name}`,
+        url: `${API_URL}game/${room_name}/skip/1-0-werewolf/${name}`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },
         success: function(info){
             
-            // console.log(info)
             handleData(info)
         },
         error: function(err){
-            // alert(err.responseJSON.Error);
-            handleData(err)
-            // console.log("err")
+            handleData(err.responseJSON)
         }
     })
 } 
@@ -433,7 +429,7 @@ export var get_all_game_info = (room_name, handleData) => {
     
     $.ajax({
         type:'GET',
-        url: `${api_url}game/${room_name}/information`,
+        url: `${API_URL}game/${room_name}/information`,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', `Bearer ${user_token}`);
         },

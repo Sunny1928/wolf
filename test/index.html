@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wolf</title>
-    <link href="./styles/global.css" type="text/css" rel="stylesheet" />
+    <link href="/styles/global.css" type="text/css" rel="stylesheet" />
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- tailwindcss -->
@@ -18,7 +18,7 @@
       referrerpolicy="no-referrer"
     />
     <script defer src="/components/BarItem.js"></script>
-    <script src="/script-test.js" type="module"></script>
+    <script src="./script.js" type="module"></script>
 
   </head>
   <body>
@@ -38,7 +38,6 @@
       
 
       <div id="main" class="flex items-center justify-center h-screen p-2">
-        <!-- <div class="relative"> -->
 
 
         
@@ -52,13 +51,8 @@
         <!-- WOLF -->
 
         
-        <!-- <div class="text-center bg-gray-100 bg-white h-full w-full md:h-[720px] md:w-[480px] rounded-xl "> -->
         <div id="game" class="p-1 text-center bg-white h-5/6 w-full md:h-[750px] md:w-[420px] rounded-lg">
-          <!-- <div class="flex">
-              <div class="items-center justify-center">
-                <img class="w-20" src="/images/Logo.png">
-              </div>
-            </div> -->
+         
           
           
 
@@ -67,29 +61,26 @@
           <div id="initialPage" class="h-full flex items-center justify-center w-full rounded-xl">
             <div id="page_front" class="z-10 relative">
               
-              <!-- <p class="font-semibold text-xl leading-relaxed ">歡迎來玩狼人殺 WOLF!</p> -->
               <div class="flex items-center justify-center">
                 <span class="m-2 ">Sponser by</span> 
-                <img class="w-20" src="./images/logo.png">
+                <img class="w-20" src="/images/logo.png">
               </div>
               <div class=" mx-2">
                 <div class="w-full max-w-lg grid grid-cols-6">
                   <div class="flex items-center justify-center col-start-1 col-end-12 p-3 rounded-lg ">
                       <div class="flex items-center justify-center h-28 w-28 rounded-full colorpad flex-shrink-0 shadow-xl">
-                        <img class="absolute h-20 w-20" src="/images/animal-track.png" alt="Medium avatar">
+                        <img class="absolute h-20 w-20" src="/images/wolf.png" alt="Medium avatar">
 
                       </div>
                   </div>
                   
                   <div class="grid col-start-2 col-end-6">
-                    <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">名字</label> -->
                     <input
                       id="user_name"
                       class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight shadow-xl focus:outline-none focus:bg-white"
                       type="text"
                       placeholder="請輸入你的名字"
                     />
-                    <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
                   </div>
                 </div>
               </div>
@@ -123,7 +114,6 @@
             <!-- ROOM COL -->
             <div class="grow h-full antialiased overflow-hidden overflow-y-auto">
               <div id="roomCol" >
-                <!-- <room-item ></room-item> -->
                 
               </div>
             </div>
@@ -177,7 +167,6 @@
                       type="number"
                       placeholder="村民"
                     />
-                    <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
                   </div>
                   <div class="w-full">
                     <label for="email" class="block text-sm font-medium text-gray-900 text-left mb-1 ml-1 uppercase">狼人</label>
@@ -298,13 +287,6 @@
                         viewBox="0 0 14 14"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <!-- <path
-                        viewBox="0 0 24 24"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                        ></path> -->
                         <path 
                           stroke-linecap="round"
                           stroke-linejoin="round" 
@@ -364,39 +346,10 @@
           </div>
         </div>
 
-
-        <!-- </div> -->
       </div>
 
       
     </div>
-
-    
-    <!-- Scripts -->
-    <!-- <script src="/scripts/utils.js"></script>
-    <script src="/scripts/DirectionInput.js"></script>
-    <script src="/scripts/Overworld.js"></script>
-    <script src="/scripts/GameObject.js"></script>
-    <script src="/scripts/Person.js"></script>
-    <script src="/scripts/Sprite.js"></script>
-    <script src="/scripts/OverworldMap.js"></script>
-    <script src="/scripts/init.js"></script> -->
-  </body>
-  <script src="https://flowbite.com/docs/flowbite.min.js"></script>
-  <script src="https://flowbite.com/docs/datepicker.min.js"></script>
-  <script>
-  window.onload = function () { 
-    const anchorTags = document.querySelectorAll('a'); 
-    anchorTags.forEach(function(a){a.addEventListener('click', function(ev){ev.preventDefault();})});  
-    const dropdownEl = document.querySelector('[data-dropdown-toggle]'); 
-    if (dropdownEl) {dropdownEl.click();} 
-    const modalEl = document.querySelector('[data-modal-toggle]'); 
-    if(modalEl) {modalEl.click(); }  
-    const dateRangePickerEl = document.querySelector('[data-rangepicker] input'); 
-    if (dateRangePickerEl) { dateRangePickerEl.focus(); } 
-    const drawerEl = document.querySelector('[data-drawer-show]'); 
-    if (drawerEl) { drawerEl.click(); }  }
-  </script>
 </html>
 
 

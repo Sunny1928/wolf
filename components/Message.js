@@ -20,7 +20,7 @@ export class MessageMe extends HTMLElement{
         this.innerHTML = `
         <div class="flex items-center justify-start flex-row-reverse m-2">
           <div class="relative shadow flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${id}">
-            <img class="absolute w-6 h-6" src="/images/animal-track.png" alt="Medium avatar">
+            <img class="absolute w-6 h-6" src="/images/wolf.png" alt="Medium avatar">
             <div class="z-10 font-extrabold">${id}</div>
           </div>
           <div class="relative mr-2 text-left text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl whitespace-normal break-all">
@@ -38,7 +38,7 @@ export class MessageOthers extends HTMLElement{
         this.innerHTML = `
         <div class="flex flex-row items-start m-2">
             <div class="relative shadow flex items-center justify-center h-10 w-10 rounded-full bg-gray-300 flex-shrink-0 bg-color-${item.user}">
-              <img class="absolute w-6 h-6" src="/images/animal-track.png" alt="Medium avatar">
+              <img class="absolute w-6 h-6" src="/images/wolf.png" alt="Medium avatar">
               <div class="z-10 font-extrabold">${item.user}</div>
             </div>
             <div class="relative ml-2">

@@ -6,17 +6,8 @@ import {AddAgent} from "/components/AddAgent.js"
 import {IntelligentAgentInfo, MemoryAgentInfo} from "/components/AgentInfo.js"
 import {PlayerItem} from "/components/Player.js"
 import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
-
 import * as API from '../api.js'
-
-
-const show_notification_about_changing_stage = 1
-
-const PRE_WORK_TIME = 5 
-const UPDATE_TIME = 1000
-const GAP = 2 
-const ROOM = 'TESTROOM'
-
+import {config} from '../config.js';
 
 
 var addAgent = () => {
@@ -246,8 +237,6 @@ $(document).ready(function () {
             user_id = data.player_id
             displayMessageGod("你的角色是"+user_role)
 
-            // console.log(data.game_info.teamate)
-
             if(data.game_info.teamate.length!=0){
                 let str ='你的夥伴 '
                 data.game_info.teamate.forEach(e=>{
@@ -332,7 +321,7 @@ $(document).ready(function () {
 
         game_over = 0
 
-        refreshRoomId =  workerTimers.setInterval(updateRoom, UPDATE_TIME);
+        refreshRoomId =  workerTimers.setInterval(updateRoom, config().UPDATE_TIME);
 
     }
 
@@ -355,7 +344,6 @@ $(document).ready(function () {
 
 
                 room_data = data
-                // console.log(room_data)
 
                 // room leader
                 if(user_name == room_data.room_leader){
@@ -368,7 +356,6 @@ $(document).ready(function () {
                     $("#villager_input").val(room_data.game_setting.village)
                     $("#wolf_input").val(room_data.game_setting.werewolf)
                     $("#hunter_input").val(room_data.game_setting.hunter)
-
                     
                 }
 
@@ -376,11 +363,8 @@ $(document).ready(function () {
                 if(room_data.game_setting.player_num == room_data.room_user.length){
                     // $('#room_cant_start').text('等待房主開始')
                     
-                    // room leader
-                    // if(user_name == room_data.room_leader){
                     $('#room_cant_start').hide()
                     $('#startGameBtn').show()
-                    // }
 
                 }else{
                     $('#chatRoom').empty()
@@ -457,7 +441,7 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-                refreshGameId =  workerTimers.setInterval(updateGame, UPDATE_TIME);
+                refreshGameId =  workerTimers.setInterval(updateGame, config().UPDATE_TIME);
             }
         })
     }
@@ -467,7 +451,7 @@ $(document).ready(function () {
     // cound time
     var countDown = (description, time) => {
 
-        let timeLeft = time-GAP;
+        let timeLeft = time - config().GAP;
         let elem = document.getElementById('timer');
 
         if(timerId != -1 ) workerTimers.clearInterval(timerId);
@@ -496,7 +480,7 @@ $(document).ready(function () {
     // cound time and restart room
     var countDownAndRestart = (description, time) => {
 
-        let timeLeft = time-GAP;
+        let timeLeft = time - config().GAP;
         let elem = document.getElementById('timer');
 
         let restartTimerId = workerTimers.setInterval(countdown, 1000);
@@ -619,31 +603,24 @@ $(document).ready(function () {
 
 
                 // show notification about changing stage
-                if(show_notification_about_changing_stage){
-                    $('#change_stage_description').html(data.stage_description);
-                    $('#change_stage_img').attr('src',`/images/stages/${stage_name}.png`);
+                // if(show_notification_about_changing_stage){
+                $('#change_stage_description').html(data.stage_description);
+                $('#change_stage_img').attr('src',`/images/stages/${stage_name}.png`);
 
-                    $("#change_stage").show()
-                    setInterval(function() {
-                        $("#change_stage").fadeOut("slow")
-                    }, 500);
-                }
+                $("#change_stage").show()
+                setInterval(function() {
+                    $("#change_stage").fadeOut("slow")
+                }, config().CHANGE_STAGE_TIME);
+                // }
                 
 
 
                 // check announcement and show
                 if(data.announcement.length!=0){
 
-                    // console.log("announcement")
-
-
-
                     for(let i of data.announcement){
 
                         let item = JSON.parse(JSON.stringify(i))
-
-
-                        // console.log(item.operation)
 
                         if(item.operation == 'chat') {
 
@@ -698,7 +675,7 @@ $(document).ready(function () {
 
 
 
-                //
+                // check game is over or not
                 if(game_over){
 
                     if(refreshGameId!=-1) workerTimers.clearInterval(refreshGameId);
@@ -707,23 +684,12 @@ $(document).ready(function () {
                     displayMessageGod(game_over.description)
 
                 }
-
                 
-                // console.log("stage name")
-                // console.log(stage_name)
-                // console.log("user info")
-                // console.log(user_name)
-                // console.log(user_id)
-                // console.log(user_role)
-                // console.log(user_state)
-                // console.log("room data")
-                // console.log(room_data)
                 $("#game").css("background-color", "#fff");
 
                 // check user is alive and has information and show
                 if(data.information.length!=0){
 
-                    // console.log("information")
                     
                     // change background color
                     $("#game").css("background-color", "rgb(117, 149, 172)");
@@ -737,7 +703,6 @@ $(document).ready(function () {
                         
 
                         if(item['user'].length != 0) {
-                            // console.log("Here")
                             user_name = players_info[item['user'][0]]['user_name']
                         }
 
@@ -763,9 +728,6 @@ $(document).ready(function () {
 
 
                             }else if(stage_name == "werewolf_dialogue"){
-                                // console.log("players")
-                                // console.log(players)
-                                // console.log(show_data)
                                 dialogueWolf(players, roles, show_data)
 
                             }else if(stage_name == "witch" && item.description == "女巫救人"){
@@ -882,7 +844,7 @@ $(document).ready(function () {
     // user_name ='sunny'
     // user_name ='yui'
 
-    // room_name = ROOM
+    // room_name = config().ROOM
     // get_user_role()
     // intoGame(room_name)
     // getPlayerInfo()
@@ -922,8 +884,6 @@ $(document).ready(function () {
         }
 
         API.operation(user_name, room_name, data, handleData=>{
-            // console.log(handleData)
-            // console.log(data.stage_name)
             if(handleData=='OK'){
                 displayMessageGod('Send operation: '+handleData)
                 // $(`#error-${data.stage_name}`).text(handleData)
@@ -970,16 +930,9 @@ $(document).ready(function () {
 
 
         API.operation(user_name, room_name, data, handleData=>{
-            // console.log(handleData)
-            // console.log(data.stage_name)
-            if(handleData=='OK'){
-                displayMessageGod('Send operation: '+handleData)
-                // $(`#error-${data.stage_name}`).text(handleData)
-
-            }else{
-                displayMessageGod(handleData.Error)
+            if(handleData=='OK') displayMessageGod('Send operation: '+handleData)
+            else displayMessageGod(handleData.Error)
                 // $(`#error-${data.stage_name}`).text(handleData.responseJSON.Error)
-            }
         })
     });
 
@@ -1064,15 +1017,12 @@ $(document).ready(function () {
     // delete player
     $("#playerCol").on("click", ".deletePlayer",function () {
         var player_name = $(this).attr('id');
-        // console.log(player_name)
         if(player_name.includes("Agent")){
             API.delete_agent(room_name, user_name, player_name, handleData=>{
                 if(handleData=='OK') displayMessageGod(`成功刪除${player_name}，請等待五秒`)
                 else displayMessageGod(handleData.Error)
             })
-        }else{
-            API.quit_room(room_name, player_name)
-        }
+        }else API.quit_room(room_name, player_name)
 
     });
 

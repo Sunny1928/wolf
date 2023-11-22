@@ -4,17 +4,8 @@ import {VoteWolf,VoteDay,VoteSave,VoteData, DialogueWolf} from "./components/Vot
 import {AddAgent} from "./components/AddAgent.js"
 import {PlayerItem} from "./components/Player.js"
 import * as workerTimers from 'https://cdn.jsdelivr.net/npm/worker-timers@7.0.75/+esm' 
-
 import * as API from './api.js'
-
-
-const show_notification_about_changing_stage = 1
-
-const PRE_WORK_TIME = 5 
-const UPDATE_TIME = 1000
-const GAP = 2 
-const ROOM = 'TESTROOM'
-
+import {config} from '../config.js';
 
 
 var addAgent = () => {
@@ -311,7 +302,7 @@ $(document).ready(function () {
 
         game_over = 0
 
-        refreshRoomId =  workerTimers.setInterval(updateRoom, UPDATE_TIME);
+        refreshRoomId =  workerTimers.setInterval(updateRoom, config().UPDATE_TIME);
 
     }
 
@@ -332,9 +323,7 @@ $(document).ready(function () {
 
             }else{
 
-
                 room_data = data
-                // console.log(room_data)
 
                 // room leader
                 if(user_name == room_data.room_leader){
@@ -435,7 +424,7 @@ $(document).ready(function () {
                     roles.push('獵人')
                 }
 
-                refreshGameId =  workerTimers.setInterval(updateGame, UPDATE_TIME);
+                refreshGameId =  workerTimers.setInterval(updateGame, config().UPDATE_TIME);
             }
         })
     }
@@ -445,7 +434,7 @@ $(document).ready(function () {
     // cound time
     var countDown = (description, time) => {
 
-        let timeLeft = time-GAP;
+        let timeLeft = time - config().GAP;
         let elem = document.getElementById('timer');
 
         if(timerId != -1 ) workerTimers.clearInterval(timerId);
@@ -474,7 +463,7 @@ $(document).ready(function () {
     // cound time and restart room
     var countDownAndRestart = (description, time) => {
 
-        let timeLeft = time-GAP;
+        let timeLeft = time - config().GAP;
         let elem = document.getElementById('timer');
 
         let restartTimerId = workerTimers.setInterval(countdown, 1000);
@@ -596,31 +585,22 @@ $(document).ready(function () {
 
 
                 // show notification about changing stage
-                if(show_notification_about_changing_stage){
-                    $('#change_stage_description').html(data.stage_description);
-                    $('#change_stage_img').attr('src',`/images/stages/${stage_name}.png`);
+                $('#change_stage_description').html(data.stage_description);
+                $('#change_stage_img').attr('src',`/images/stages/${stage_name}.png`);
 
-                    $("#change_stage").show()
-                    setInterval(function() {
-                        $("#change_stage").fadeOut("slow")
-                    }, 500);
-                }
+                $("#change_stage").show()
+                setInterval(function() {
+                    $("#change_stage").fadeOut("slow")
+                }, config().CHANGE_STAGE_TIME);
                 
 
 
                 // check announcement and show
                 if(data.announcement.length!=0){
 
-                    // console.log("announcement")
-
-
-
                     for(let i of data.announcement){
 
                         let item = JSON.parse(JSON.stringify(i))
-
-
-                        // console.log(item.operation)
 
                         if(item.operation == 'chat') {
 
@@ -685,24 +665,11 @@ $(document).ready(function () {
 
                 }
 
-                
-                // console.log("stage name")
-                // console.log(stage_name)
-                // console.log("user info")
-                // console.log(user_name)
-                // console.log(user_id)
-                // console.log(user_role)
-                // console.log(user_state)
-                // console.log("room data")
-                // console.log(room_data)
-
                 $("#game").css("background-color", "#fff");
 
 
                 // check user is alive and has information and show
                 if(data.information.length!=0){
-
-                    // console.log("information")
 
                     // change background color
                     $("#game").css("background-color", "rgb(117, 149, 172)");
@@ -762,11 +729,8 @@ $(document).ready(function () {
 
 
 
-            if(JSON.stringify(data) === JSON.stringify(data_former_1)){
-                console.log("same game")
-
-            }else{
-
+            if(JSON.stringify(data) === JSON.stringify(data_former_1)) console.log("same game")
+            else{
                 // update werewolf votes
                 if(data.stage.split('-')[2] == 'werewolf' && user_role=='werewolf'){
                     let data_wolf_vote = JSON.parse(JSON.stringify(data))
@@ -836,7 +800,7 @@ $(document).ready(function () {
     // user_name ='sunny'
     // user_name ='yui'
 
-    // room_name = ROOM
+    // room_name = config().ROOM
     // get_user_role()
     // intoGame(room_name)
 
@@ -875,8 +839,6 @@ $(document).ready(function () {
         }
 
         API.operation(user_name, room_name, data, handleData=>{
-            // console.log(handleData)
-            // console.log(data.stage_name)
             if(handleData=='OK'){
                 displayMessageGod('Send operation: '+handleData)
                 // $(`#error-${data.stage_name}`).text(handleData)
@@ -894,12 +856,10 @@ $(document).ready(function () {
     // change player for the operation
     $("#playerSelector").change(function(){
         user_name = $(`select[name=playerName] option`).filter(':selected').val()
-        // console.log(user_name)
     });
 
     // dialogue wolf button
     $("#chatRoom").on("click", ".dialogueWolfBtn",function () {
-
 
         let id = $(this).attr('id')
         let who = $(`input[name="${id}"]:checked`).val()
@@ -922,15 +882,10 @@ $(document).ready(function () {
             "position" : [1,2]
         }
 
-        // console.log(chat)
-
         API.operation(user_name, room_name, data, handleData=>{
-            // console.log(handleData)
-            // console.log(data.stage_name)
             if(handleData=='OK'){
                 displayMessageGod('Send operation: '+handleData)
                 // $(`#error-${data.stage_name}`).text(handleData)
-
             }else{
                 displayMessageGod(handleData.Error)
             }
@@ -993,7 +948,6 @@ $(document).ready(function () {
     // delete player
     $("#playerCol").on("click", ".deletePlayer",function () {
         var player_name = $(this).attr('id');
-        // console.log(player_name)
         if(player_name.includes("Agent")){
             API.delete_agent(room_name, user_name, player_name, handleData=>{
                 if(handleData=='OK') displayMessageGod(`成功刪除${player_name}，請等待五秒`)

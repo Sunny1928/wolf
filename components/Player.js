@@ -1,4 +1,4 @@
-var max_name_length = 6
+var max_name_length = 7
 
 export class PlayerItem extends HTMLElement{
     constructor(me, id, user_name, delte_btn=0){

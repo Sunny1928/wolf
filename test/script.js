@@ -765,8 +765,8 @@ $(document).ready(function () {
                 agentCol.empty()
                 for (let [key, value] of Object.entries(data['agent_info'])) {
                     let item 
-                    if(key.includes('iAgent')) item = new IntelligentAgentInfo(key, value, current_tab)
-                    if(key.includes('mAgent')) item = new MemoryAgentInfo(key, value, current_tab)
+                    if(key == 'IS-Agent' || key == 'I-Agent') item = new IntelligentAgentInfo(key, value, current_tab)
+                    if(key == 'MS-Agent' || key == 'M-Agent') item = new MemoryAgentInfo(key, value, current_tab)
                     agentCol.append(item)
                 }
                 

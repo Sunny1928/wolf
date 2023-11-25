@@ -765,8 +765,8 @@ $(document).ready(function () {
                 agentCol.empty()
                 for (let [key, value] of Object.entries(data['agent_info'])) {
                     let item 
-                    if(key == 'IS-Agent' || key == 'I-Agent') item = new IntelligentAgentInfo(key, value, current_tab)
-                    if(key == 'MS-Agent' || key == 'M-Agent') item = new MemoryAgentInfo(key, value, current_tab)
+                    if(key.includes('I')) item = new IntelligentAgentInfo(key, value, current_tab)
+                    if(key.includes('M')) item = new MemoryAgentInfo(key, value, current_tab)
                     agentCol.append(item)
                 }
                 
@@ -1054,7 +1054,7 @@ $(document).ready(function () {
 
         let data = {
             "agent_type" : agent_type ,
-            "agent_name" : agent_name+':' + Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
+            "agent_name" : agent_name+':'+ Math.floor(Math.random() * 999).toString().padEnd(3, '0'),
             "room_name" : room_name ,
             "api_json" : "doc/secret/openai.key",
             "color" : colors[agent_type] ,

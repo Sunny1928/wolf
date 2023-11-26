@@ -948,7 +948,7 @@ $(document).ready(function () {
     // delete player
     $("#playerCol").on("click", ".deletePlayer",function () {
         var player_name = $(this).attr('id');
-        if(player_name.includes("Agent")){
+        if(player_name.includes("ISA") || player_name.includes("MSA") || player_name.includes("IA") || player_name.includes("MA") ){
             API.delete_agent(room_name, user_name, player_name, handleData=>{
                 if(handleData=='OK') displayMessageGod(`成功刪除${player_name}，請等待五秒`)
                 else displayMessageGod(handleData.Error)
